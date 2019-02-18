@@ -30,12 +30,15 @@ namespace audience
             _MessageFunctionMapper = new Dictionary<string, Delegate>()
             {
                 { SceneNames.Lobby, (Action<Base>)OnLobbyMessage },
+                { SceneNames.Game, (Action<Base>)OnGameMessage },
             };
 
             _Socket = GetComponent<SocketIOComponent>();
             
             _Socket.On(Command.MESSAGE, OnMessage);
             _Socket.On(Command.GAME_QUIT, OnPlayerQuitGame);
+
+            GameStart();
         }
 
         #endregion

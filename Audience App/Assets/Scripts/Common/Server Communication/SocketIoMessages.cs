@@ -4,19 +4,24 @@ namespace audience.messages
 {
     public class Command
     {
-        // Requests
+        // Emitted
         public const string JOIN_GAME = "joinGame";
         public const string DISCONNECT = "disconnect";
+        public const string SEND_VOTE = "vote";
 
-        // Responses
+        // Received
         public const string MESSAGE = "message";
         public const string GAME_QUIT = "gameQuit";
+        public const string EVENT_LIST = "eventList";
     }
 
     public enum Code
     {
         join_game_success = 240,
         join_game_error = 241,
+
+        success_vote_accepted = 270,
+        error_vote_didnt_pass = 271,
     }
 
     public class Base
@@ -43,4 +48,17 @@ namespace audience.messages
     {
         public List<Player> players;
     }
+
+    public class PollChoices
+    {
+        public List<Event> events;
+        public int pollingTime;
+    }
+
+    public class Event
+    {
+        public int id;
+        public int votes;
+    }
 }
+
