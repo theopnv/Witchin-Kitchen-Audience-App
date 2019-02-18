@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     private NetworkManager _NetworkManager;
 
-    [SerializeField] private GameObject _PollPanelPrefab;
+    [SerializeField] private GameCanvasManager _CanvasManager;
 
     [HideInInspector]
     public PollPanelManager PollPanelManager;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void StartPoll(PollChoices pollChoices)
     {
-        var pollPanel = Instantiate(_PollPanelPrefab);
+        var pollPanel = _CanvasManager.SetActivePanel(GameCanvasManager.PanelId.poll_panel);
         PollPanelManager = pollPanel.GetComponent<PollPanelManager>();
         PollPanelManager.StartPoll(pollChoices, _NetworkManager);
     }

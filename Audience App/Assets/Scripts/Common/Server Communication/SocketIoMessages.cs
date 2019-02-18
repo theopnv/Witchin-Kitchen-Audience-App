@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace audience.messages
 {
@@ -52,7 +53,7 @@ namespace audience.messages
     public class PollChoices
     {
         public List<Event> events;
-        public int pollingTime;
+        public string deadline;
     }
 
     public class Event

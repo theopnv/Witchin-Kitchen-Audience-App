@@ -62,6 +62,7 @@ namespace audience
 
         private void OnEventList(SocketIOEvent e)
         {
+            Debug.Log("OnEventList");
             _GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
             var pollChoices = JsonConvert.DeserializeObject<PollChoices>(e.data.ToString());
