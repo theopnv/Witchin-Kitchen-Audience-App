@@ -26,7 +26,6 @@ namespace audience
 
         #endregion
 
-
         #region Receive
 
         private void OnLobbyMessage(Base content)

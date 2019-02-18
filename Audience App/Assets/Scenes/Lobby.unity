@@ -819,6 +819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58080ef87517d014894bc89ac8b288f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _QuitGameCanvasPrefab: {fileID: 5298287127746399044, guid: d997cb72ef89e7546b976186477c32d2,
+    type: 3}
 --- !u!4 &754105216
 Transform:
   m_ObjectHideFlags: 0
