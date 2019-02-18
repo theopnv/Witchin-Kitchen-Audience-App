@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace audience.lobby.messages
+namespace audience.messages
 {
     public class Command
     {
@@ -23,18 +23,26 @@ namespace audience.lobby.messages
 
     public class Base
     {
-        public User User;
-        public Code Code;
-        public string Content;
+        public Code code;
+        public string content;
     }
 
-    public class User
+    public class Game
     {
-        public string Name;
+        public string id;
+        public string mainSocketID;
+        public List<Player> players;
+        public List<string> viewers; // socket IDs
     }
 
-    public class LobbyGames
+    public class Player
     {
-        public List<string> Games;
+        public string color;
+        public string name;
+    }
+
+    public class Players
+    {
+        public List<Player> players;
     }
 }
