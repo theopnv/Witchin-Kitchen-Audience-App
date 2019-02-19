@@ -61,5 +61,11 @@ namespace audience.messages
         public int id;
         public int votes;
     }
+
+    public class GameOutcome
+    {
+        public bool gameFinished;
+        public Player winner;
+    }
 }
 

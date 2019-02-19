@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameCanvasManager _CanvasManager;
 
-    [HideInInspector]
-    public PollPanelManager PollPanelManager;
+    [HideInInspector] public PollPanelManager PollPanelManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +31,13 @@ public class GameManager : MonoBehaviour
         var pollPanel = _CanvasManager.SetActivePanel(GameCanvasManager.PanelId.poll_panel);
         PollPanelManager = pollPanel.GetComponent<PollPanelManager>();
         PollPanelManager.StartPoll(pollChoices, _NetworkManager);
+    }
+
+    public void SetGameOutcome(GameOutcome gameOutcome)
+    {
+        var exitRoompanel = _CanvasManager.SetActivePanel(GameCanvasManager.PanelId.game_over_panel);
+        var exitRoomPanelManager = exitRoompanel.GetComponent<ExitRoomPanelManager>();
+        exitRoomPanelManager.SetOutcome(gameOutcome);
     }
 
 }

@@ -20,9 +20,7 @@ namespace audience
         /// Only relevant messages are received in the current scene.
         /// </summary>
         private Dictionary<string, Delegate> _MessageFunctionMapper;
-
-        [SerializeField] private Canvas _QuitGameCanvasPrefab;
-
+        
         #region Unity API
 
         void Start()
@@ -65,8 +63,13 @@ namespace audience
         private void OnPlayerQuitGame(SocketIOEvent e)
         {
             Debug.Log("OnPlayerQuitGame");
-            var quitGameCanvasInstance = Instantiate(_QuitGameCanvasPrefab);
-            quitGameCanvasInstance.gameObject.SetActive(true);
+            var gameOutcome = JsonConvert.DeserializeObject<GameOutcome>(e.data.ToString());
+            if (_GameManager == null)
+            {
+                _GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+            }
+
+            _GameManager.SetGameOutcome(gameOutcome);
             Destroy(gameObject);
         }
 

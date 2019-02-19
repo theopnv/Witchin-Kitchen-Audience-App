@@ -8,10 +8,12 @@ public class GameCanvasManager : MonoBehaviour
     {
         primary_panel,
         poll_panel,
+        game_over_panel,
     }
 
     [SerializeField] private GameObject _PrimaryPanel;
     [SerializeField] private GameObject _PollPanel;
+    [SerializeField] private GameObject _GameOverPanel;
 
     private Dictionary<PanelId, GameObject> _Panels;
 
@@ -21,6 +23,7 @@ public class GameCanvasManager : MonoBehaviour
         {
             { PanelId.primary_panel, _PrimaryPanel },
             { PanelId.poll_panel, _PollPanel },
+            { PanelId.game_over_panel, _GameOverPanel },
         };
     }
 
@@ -31,18 +34,9 @@ public class GameCanvasManager : MonoBehaviour
             panel.Value.SetActive(false);
         }
 
-        switch (id)
-        {
-            case PanelId.primary_panel:
-                _PrimaryPanel.SetActive(true);
-                return _PrimaryPanel;
-            case PanelId.poll_panel:
-                _PollPanel.SetActive(true);
-                return _PollPanel;
-            default: break;
-        }
+        _Panels[id].SetActive(true);
 
-        return null;
+        return _Panels[id];
     }
 
 }
