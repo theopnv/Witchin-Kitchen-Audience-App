@@ -383,8 +383,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _RemainingTimeText: {fileID: 497075439}
   _gameCanvasManager: {fileID: 554714731}
-  _ButtonA: {fileID: 885912083}
-  _ButtonB: {fileID: 775778994}
+  _ButtonA: {fileID: 885912084}
+  _ButtonB: {fileID: 775778995}
 --- !u!114 &235529726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1339,7 +1339,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Freezing Rain (A)
+  m_Text: Event A
 --- !u!222 &1321501457
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2140,7 +2140,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Freezing Rain (B)
+  m_Text: Event B
 --- !u!222 &2102331627
 CanvasRenderer:
   m_ObjectHideFlags: 0
