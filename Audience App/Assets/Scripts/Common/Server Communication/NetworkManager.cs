@@ -36,6 +36,7 @@ namespace audience
             _Socket.On(Command.MESSAGE, OnMessage);
             _Socket.On(Command.GAME_QUIT, OnPlayerQuitGame);
 
+            LobbyStart();
             GameStart();
         }
 

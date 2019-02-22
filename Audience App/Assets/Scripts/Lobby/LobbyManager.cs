@@ -11,14 +11,25 @@ using WebSocketSharp;
 namespace audience.lobby
 {
 
-
     public class LobbyManager : MonoBehaviour
     {
         #region Private Attributes
 
         [SerializeField]
         private InputField _RoomPinInputField;
-        
+
+        [SerializeField]
+        private InputField _NameInputField;
+
+        [SerializeField]
+        private Button[] _ColorButtons;
+
+        [SerializeField]
+        private Canvas _Canvas;
+
+        [SerializeField]
+        private GameObject _ErrorOverlayPrefab;
+
         private NetworkManager _NetworkManager;
 
         #endregion
@@ -30,18 +41,39 @@ namespace audience.lobby
         
         #region Custom Methods
 
+        private void InstantiateErrorOverlay(string error)
+        {
+            var instance = Instantiate(_ErrorOverlayPrefab, _Canvas.transform);
+            instance.GetComponent<ErrorOverlay>()
+                .ErrorWindowText.text = error;
+        }
+
         public void OnJoinButtonClick()
         {
-            if (!_RoomPinInputField.text.IsNullOrEmpty())
+            if (_NameInputField.text.IsNullOrEmpty())
             {
-                var asInt = int.Parse(_RoomPinInputField.text);
-                _NetworkManager.EmitJoinGame(asInt);
+                InstantiateErrorOverlay(StringLitterals.ERROR_NO_NAME);
+                return;
             }
-            else
+            ViewerInfo.Name = _NameInputField.text;
+
+            if (_RoomPinInputField.text.IsNullOrEmpty())
             {
-                Debug.LogError("Please enter a room PIN");
+                InstantiateErrorOverlay(StringLitterals.ERROR_NO_PIN);
+                return;
             }
+
+            var asInt = int.Parse(_RoomPinInputField.text);
+            _NetworkManager.EmitJoinGame(asInt);
         }
+
+
+        // TODO: Refactor this (dynamically add buttons and their listeners)
+        // once the UIs are established.
+        public void OnRedClick() { ViewerInfo.Color = Color.red; }
+        public void OnBlueClick() { ViewerInfo.Color = Color.blue; }
+        public void OnGreenClick() { ViewerInfo.Color = Color.green; }
+        public void OnYellowClick() { ViewerInfo.Color = Color.yellow; }
 
         #endregion
     }

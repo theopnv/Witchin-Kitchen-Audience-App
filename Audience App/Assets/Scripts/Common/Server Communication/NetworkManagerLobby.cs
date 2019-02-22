@@ -14,6 +14,11 @@ namespace audience
 
         #region Unity API
 
+        private void LobbyStart()
+        {
+            _Socket.On(Command.JOINED_GAME, OnJoinedGame);
+        }
+
         #endregion
 
         #region Emit
@@ -22,6 +27,18 @@ namespace audience
         {
             var serialized = JsonConvert.SerializeObject(roomPin);
             _Socket.Emit(messages.Command.JOIN_GAME, new JSONObject(serialized));
+        }
+
+        public void EmitViewerCharacteristics()
+        {
+            var viewer = new Viewer
+            {
+                name = ViewerInfo.Name,
+                color = ColorUtility.ToHtmlStringRGBA(ViewerInfo.Color),
+                socketId = ViewerInfo.SocketId,
+            };
+            var serialized = JsonConvert.SerializeObject(viewer);
+            _Socket.Emit(Command.REGISTER_VIEWER, new JSONObject(serialized));
         }
 
         #endregion
@@ -35,7 +52,7 @@ namespace audience
                 Debug.Log(content.content);
                 switch (content.code)
                 {
-                    case Code.join_game_success:
+                    case Code.register_viewer_success:
                         SceneManager.LoadSceneAsync(SceneNames.Game);
                         break;
                     default: break;
@@ -45,6 +62,14 @@ namespace audience
             {
                 Debug.LogError(content.content);
             }
+        }
+
+        private void OnJoinedGame(SocketIOEvent e)
+        {
+            var viewer = JsonConvert.DeserializeObject<Viewer>(e.data.ToString());
+            Debug.Log("OnJoinedGame with socketId: " + viewer.socketId);
+            ViewerInfo.SocketId = viewer.socketId;
+            EmitViewerCharacteristics();
         }
 
         #endregion
