@@ -121,10 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf06b52d1d6e0544ebbf45aca29122ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollView: {fileID: 7481860395227862347}
-  ScrollContent: {fileID: 7481860396111820952}
-  CardPrefab: {fileID: 2991758475171665582, guid: 539005f101893de4388de0b32ec0296a,
-    type: 3}
+  _ScrollView: {fileID: 0}
+  _ScrollContent: {fileID: 0}
+  _CardPrefab: {fileID: 0}
 --- !u!1 &7481860395654961468
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,9 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf06b52d1d6e0544ebbf45aca29122ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollView: {fileID: 7481860395227862347}
-  ScrollContent: {fileID: 7481860396111820952}
-  CardPrefab: {fileID: 2991758475171665582, guid: 539005f101893de4388de0b32ec0296a,
+  _ScrollView: {fileID: 7481860395227862347}
+  _ScrollContent: {fileID: 7481860396111820952}
+  _CardPrefab: {fileID: 2991758475171665582, guid: 539005f101893de4388de0b32ec0296a,
     type: 3}
 --- !u!1 &7481860396111820952
 GameObject:

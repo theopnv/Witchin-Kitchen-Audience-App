@@ -22,6 +22,7 @@ namespace audience.game
         [SerializeField] private GameObject _ExitRoomPanelPrefab;
 
         [SerializeField] private GameObject _SpellsPanelPrefab;
+        [HideInInspector] public SpellsPanelManager SpellsPanelManager;
 
         #region Unity API
 
@@ -60,8 +61,8 @@ namespace audience.game
         public void StartSpellSelection()
         {
             var spellPanel = Instantiate(_SpellsPanelPrefab, _Canvas.transform);
-            var spellPanelInstance = spellPanel.GetComponent<SpellsPanelManager>();
-            spellPanelInstance.GenerateSpellCards();
+            SpellsPanelManager = spellPanel.GetComponent<SpellsPanelManager>();
+            SpellsPanelManager.GenerateSpellCards(_NetworkManager);
         }
 
         #endregion

@@ -33,6 +33,12 @@ namespace audience
             _Socket.Emit(Command.SEND_VOTE, new JSONObject(serialized));
         }
 
+        public void EmitSpellCast(Spell spell)
+        {
+            var serialized = JsonConvert.SerializeObject(spell);
+            _Socket.Emit(Command.CAST_SPELL, new JSONObject(serialized));
+        }
+
         #endregion
 
         #region Receive
@@ -41,13 +47,15 @@ namespace audience
         {
             if ((int)content.code % 10 == 0) // Success codes always have their unit number equal to 0 (cf. protocol)
             {
-                Debug.Log(content.content);
+                Debug.Log(content.code + ": " + content.content);
                 switch (content.code)
                 {
                     case Code.success_vote_accepted:
-                        Destroy(_GameManager?.PollPanelManager);
+                        Destroy(_GameManager?.PollPanelManager.gameObject);
                         break;
-                     break;
+                    case Code.spell_casted_success:
+                        Destroy(_GameManager?.SpellsPanelManager.gameObject);
+                        break;
                 }
             }
             else

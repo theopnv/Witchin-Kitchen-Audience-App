@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace audience.game
 {
@@ -13,9 +14,9 @@ namespace audience.game
             max_id,
         }
 
-        public static Dictionary<SpellID, string> EventList = new Dictionary<SpellID, string>
+        public static Dictionary<SpellID, Type> EventList = new Dictionary<SpellID, Type>
         {
-            { SpellID.network_ad, "Network Ads" },
+            { SpellID.network_ad, typeof(NetworkAdSpell) },
         };
 
     }
