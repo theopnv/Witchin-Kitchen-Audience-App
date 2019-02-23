@@ -21,12 +21,20 @@ namespace audience.game
 
         [SerializeField] private GameObject _ExitRoomPanelPrefab;
 
+        [SerializeField] private GameObject _SpellsPanelPrefab;
+
+        #region Unity API
+
         // Start is called before the first frame update
         void Start()
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
             Instantiate(_PrimaryPanelPrefab, _Canvas.transform);
         }
+
+        #endregion
+
+        #region Custom Methods
 
         public void ExitRoom()
         {
@@ -48,6 +56,15 @@ namespace audience.game
             var exitRoomPanelManager = exitRoomPanel.GetComponent<ExitRoomPanelManager>();
             exitRoomPanelManager.SetOutcome(gameOutcome);
         }
+
+        public void StartSpellSelection()
+        {
+            var spellPanel = Instantiate(_SpellsPanelPrefab, _Canvas.transform);
+            var spellPanelInstance = spellPanel.GetComponent<SpellsPanelManager>();
+            spellPanelInstance.GenerateSpellCards();
+        }
+
+        #endregion
 
     }
 

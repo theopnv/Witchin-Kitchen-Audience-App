@@ -20,6 +20,7 @@ namespace audience
         private void GameStart()
         {
             _Socket.On(Command.EVENT_LIST, OnEventList);
+            _Socket.On(Command.CAST_SPELL, OnCastSpellRequest);
         }
 
         #endregion
@@ -64,13 +65,25 @@ namespace audience
         private void OnEventList(SocketIOEvent e)
         {
             Debug.Log("OnEventList");
+            RetrieveGameManager();
+
+            var pollChoices = JsonConvert.DeserializeObject<PollChoices>(e.data.ToString());
+            _GameManager?.StartPoll(pollChoices);
+        }
+
+        private void OnCastSpellRequest(SocketIOEvent e)
+        {
+            Debug.Log("OnCastSpellRequest");
+            RetrieveGameManager();
+            _GameManager?.StartSpellSelection();
+        }
+
+        private void RetrieveGameManager()
+        {
             if (_GameManager == null)
             {
                 _GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
             }
-
-            var pollChoices = JsonConvert.DeserializeObject<PollChoices>(e.data.ToString());
-            _GameManager?.StartPoll(pollChoices);
         }
 
         #endregion

@@ -690,8 +690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf06b52d1d6e0544ebbf45aca29122ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollView: {fileID: 0}
-  ScrollContent: {fileID: 0}
+  ScrollView: {fileID: 2128632215}
+  ScrollContent: {fileID: 858813508}
   CardPrefab: {fileID: 2991758475171665582, guid: 539005f101893de4388de0b32ec0296a,
     type: 3}
 --- !u!1 &1842769153
