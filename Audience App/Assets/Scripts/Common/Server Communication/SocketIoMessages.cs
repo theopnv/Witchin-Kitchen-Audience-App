@@ -10,6 +10,7 @@ namespace audience.messages
         public const string DISCONNECT = "disconnect";
         public const string SEND_VOTE = "vote";
         public const string REGISTER_VIEWER = "registerViewer";
+        public const string CAST_SPELL = "castSpell";
 
         // Received
         public const string MESSAGE = "message";
@@ -27,6 +28,9 @@ namespace audience.messages
 
         register_viewer_success = 300,
         register_viewer_error = 301,
+
+        spell_casted_success = 290,
+        spell_casted_error = 291,
     }
 
     public class Base
@@ -79,6 +83,12 @@ namespace audience.messages
     {
         public bool gameFinished;
         public Player winner;
+    }
+
+    public class Spell
+    {
+        public int spellId;
+        public Player targetedPlayer;
     }
 }
 

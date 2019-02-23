@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using audience.game;
 using audience.messages;
 using Newtonsoft.Json;
 using SocketIO;

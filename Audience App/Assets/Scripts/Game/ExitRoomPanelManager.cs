@@ -6,36 +6,41 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ExitRoomPanelManager : MonoBehaviour
+namespace audience.game
 {
-    [SerializeField] private GameObject _GameFinished;
-    [SerializeField] private GameObject _GameExited;
 
-    [SerializeField] private Text _WinnerText;
-    
-    #region Custom Methods
-
-    public void SetOutcome(GameOutcome gameOutcome)
+    public class ExitRoomPanelManager : MonoBehaviour
     {
-        _GameFinished.SetActive(gameOutcome.gameFinished);
-        _GameExited.SetActive(!gameOutcome.gameFinished);
+        [SerializeField] private GameObject _GameFinished;
+        [SerializeField] private GameObject _GameExited;
 
-        if (gameOutcome.gameFinished)
+        [SerializeField] private Text _WinnerText;
+
+        #region Custom Methods
+
+        public void SetOutcome(GameOutcome gameOutcome)
         {
-            _WinnerText.text = gameOutcome.winner.name + " won the game!";
-            StartCoroutine("GoBackToMenu", 10);
+            _GameFinished.SetActive(gameOutcome.gameFinished);
+            _GameExited.SetActive(!gameOutcome.gameFinished);
+
+            if (gameOutcome.gameFinished)
+            {
+                _WinnerText.text = gameOutcome.winner.name + " won the game!";
+                StartCoroutine("GoBackToMenu", 10);
+            }
+            else
+            {
+                StartCoroutine("GoBackToMenu", 2);
+            }
         }
-        else
+
+        private IEnumerator GoBackToMenu(int delay)
         {
-            StartCoroutine("GoBackToMenu", 2);
+            yield return new WaitForSeconds(delay);
+            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
         }
+
+        #endregion
     }
 
-    private IEnumerator GoBackToMenu(int delay)
-    {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
-    }
-
-    #endregion
 }

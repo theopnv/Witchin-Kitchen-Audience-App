@@ -4,17 +4,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using SocketIO;
 
-public class TitleScreenManager : MonoBehaviour
+namespace audience.title_screen
 {
-    private const string _LOBBY_GAME_SCENE = "Lobby";
 
-    void Start()
+    public class TitleScreenManager : MonoBehaviour
     {
-        QualitySettings.vSyncCount = 1;
+        private const string _LOBBY_GAME_SCENE = "Lobby";
+
+        void Start()
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+
+        public void OnMainButtonClick()
+        {
+            SceneManager.LoadSceneAsync(_LOBBY_GAME_SCENE);
+        }
     }
 
-    public void OnMainButtonClick()
-    {
-        SceneManager.LoadSceneAsync(_LOBBY_GAME_SCENE);
-    }
 }

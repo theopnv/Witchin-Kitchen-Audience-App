@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using audience.game;
 using audience.messages;
 using Newtonsoft.Json;
 using SocketIO;
@@ -43,7 +44,7 @@ namespace audience
                 switch (content.code)
                 {
                     case Code.success_vote_accepted:
-                        _GameManager?.PollPanelManager?.ClosePollPanel();
+                        Destroy(_GameManager?.PollPanelManager);
                         break;
                      break;
                 }

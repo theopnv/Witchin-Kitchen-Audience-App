@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ErrorOverlay : MonoBehaviour
+namespace audience
 {
-    public Text ErrorWindowText;
-
-    void Update()
+    public class ErrorOverlay : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0))
+        public Text ErrorWindowText;
+
+        void Update()
         {
-            Destroy(gameObject);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Destroy(gameObject);
+            }
         }
     }
+
 }
