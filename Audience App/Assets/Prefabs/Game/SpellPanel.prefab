@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ScrollView: {fileID: 7481860395227862347}
   _ScrollContent: {fileID: 7481860396111820952}
-  _CardPrefab: {fileID: 2991758475171665582, guid: 539005f101893de4388de0b32ec0296a,
+  _CardPrefab: {fileID: 8507887356459410382, guid: 539005f101893de4388de0b32ec0296a,
     type: 3}
 --- !u!1 &7481860396111820952
 GameObject:
@@ -251,7 +251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.0000032814962, y: 0}
   m_SizeDelta: {x: 0, y: 1122}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7481860396111820954

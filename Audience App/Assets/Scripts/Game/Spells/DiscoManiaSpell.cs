@@ -9,6 +9,11 @@ namespace audience.game
 
     public class DiscoManiaSpell : ASpell
     {
+        public override Spells.SpellID GetSpellID()
+        {
+            return Spells.SpellID.disco_mania;
+        }
+
         public override string GetTitle()
         {
             return "Disco Mania";
@@ -19,15 +24,6 @@ namespace audience.game
             return "Turn the arena into a giant dancefloor!";
         }
 
-        public override void OnCastButtonClick()
-        {
-            var spell = new Spell
-            {
-                spellId = (int)Spells.SpellID.disco_mania,
-                targetedPlayer = new Player() { id = 1, }
-            };
-            _NetworkManager.EmitSpellCast(spell);
-        }
     }
 
 }

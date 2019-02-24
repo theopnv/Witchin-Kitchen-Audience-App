@@ -7,7 +7,7 @@ namespace audience.game
         void SetNetworkManager(NetworkManager nm);
         string GetTitle();
         string GetDescription();
-        void OnCastButtonClick();
+        void OnCastButtonClick(int targetId);
     }
 
 }

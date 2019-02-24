@@ -52,9 +52,9 @@ public class SpellsPanelManager : MonoBehaviour
         spellManager.SetNetworkManager(_NetworkManager);
 
         var spellCardManager = cardInstance.GetComponent<SpellCardManager>();
-        spellCardManager.Title.text = spellManager.GetTitle();
+        spellCardManager.RectoTitle.text = spellManager.GetTitle();
         //spellCardManager.Description.text = spellManager.GetDescription();
-        spellCardManager.CastSpellButton.onClick.AddListener(spellManager.OnCastButtonClick);
+        spellCardManager.CastSpellAction += spellManager.OnCastButtonClick;
     }
 
     #endregion

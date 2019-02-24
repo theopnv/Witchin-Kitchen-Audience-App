@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using audience;
 using audience.game;
+using audience.messages;
 using UnityEngine;
 
 namespace audience.game
@@ -18,7 +19,18 @@ namespace audience.game
 
         public abstract string GetTitle();
         public abstract string GetDescription();
-        public abstract void OnCastButtonClick();
+        public abstract Spells.SpellID GetSpellID();
+
+        public void OnCastButtonClick(int targetId)
+        {
+            var spell = new Spell
+            {
+                spellId = (int)GetSpellID(),
+                targetedPlayer = new Player() { id = targetId, }
+            };
+            Debug.Log("Target: " + targetId);
+            _NetworkManager.EmitSpellCast(spell);
+        }
     }
 
 }
