@@ -7,23 +7,23 @@ using UnityEngine;
 namespace audience.game
 {
 
-    public class NetworkAdSpell : ASpell
+    public class DiscoManiaSpell : ASpell
     {
         public override string GetTitle()
         {
-            return "Network Ads";
+            return "Disco Mania";
         }
 
         public override string GetDescription()
         {
-            return "This is a very small description";
+            return "Turn the arena into a giant dancefloor!";
         }
 
         public override void OnCastButtonClick()
         {
             var spell = new Spell
             {
-                spellId = (int)Spells.SpellID.network_ad,
+                spellId = (int)Spells.SpellID.disco_mania,
                 targetedPlayer = new Player() { id = 1, }
             };
             _NetworkManager.EmitSpellCast(spell);
