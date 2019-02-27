@@ -71,6 +71,7 @@ namespace audience.messages
     {
         public List<Event> events;
         public string deadline;
+        public int duration;
     }
 
     public class Event

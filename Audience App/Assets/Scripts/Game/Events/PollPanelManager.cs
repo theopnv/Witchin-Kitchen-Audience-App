@@ -26,11 +26,11 @@ namespace audience.game
 
         public void StartPoll(PollChoices pollChoices, NetworkManager networkManager)
         {
-            _PollChoices = pollChoices;
+;            _PollChoices = pollChoices;
             _NetworkManager = networkManager;
 
             var now = DateTime.Now.ToUniversalTime().ToString("u");
-            _RemainingTime = (DateTime.Parse(_PollChoices.deadline) - DateTime.Parse(now)).Seconds;
+            _RemainingTime = pollChoices.duration;
             SetButton(_ButtonA, _PollChoices.events[0]);
             SetButton(_ButtonB, _PollChoices.events[1]);
 
