@@ -26,6 +26,13 @@ namespace audience
 
         void Start()
         {
+            var socketComponent = GetComponent<SocketIOComponent>();
+            var hostAddress = PlayerPrefs.GetString(PlayerPrefsKeys.HOST_ADDRESS) + SocketInfo.SUFFIX_ADDRESS;
+            Debug.Log("Host address is: " + hostAddress);
+            socketComponent.url = hostAddress;
+            socketComponent.Start();
+            socketComponent.Connect();
+
             _MessageFunctionMapper = new Dictionary<string, Delegate>()
             {
                 { SceneNames.Lobby, (Action<Base>)OnLobbyMessage },

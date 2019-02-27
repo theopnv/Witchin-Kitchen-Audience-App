@@ -91,5 +91,10 @@ namespace audience.messages
         public int spellId;
         public Player targetedPlayer;
     }
+
+    public static class SocketInfo
+    {
+        public const string SUFFIX_ADDRESS = "socket.io/?EIO=4&transport=websocket";
+    }
 }
 

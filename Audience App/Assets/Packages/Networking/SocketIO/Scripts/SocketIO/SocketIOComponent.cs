@@ -99,24 +99,6 @@ namespace SocketIO
 			sid = null;
 			packetId = 0;
 
-			ws = new WebSocket(url);
-			ws.OnOpen += OnOpen;
-			ws.OnMessage += OnMessage;
-			ws.OnError += OnError;
-			ws.OnClose += OnClose;
-			wsConnected = false;
-
-			eventQueueLock = new object();
-			eventQueue = new Queue<SocketIOEvent>();
-
-			ackQueueLock = new object();
-			ackQueue = new Queue<Packet>();
-
-			connected = false;
-
-			#if SOCKET_IO_DEBUG
-			if(debugMethod == null) { debugMethod = Debug.Log; };
-			#endif
 		}
 
 		public void Start()
@@ -169,8 +151,26 @@ namespace SocketIO
 		#region Public Interface
 		
 		public void Connect()
-		{
-			connected = true;
+        {
+            ws = new WebSocket(url);
+            ws.OnOpen += OnOpen;
+            ws.OnMessage += OnMessage;
+            ws.OnError += OnError;
+            ws.OnClose += OnClose;
+            wsConnected = false;
+
+            eventQueueLock = new object();
+            eventQueue = new Queue<SocketIOEvent>();
+
+            ackQueueLock = new object();
+            ackQueue = new Queue<Packet>();
+
+            connected = false;
+
+#if SOCKET_IO_DEBUG
+			if(debugMethod == null) { debugMethod = Debug.Log; };
+#endif
+            connected = true;
 
 			socketThread = new Thread(RunSocketThread);
 			socketThread.Start(ws);
