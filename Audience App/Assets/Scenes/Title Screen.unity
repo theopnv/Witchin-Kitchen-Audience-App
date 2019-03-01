@@ -819,6 +819,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a855c9db33eaa84f993d9121d1712c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _TwoChoicesOverlayPrefab: {fileID: 5696771864021238238, guid: f16d7b84e9b7fe44ea7cd9cfbf7024f5,
+    type: 3}
+  _Canvas: {fileID: 2076808551}
 --- !u!1 &1941531399
 GameObject:
   m_ObjectHideFlags: 0

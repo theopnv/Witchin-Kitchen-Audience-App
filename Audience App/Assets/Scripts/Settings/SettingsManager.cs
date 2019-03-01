@@ -20,6 +20,14 @@ public class SettingsManager : MonoBehaviour
         _AddressInputField.text = PlayerPrefs.GetString(Key.HOST_ADDRESS);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+        }
+    }
+
     public void OnSaveClick()
     {
         if (_AddressInputField.text.IsNullOrEmpty())

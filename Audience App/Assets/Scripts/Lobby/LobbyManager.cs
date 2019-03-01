@@ -34,18 +34,31 @@ namespace audience.lobby
 
         #endregion
 
+        #region Unity API
+
         void Start()
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
         }
-        
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+            }
+        }
+
+        #endregion
+
         #region Custom Methods
 
         private void InstantiateErrorOverlay(string error)
         {
             var instance = Instantiate(_ErrorOverlayPrefab, _Canvas.transform);
-            instance.GetComponent<ErrorOverlay>()
-                .ErrorWindowText.text = error;
+            var errorOverlay = instance.GetComponent<Overlay>();
+            errorOverlay.Description = error;
+            errorOverlay.Primary += () => { Destroy(instance.gameObject); };
         }
 
         public void OnJoinButtonClick()

@@ -10,6 +10,9 @@ namespace audience.title_screen
 
     public class TitleScreenManager : MonoBehaviour
     {
+        [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
+        [SerializeField] private Canvas _Canvas;
+
         void Start()
         {
             QualitySettings.vSyncCount = 1;
@@ -18,6 +21,18 @@ namespace audience.title_screen
             if (!PlayerPrefs.HasKey(Key.HOST_ADDRESS))
             {
                 PlayerPrefs.SetString(Key.HOST_ADDRESS, "http://dev.audience.witchin-kitchen.com/");
+            }
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                var instance = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform);
+                var manager = instance.GetComponent<Overlay>();
+                manager.Primary += Application.Quit;
+                manager.Secondary += () => { Destroy(manager.gameObject); };
+                manager.Description = StringLitterals.EXIT_APP_CONFIRMATION;
             }
         }
 

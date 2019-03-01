@@ -252,6 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd4c68262381d3468ba5b23b0af9a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _TwoChoicesOverlayPrefab: {fileID: 5696771864021238238, guid: f16d7b84e9b7fe44ea7cd9cfbf7024f5,
+    type: 3}
   _Canvas: {fileID: 554714729}
   _PrimaryPanelPrefab: {fileID: 960940941099796081, guid: 4b34947949ccc4f44a31e7c5b7456ca7,
     type: 3}

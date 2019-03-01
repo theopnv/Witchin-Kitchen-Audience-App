@@ -12,6 +12,7 @@ namespace audience.game
     {
         private NetworkManager _NetworkManager;
 
+        [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
         [SerializeField] private Canvas _Canvas;
 
         [SerializeField] private GameObject _PrimaryPanelPrefab;
@@ -31,6 +32,18 @@ namespace audience.game
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
             Instantiate(_PrimaryPanelPrefab, _Canvas.transform);
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                var instance = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform);
+                var manager = instance.GetComponent<Overlay>();
+                manager.Primary += ExitRoom;
+                manager.Secondary += () => { Destroy(manager.gameObject); };
+                manager.Description = StringLitterals.RETURN_TO_TITLE_SCREEN_CONFIRMATION;
+            }
         }
 
         #endregion
