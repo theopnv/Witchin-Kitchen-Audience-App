@@ -146,10 +146,11 @@ namespace audience.game
             exitRoomPanelManager.SetOutcome(gameOutcome);
         }
 
-        public void StartSpellSelection()
+        public void StartSpellSelection(bool authorizeCasting = true)
         {
             var spellPanel = Instantiate(_SpellsPanelPrefab, _Canvas.transform);
             SpellsPanelManager = spellPanel.GetComponent<SpellsPanelManager>();
+            SpellsPanelManager.AuthorizeCasting = authorizeCasting;
             SpellsPanelManager.GenerateSpellCards(_NetworkManager);
         }
 

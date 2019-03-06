@@ -9,6 +9,8 @@ namespace audience.game
 
     public class SpellCardManager : MonoBehaviour
     {
+        public bool AuthorizeCasting;
+
         public GameObject Recto;
         public Text RectoTitle;
         public Text RectoDescription;
@@ -26,6 +28,10 @@ namespace audience.game
 
         void Start()
         {
+            if (!AuthorizeCasting)
+            {
+                RectoCastSpellButton.gameObject.SetActive(false);
+            }
             // Shitty API that doesn't allow simple parameter binding in a for loop
             VersoPlayerButtons[0].onClick.AddListener(delegate { OnTargetButtonClick(0); });
             VersoPlayerButtons[1].onClick.AddListener(delegate { OnTargetButtonClick(1); });

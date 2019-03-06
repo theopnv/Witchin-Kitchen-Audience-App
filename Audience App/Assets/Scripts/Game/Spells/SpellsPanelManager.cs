@@ -18,6 +18,7 @@ public class SpellsPanelManager : APanelManager
     private GameObject _CardPrefab;
 
     private NetworkManager _NetworkManager;
+    public bool AuthorizeCasting;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,7 @@ public class SpellsPanelManager : APanelManager
         spellManager.SetNetworkManager(_NetworkManager);
 
         var spellCardManager = cardInstance.GetComponent<SpellCardManager>();
+        spellCardManager.AuthorizeCasting = AuthorizeCasting;
         spellCardManager.RectoTitle.text = spellManager.GetTitle();
         spellCardManager.RectoDescription.text = spellManager.GetDescription();
         spellCardManager.CastSpellAction += spellManager.OnCastButtonClick;

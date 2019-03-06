@@ -13,7 +13,7 @@ namespace audience.game
 
         public void BrowseSpells()
         {
-            GameManager.StartSpellSelection();
+            GameManager.StartSpellSelection(false);
         }
 
         public void ExitRoom()
