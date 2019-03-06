@@ -53,7 +53,7 @@ public class SpellsPanelManager : MonoBehaviour
 
         var spellCardManager = cardInstance.GetComponent<SpellCardManager>();
         spellCardManager.RectoTitle.text = spellManager.GetTitle();
-        //spellCardManager.Description.text = spellManager.GetDescription();
+        spellCardManager.RectoDescription.text = spellManager.GetDescription();
         spellCardManager.CastSpellAction += spellManager.OnCastButtonClick;
     }
 

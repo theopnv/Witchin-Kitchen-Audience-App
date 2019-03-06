@@ -31,7 +31,8 @@ namespace audience.game
         void Start()
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
-            Instantiate(_PrimaryPanelPrefab, _Canvas.transform);
+            var instance = Instantiate(_PrimaryPanelPrefab, _Canvas.transform);
+            instance.GetComponent<PrimaryPanelManager>().GameManager = this;
         }
 
         void Update()
@@ -52,7 +53,7 @@ namespace audience.game
 
         public void ExitRoom()
         {
-            _NetworkManager.ExitRoom();
+            _NetworkManager?.ExitRoom();
             Destroy(_NetworkManager.gameObject);
             SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
         }
