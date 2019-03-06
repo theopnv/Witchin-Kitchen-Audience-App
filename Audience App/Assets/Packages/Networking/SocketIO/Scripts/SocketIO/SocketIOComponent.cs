@@ -99,9 +99,38 @@ namespace SocketIO
 			sid = null;
 			packetId = 0;
 
-		}
+            CreateWebsocket(url);
 
-		public void Start()
+            eventQueueLock = new object();
+            eventQueue = new Queue<SocketIOEvent>();
+
+            ackQueueLock = new object();
+            ackQueue = new Queue<Packet>();
+
+            connected = false;
+
+#if SOCKET_IO_DEBUG
+			if(debugMethod == null) { debugMethod = Debug.Log; };
+#endif
+        }
+
+        public void ResetUrl(string url)
+        {
+            connected = false;
+            CreateWebsocket(url);
+        }
+
+        private void CreateWebsocket(string url)
+        {
+            ws = new WebSocket(url);
+            ws.OnOpen += OnOpen;
+            ws.OnMessage += OnMessage;
+            ws.OnError += OnError;
+            ws.OnClose += OnClose;
+            wsConnected = false;
+        }
+
+        public void Start()
 		{
 			if (autoConnect) { Connect(); }
 		}

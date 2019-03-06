@@ -12,10 +12,12 @@ namespace audience.game
     {
         private NetworkManager _NetworkManager;
 
+        [SerializeField] private GameObject _OneChoiceOverlayPrefab;
         [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
         [SerializeField] private Canvas _Canvas;
 
         [SerializeField] private GameObject _PrimaryPanelPrefab;
+        [HideInInspector] public PrimaryPanelManager PrimaryPanelManager;
 
         [SerializeField] private GameObject _PollPanelPrefab;
         [HideInInspector] public PollPanelManager PollPanelManager;
@@ -31,6 +33,8 @@ namespace audience.game
         void Start()
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
+            _NetworkManager.OnDisconnected += OnDisconnectedFromServer;
+
             var instance = Instantiate(_PrimaryPanelPrefab, _Canvas.transform);
             instance.GetComponent<PrimaryPanelManager>().GameManager = this;
         }
@@ -47,9 +51,26 @@ namespace audience.game
             }
         }
 
+        void OnDisable()
+        {
+            _NetworkManager.OnDisconnected -= OnDisconnectedFromServer;
+        }
+
         #endregion
 
         #region Custom Methods
+
+        void OnDisconnectedFromServer()
+        {
+            var instance = Instantiate(_OneChoiceOverlayPrefab, _Canvas.transform);
+            var errorOverlay = instance.GetComponent<Overlay>();
+            errorOverlay.Description = "Disconnected from server. Please try joining the room again.";
+            errorOverlay.Primary += () =>
+            {
+                _NetworkManager?.ExitRoom();
+                SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+            };
+        }
 
         public void ExitRoom()
         {

@@ -3,6 +3,14 @@ using UnityEngine;
 
 namespace audience
 {
+
+    public static class GameInfo
+    {
+        public static int[] PlayerIDs;
+        public static Color[] PlayerColors;
+        public static string[] PlayerNames;
+    }
+
     /// <summary>
     /// Static class to pass player data from lobby scene to game scene
     /// Unfortunately we can't use an array of static PlayerInfo[] because arrays

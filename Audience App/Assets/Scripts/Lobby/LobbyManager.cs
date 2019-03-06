@@ -80,6 +80,10 @@ namespace audience.lobby
             _NetworkManager.EmitJoinGame(asInt);
         }
 
+        public void OnBackButtonClick()
+        {
+            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+        }
 
         // TODO: Refactor this (dynamically add buttons and their listeners)
         // once the UIs are established.

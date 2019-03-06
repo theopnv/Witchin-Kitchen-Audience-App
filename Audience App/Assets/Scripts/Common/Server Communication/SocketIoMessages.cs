@@ -5,9 +5,12 @@ namespace audience.messages
 {
     public class Command
     {
+        // Socket IO reserved
+        public const string CONNECT = "connect";
+        public const string DISCONNECT = "disconnect";
+
         // Emitted
         public const string JOIN_GAME = "joinGame";
-        public const string DISCONNECT = "disconnect";
         public const string SEND_VOTE = "vote";
         public const string REGISTER_VIEWER = "registerViewer";
         public const string CAST_SPELL = "castSpell";

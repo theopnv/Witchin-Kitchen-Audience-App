@@ -21,7 +21,12 @@ namespace audience
         /// Only relevant messages are received in the current scene.
         /// </summary>
         private Dictionary<string, Delegate> _MessageFunctionMapper;
-        
+
+        public Action OnConnected;
+        public Action OnDisconnected;
+
+        [HideInInspector] public bool IsConnectedToServer;
+
         #region Unity API
 
         void Start()
@@ -40,7 +45,20 @@ namespace audience
             };
 
             _Socket = GetComponent<SocketIOComponent>();
-            
+
+            _Socket.On(Command.CONNECT, e =>
+            {
+                Debug.Log("Connected to server");
+                IsConnectedToServer = true;
+                OnConnected?.Invoke();
+            });
+            _Socket.On(Command.DISCONNECT, e =>
+            {
+                Debug.LogError("Disconnected from server");
+                IsConnectedToServer = false;
+                OnDisconnected?.Invoke();
+            });
+
             _Socket.On(Command.MESSAGE, OnMessage);
 
             LobbyStart();
