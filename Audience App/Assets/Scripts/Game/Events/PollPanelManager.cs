@@ -11,7 +11,7 @@ using Event = audience.messages.Event;
 namespace audience.game
 {
 
-    public class PollPanelManager : MonoBehaviour
+    public class PollPanelManager : APanelManager
     {
         [SerializeField]
         private Text _RemainingTimeText;
@@ -48,7 +48,7 @@ namespace audience.game
         {
             if (_RemainingTime < 0)
             {
-                Destroy(gameObject);
+                ExitScreen();
             }
             _RemainingTimeText.text = "Remaining time to vote: " + _RemainingTime + " secs";
             --_RemainingTime;

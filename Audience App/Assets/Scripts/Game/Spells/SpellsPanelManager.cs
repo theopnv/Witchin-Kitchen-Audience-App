@@ -6,7 +6,7 @@ using audience.game;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpellsPanelManager : MonoBehaviour
+public class SpellsPanelManager : APanelManager
 {
     [SerializeField]
     private ScrollRect _ScrollView;
@@ -30,7 +30,7 @@ public class SpellsPanelManager : MonoBehaviour
     private IEnumerator Timer()
     {
         yield return new WaitForSeconds(20);
-        Destroy(gameObject);
+        ExitScreen();
     }
 
     public void GenerateSpellCards(NetworkManager networkManager)

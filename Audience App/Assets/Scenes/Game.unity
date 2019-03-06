@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189047506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1414.8761, y: 696.79315, z: 11.976634}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 409006405}
@@ -259,7 +259,6 @@ MonoBehaviour:
   _Canvas: {fileID: 554714729}
   _PrimaryPanelPrefab: {fileID: 960940941099796081, guid: 4b34947949ccc4f44a31e7c5b7456ca7,
     type: 3}
-  PrimaryPanelManager: {fileID: 0}
   _PollPanelPrefab: {fileID: 3183082475218297909, guid: ee27833366c57ff4c9b5cac904d530da,
     type: 3}
   PollPanelManager: {fileID: 0}

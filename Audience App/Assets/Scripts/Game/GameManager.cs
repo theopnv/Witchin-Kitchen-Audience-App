@@ -11,13 +11,13 @@ namespace audience.game
     public class GameManager : MonoBehaviour
     {
         private NetworkManager _NetworkManager;
+        private bool IsOnPrimaryPanel;
 
         [SerializeField] private GameObject _OneChoiceOverlayPrefab;
         [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
         [SerializeField] private Canvas _Canvas;
 
         [SerializeField] private GameObject _PrimaryPanelPrefab;
-        [HideInInspector] public PrimaryPanelManager PrimaryPanelManager;
 
         [SerializeField] private GameObject _PollPanelPrefab;
         [HideInInspector] public PollPanelManager PollPanelManager;
@@ -44,11 +44,18 @@ namespace audience.game
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                var instance = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform);
-                var manager = instance.GetComponent<Overlay>();
-                manager.Primary += ExitRoom;
-                manager.Secondary += () => { Destroy(manager.gameObject); };
-                manager.Description = StringLitterals.RETURN_TO_TITLE_SCREEN_CONFIRMATION;
+                if (IsOnPrimaryPanel)
+                {
+                    var instance = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform);
+                    var manager = instance.GetComponent<Overlay>();
+                    manager.Primary += ExitRoom;
+                    manager.Secondary += () => { Destroy(manager.gameObject); };
+                    manager.Description = StringLitterals.RETURN_TO_TITLE_SCREEN_CONFIRMATION;
+                }
+                else
+                {
+                    DestroyLastPanel();
+                }
             }
         }
 
@@ -61,6 +68,22 @@ namespace audience.game
         #endregion
 
         #region Custom Methods
+
+        public void DestroyLastPanel()
+        {
+            IsOnPrimaryPanel = false;
+            if (PollPanelManager != null)
+            {
+                Destroy(PollPanelManager.gameObject);
+                PollPanelManager = null;
+            }
+
+            if (SpellsPanelManager != null)
+            {
+                Destroy(SpellsPanelManager.gameObject);
+                SpellsPanelManager = null;
+            }
+        }
 
         void OnDisconnectedFromServer()
         {
@@ -82,10 +105,10 @@ namespace audience.game
                 switch (content.code)
                 {
                     case Code.success_vote_accepted:
-                        Destroy(PollPanelManager.gameObject);
+                        DestroyLastPanel();
                         break;
                     case Code.spell_casted_success:
-                        Destroy(SpellsPanelManager.gameObject);
+                        DestroyLastPanel();
                         break;
                 }
             }
@@ -104,7 +127,7 @@ namespace audience.game
         public void ExitRoom()
         {
             _NetworkManager?.ExitRoom();
-            Destroy(_NetworkManager.gameObject);
+            Destroy(_NetworkManager?.gameObject);
             SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
         }
 

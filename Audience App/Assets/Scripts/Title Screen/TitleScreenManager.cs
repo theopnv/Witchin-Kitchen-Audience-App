@@ -22,6 +22,12 @@ namespace audience.title_screen
             {
                 PlayerPrefs.SetString(Key.HOST_ADDRESS, "http://dev.audience.witchin-kitchen.com/");
             }
+
+            var networkManager = GameObject.FindObjectOfType<NetworkManager>();
+            if (networkManager)
+            {
+                Destroy(networkManager.gameObject);
+            }
         }
 
         void Update()
