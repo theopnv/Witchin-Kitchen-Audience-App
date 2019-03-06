@@ -110,6 +110,7 @@ namespace audience.game
 
         public void StartPoll(PollChoices pollChoices)
         {
+            Handheld.Vibrate();
             var pollPanel = Instantiate(_PollPanelPrefab, _Canvas.transform);
             PollPanelManager = pollPanel.GetComponent<PollPanelManager>();
             PollPanelManager.StartPoll(pollChoices, _NetworkManager);

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using audience.messages;
 using SocketIO;
@@ -85,10 +86,17 @@ namespace audience.lobby
             if (!_NetworkManager.IsConnectedToServer)
             {
                 InstantiateErrorOverlay(StringLitterals.ERROR_SERVER_UNREACHABLE);
-            } 
+            }
 
-            var asInt = int.Parse(_RoomPinInputField.text);
-            _NetworkManager.EmitJoinGame(asInt);
+            try
+            {
+                var asInt = int.Parse(_RoomPinInputField.text);
+                _NetworkManager.EmitJoinGame(asInt);
+            }
+            catch (Exception e)
+            {
+                InstantiateErrorOverlay(StringLitterals.ERROR_WRONG_PIN);
+            }
         }
 
         public void OnBackButtonClick()
