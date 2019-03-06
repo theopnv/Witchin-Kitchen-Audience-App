@@ -39,6 +39,7 @@ namespace audience.lobby
         void Start()
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
+            _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
         }
 
         void Update()
@@ -47,6 +48,11 @@ namespace audience.lobby
             {
                 SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
             }
+        }
+
+        void OnDisable()
+        {
+            _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
         }
 
         #endregion
@@ -76,6 +82,11 @@ namespace audience.lobby
                 return;
             }
 
+            if (!_NetworkManager.IsConnectedToServer)
+            {
+                InstantiateErrorOverlay(StringLitterals.ERROR_SERVER_UNREACHABLE);
+            } 
+
             var asInt = int.Parse(_RoomPinInputField.text);
             _NetworkManager.EmitJoinGame(asInt);
         }
@@ -91,6 +102,31 @@ namespace audience.lobby
         public void OnBlueClick() { ViewerInfo.Color = Color.blue; }
         public void OnGreenClick() { ViewerInfo.Color = Color.green; }
         public void OnYellowClick() { ViewerInfo.Color = Color.yellow; }
+
+        void OnMessageReceivedFromServer(Base message)
+        {
+            if ((int)message.code % 10 == 0) // Success codes always have their unit number equal to 0 (cf. protocol)
+            {
+                Debug.Log(message.content);
+                switch (message.code)
+                {
+                    case Code.register_viewer_success:
+                        SceneManager.LoadSceneAsync(SceneNames.Game);
+                        break;
+                    default: break;
+                }
+            }
+            else
+            {
+                Debug.LogError(message.content);
+                switch (message.code)
+                {
+                    case Code.join_game_error:
+                        InstantiateErrorOverlay(StringLitterals.ERROR_WRONG_PIN);
+                        break;
+                }
+            }
+        }
 
         #endregion
     }

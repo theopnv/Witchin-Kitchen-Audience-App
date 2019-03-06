@@ -34,6 +34,7 @@ namespace audience.game
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnDisconnected += OnDisconnectedFromServer;
+            _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
 
             var instance = Instantiate(_PrimaryPanelPrefab, _Canvas.transform);
             instance.GetComponent<PrimaryPanelManager>().GameManager = this;
@@ -54,6 +55,7 @@ namespace audience.game
         void OnDisable()
         {
             _NetworkManager.OnDisconnected -= OnDisconnectedFromServer;
+            _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
         }
 
         #endregion
@@ -70,6 +72,33 @@ namespace audience.game
                 _NetworkManager?.ExitRoom();
                 SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
             };
+        }
+
+        private void OnMessageReceivedFromServer(Base content)
+        {
+            if ((int)content.code % 10 == 0) // Success codes always have their unit number equal to 0 (cf. protocol)
+            {
+                Debug.Log(content.code + ": " + content.content);
+                switch (content.code)
+                {
+                    case Code.success_vote_accepted:
+                        Destroy(PollPanelManager.gameObject);
+                        break;
+                    case Code.spell_casted_success:
+                        Destroy(SpellsPanelManager.gameObject);
+                        break;
+                }
+            }
+            else
+            {
+                Debug.LogError(content.content);
+                switch (content.code)
+                {
+                    case Code.error_vote_didnt_pass:
+                        break;
+                    default: break;
+                }
+            }
         }
 
         public void ExitRoom()

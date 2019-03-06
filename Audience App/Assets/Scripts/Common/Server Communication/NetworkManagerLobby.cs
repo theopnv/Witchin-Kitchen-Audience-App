@@ -44,26 +44,7 @@ namespace audience
         #endregion
 
         #region Receive
-
-        private void OnLobbyMessage(Base content)
-        {
-            if ((int)content.code % 10 == 0) // Success codes always have their unit number equal to 0 (cf. protocol)
-            {
-                Debug.Log(content.content);
-                switch (content.code)
-                {
-                    case Code.register_viewer_success:
-                        SceneManager.LoadSceneAsync(SceneNames.Game);
-                        break;
-                    default: break;
-                }
-            }
-            else
-            {
-                Debug.LogError(content.content);
-            }
-        }
-
+        
         private void OnJoinedGame(SocketIOEvent e)
         {
             var viewer = JsonConvert.DeserializeObject<Viewer>(e.data.ToString());

@@ -24,6 +24,7 @@ namespace audience
 
         public Action OnConnected;
         public Action OnDisconnected;
+        public Action<Base> OnMessageReceived;
 
         [HideInInspector] public bool IsConnectedToServer;
 
@@ -37,12 +38,6 @@ namespace audience
             socketComponent.url = hostAddress;
             socketComponent.Start();
             socketComponent.Connect();
-
-            _MessageFunctionMapper = new Dictionary<string, Delegate>()
-            {
-                { SceneNames.Lobby, (Action<Base>)OnLobbyMessage },
-                { SceneNames.Game, (Action<Base>)OnGameMessage },
-            };
 
             _Socket = GetComponent<SocketIOComponent>();
 
@@ -81,9 +76,7 @@ namespace audience
         private void OnMessage(SocketIOEvent e)
         {
             var content = JsonConvert.DeserializeObject<Base>(e.data.ToString());
-            var currentSceneName = SceneManager.GetActiveScene().name;
-            
-            _MessageFunctionMapper[currentSceneName]?.DynamicInvoke(content);
+            OnMessageReceived?.Invoke(content);
         }
 
         #endregion

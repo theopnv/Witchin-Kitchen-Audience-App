@@ -43,34 +43,7 @@ namespace audience
         #endregion
 
         #region Receive
-
-        private void OnGameMessage(Base content)
-        {
-            if ((int)content.code % 10 == 0) // Success codes always have their unit number equal to 0 (cf. protocol)
-            {
-                Debug.Log(content.code + ": " + content.content);
-                switch (content.code)
-                {
-                    case Code.success_vote_accepted:
-                        Destroy(_GameManager?.PollPanelManager.gameObject);
-                        break;
-                    case Code.spell_casted_success:
-                        Destroy(_GameManager?.SpellsPanelManager.gameObject);
-                        break;
-                }
-            }
-            else
-            {
-                Debug.LogError(content.content);
-                switch (content.code)
-                {
-                    case Code.error_vote_didnt_pass:
-                        break;
-                    default: break;
-                }
-            }
-        }
-
+        
         private void OnEventList(SocketIOEvent e)
         {
             Debug.Log("OnEventList");
