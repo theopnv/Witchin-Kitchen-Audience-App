@@ -10,7 +10,8 @@ namespace audience.game
     {
         public void ExitRoom()
         {
-            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+            var gameManager = FindObjectOfType<GameManager>();
+            gameManager.ExitRoom();
         }
     }
 

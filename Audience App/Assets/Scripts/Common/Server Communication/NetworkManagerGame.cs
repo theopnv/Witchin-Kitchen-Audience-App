@@ -21,6 +21,7 @@ namespace audience
         {
             _Socket.On(Command.EVENT_LIST, OnEventList);
             _Socket.On(Command.CAST_SPELL, OnCastSpellRequest);
+            _Socket.On(Command.GAME_QUIT, OnPlayerQuitGame);
         }
 
         #endregion
@@ -84,6 +85,19 @@ namespace audience
             Debug.Log("OnCastSpellRequest");
             RetrieveGameManager();
             _GameManager?.StartSpellSelection();
+        }
+
+        private void OnPlayerQuitGame(SocketIOEvent e)
+        {
+            Debug.Log("OnPlayerQuitGame");
+            var gameOutcome = JsonConvert.DeserializeObject<GameOutcome>(e.data.ToString());
+            if (_GameManager == null)
+            {
+                _GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+            }
+
+            _GameManager.SetGameOutcome(gameOutcome);
+            Destroy(gameObject);
         }
 
         private void RetrieveGameManager()

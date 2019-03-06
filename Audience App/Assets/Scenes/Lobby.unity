@@ -811,8 +811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961346d7e16a445ff93777573e78efd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: http://dev.witchin-kitchen.com/socket.io/?EIO=4&transport=websocket
-  autoConnect: 1
+  url: http://dev.audience.witchin-kitchen.com/socket.io/?EIO=4&transport=websocket
+  autoConnect: 0
   reconnectDelay: 5
   ackExpirationTime: 1800
   pingInterval: 25

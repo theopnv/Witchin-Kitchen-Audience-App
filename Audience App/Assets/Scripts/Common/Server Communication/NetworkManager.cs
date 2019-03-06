@@ -42,7 +42,6 @@ namespace audience
             _Socket = GetComponent<SocketIOComponent>();
             
             _Socket.On(Command.MESSAGE, OnMessage);
-            _Socket.On(Command.GAME_QUIT, OnPlayerQuitGame);
 
             LobbyStart();
             GameStart();
@@ -67,19 +66,6 @@ namespace audience
             var currentSceneName = SceneManager.GetActiveScene().name;
             
             _MessageFunctionMapper[currentSceneName]?.DynamicInvoke(content);
-        }
-
-        private void OnPlayerQuitGame(SocketIOEvent e)
-        {
-            Debug.Log("OnPlayerQuitGame");
-            var gameOutcome = JsonConvert.DeserializeObject<GameOutcome>(e.data.ToString());
-            if (_GameManager == null)
-            {
-                _GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-            }
-
-            _GameManager.SetGameOutcome(gameOutcome);
-            Destroy(gameObject);
         }
 
         #endregion
