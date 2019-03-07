@@ -26,7 +26,16 @@ namespace audience.game
             var spell = new Spell
             {
                 spellId = (int)GetSpellID(),
-                targetedPlayer = new Player() { id = targetId, }
+                targetedPlayer = new Player
+                {
+                    id = targetId,
+                },
+                caster = new Viewer
+                {
+                    color = ColorUtility.ToHtmlStringRGBA(ViewerInfo.Color),
+                    name = ViewerInfo.Name,
+                    socketId = ViewerInfo.SocketId
+                }
             };
             Debug.Log("Target: " + targetId);
             _NetworkManager.EmitSpellCast(spell);

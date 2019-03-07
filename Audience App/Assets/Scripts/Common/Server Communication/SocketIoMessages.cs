@@ -63,6 +63,7 @@ namespace audience.messages
         public int id;
         public string color;
         public string name;
+        public int score;
     }
 
     public class Players
@@ -93,6 +94,7 @@ namespace audience.messages
     {
         public int spellId;
         public Player targetedPlayer;
+        public Viewer caster;
     }
 
     public static class SocketInfo
