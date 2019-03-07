@@ -12,6 +12,7 @@ namespace audience.game
             disco_mania = 0,
             mega_mage_punch = 1,
             fireball_for_all = 2,
+            rocket_speed = 3,
 
             max_id,
         }
@@ -21,6 +22,7 @@ namespace audience.game
             { SpellID.disco_mania, typeof(DiscoManiaSpell) },
             { SpellID.mega_mage_punch, typeof(MegaMageSpell) },
             { SpellID.fireball_for_all, typeof(FireBallForAllSpell) },
+            { SpellID.rocket_speed, typeof(RocketSpeedSpell) },
         };
 
     }

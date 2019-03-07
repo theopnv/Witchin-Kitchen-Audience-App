@@ -72,16 +72,16 @@ namespace audience.game
         public void DestroyLastPanel()
         {
             IsOnPrimaryPanel = false;
+
+            if (SpellsPanelManager != null && PollPanelManager == null)
+            {
+                Destroy(SpellsPanelManager.gameObject);
+                SpellsPanelManager = null;
+            }
             if (PollPanelManager != null)
             {
                 Destroy(PollPanelManager.gameObject);
                 PollPanelManager = null;
-            }
-
-            if (SpellsPanelManager != null)
-            {
-                Destroy(SpellsPanelManager.gameObject);
-                SpellsPanelManager = null;
             }
         }
 
