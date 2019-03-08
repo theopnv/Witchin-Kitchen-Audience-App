@@ -17,7 +17,9 @@ namespace audience.game
         public Button RectoCastSpellButton;
 
         public GameObject Verso;
-        public Button[] VersoPlayerButtons = new Button[2];
+
+        [SerializeField] private GameObject _ButtonsPlaceholder;
+        [SerializeField] private GameObject _TargetPlayerButton;
 
         [HideInInspector] public Action<int> CastSpellAction;
 
@@ -32,9 +34,46 @@ namespace audience.game
             {
                 RectoCastSpellButton.gameObject.SetActive(false);
             }
-            // Shitty API that doesn't allow simple parameter binding in a for loop
-            VersoPlayerButtons[0].onClick.AddListener(delegate { OnTargetButtonClick(0); });
-            VersoPlayerButtons[1].onClick.AddListener(delegate { OnTargetButtonClick(1); });
+
+            SetButtons();
+        }
+
+        void SetButtons()
+        {
+            //Shitty Button API that doesn't allow simple parameter binding in a for loop
+            var i = 0;
+            if (GameInfo.PlayerNumber > i)
+            {
+                InstantiateButton(i);
+            }
+
+            ++i;
+            if (GameInfo.PlayerNumber > i)
+            {
+                InstantiateButton(i);
+            }
+
+            ++i;
+            if (GameInfo.PlayerNumber > i)
+            {
+                InstantiateButton(i);
+            }
+
+            ++i;
+            if (GameInfo.PlayerNumber > i)
+            {
+                InstantiateButton(i);
+            }
+
+        }
+
+        void InstantiateButton(int i)
+        {
+            var instance = Instantiate(_TargetPlayerButton, _ButtonsPlaceholder.transform);
+            var button = instance.GetComponent<Button>();
+            button.onClick.AddListener(delegate { OnTargetButtonClick(i); });
+            var text = instance.GetComponentInChildren<Text>();
+            text.text = GameInfo.PlayerNames[i];
         }
 
         void Update()

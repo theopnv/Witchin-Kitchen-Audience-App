@@ -97,6 +97,12 @@ namespace audience.messages
         public Viewer caster;
     }
 
+    public class GameForViewer
+    {
+        public Game game;
+        public Viewer viewer;
+    }
+
     public static class SocketInfo
     {
         public const string SUFFIX_ADDRESS = "socket.io/?EIO=4&transport=websocket";

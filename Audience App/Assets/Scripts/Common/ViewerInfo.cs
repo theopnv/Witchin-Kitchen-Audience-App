@@ -6,9 +6,10 @@ namespace audience
 
     public static class GameInfo
     {
-        public static int[] PlayerIDs;
-        public static Color[] PlayerColors;
-        public static string[] PlayerNames;
+        public static int PlayerNumber = 4;
+        public static int[] PlayerIDs = new int[PlayerNumber];
+        public static Color[] PlayerColors = new Color[PlayerNumber];
+        public static string[] PlayerNames = new string[PlayerNumber];
     }
 
     /// <summary>

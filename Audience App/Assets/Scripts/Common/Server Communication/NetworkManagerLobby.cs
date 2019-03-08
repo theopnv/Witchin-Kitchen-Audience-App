@@ -47,9 +47,16 @@ namespace audience
         
         private void OnJoinedGame(SocketIOEvent e)
         {
-            var viewer = JsonConvert.DeserializeObject<Viewer>(e.data.ToString());
-            Debug.Log("OnJoinedGame with socketId: " + viewer.socketId);
-            ViewerInfo.SocketId = viewer.socketId;
+            var gameForViewer = JsonConvert.DeserializeObject<GameForViewer>(e.data.ToString());
+            Debug.Log("OnJoinedGame with socketId: " + gameForViewer.viewer.socketId);
+            ViewerInfo.SocketId = gameForViewer.viewer.socketId;
+            GameInfo.PlayerNumber = gameForViewer.game.players.Count;
+            for (var i = 0; i < gameForViewer.game.players.Count; i++)
+            {
+                GameInfo.PlayerNames[i] = gameForViewer.game.players[i].name;
+                ColorUtility.TryParseHtmlString(gameForViewer.game.players[i].color, out GameInfo.PlayerColors[i]);
+                GameInfo.PlayerIDs[i] = i;
+            }
             EmitViewerCharacteristics();
         }
 
