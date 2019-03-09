@@ -17,6 +17,7 @@ namespace audience
         private void LobbyStart()
         {
             _Socket.On(Command.JOINED_GAME, OnJoinedGame);
+            _Socket.On(Command.UPDATED_GAME_STATE, OnGameStateUpdated);
         }
 
         #endregion
@@ -47,17 +48,22 @@ namespace audience
         
         private void OnJoinedGame(SocketIOEvent e)
         {
-            var gameForViewer = JsonConvert.DeserializeObject<GameForViewer>(e.data.ToString());
-            Debug.Log("OnJoinedGame with socketId: " + gameForViewer.viewer.socketId);
-            ViewerInfo.SocketId = gameForViewer.viewer.socketId;
-            GameInfo.PlayerNumber = gameForViewer.game.players.Count;
-            for (var i = 0; i < gameForViewer.game.players.Count; i++)
+            var viewer = JsonConvert.DeserializeObject<Viewer>(e.data.ToString());
+            Debug.Log("OnJoinedGame with socketId: " + viewer.socketId);
+            ViewerInfo.SocketId = viewer.socketId;
+            EmitViewerCharacteristics();
+        }
+
+        private void OnGameStateUpdated(SocketIOEvent e)
+        {
+            var game = JsonConvert.DeserializeObject<Game>(e.data.ToString());
+            GameInfo.PlayerNumber = game.players.Count;
+            for (var i = 0; i < game.players.Count; i++)
             {
-                GameInfo.PlayerNames[i] = gameForViewer.game.players[i].name;
-                ColorUtility.TryParseHtmlString(gameForViewer.game.players[i].color, out GameInfo.PlayerColors[i]);
+                GameInfo.PlayerNames[i] = game.players[i].name;
+                ColorUtility.TryParseHtmlString(game.players[i].color, out GameInfo.PlayerColors[i]);
                 GameInfo.PlayerIDs[i] = i;
             }
-            EmitViewerCharacteristics();
         }
 
         #endregion

@@ -20,6 +20,7 @@ namespace audience.messages
         public const string GAME_QUIT = "gameQuit";
         public const string EVENT_LIST = "eventList";
         public const string JOINED_GAME = "joinedGame";
+        public const string UPDATED_GAME_STATE = "updateGameState";
     }
 
     public enum Code
@@ -95,12 +96,6 @@ namespace audience.messages
         public int spellId;
         public Player targetedPlayer;
         public Viewer caster;
-    }
-
-    public class GameForViewer
-    {
-        public Game game;
-        public Viewer viewer;
     }
 
     public static class SocketInfo
