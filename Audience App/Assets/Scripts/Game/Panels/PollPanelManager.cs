@@ -19,7 +19,7 @@ namespace audience.game
         [SerializeField] private GameObject _VoteSide;
 
         [SerializeField]
-        private Text _RemainingTimeText;
+        private Text _RemainingTimeTextVote;
 
         [SerializeField] private Button _ButtonA;
         [SerializeField] private Button _ButtonB;
@@ -33,6 +33,7 @@ namespace audience.game
             _RemainingTime = PollChoices.duration;
             SetButton(_ButtonA, PollChoices.events[0]);
             SetButton(_ButtonB, PollChoices.events[1]);
+            _RemainingTimeText = _RemainingTimeTextVote;
 
             InvokeRepeating("UpdateTime", 0, 1);
         }
@@ -72,6 +73,7 @@ namespace audience.game
 
         public PollChoices PollChoices;
         private bool IsVoting;
+        private Text _RemainingTimeText;
 
         void Start()
         {
@@ -80,6 +82,7 @@ namespace audience.game
 
             IsVoting = true;
             StartPoll();
+            _RemainingTimeText = _RemainingTimeTextResults;
         }
 
         void OnDisable()
@@ -127,6 +130,9 @@ namespace audience.game
         #endregion
 
         #region Results Side
+
+        [SerializeField]
+        private Text _RemainingTimeTextResults;
 
         [SerializeField] private GameObject _ResultsSide;
 
