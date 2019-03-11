@@ -9,23 +9,25 @@ using UnityEngine.UI;
 namespace audience.game
 {
 
-    public class ExitRoomPanelManager : MonoBehaviour
+    public class ExitRoomPanelManager : APanelManager
     {
         [SerializeField] private GameObject _GameFinished;
         [SerializeField] private GameObject _GameExited;
 
         [SerializeField] private Text _WinnerText;
 
+        public GameOutcome GameOutcome;
+
         #region Custom Methods
 
-        public void SetOutcome(GameOutcome gameOutcome)
+        void Start()
         {
-            _GameFinished.SetActive(gameOutcome.gameFinished);
-            _GameExited.SetActive(!gameOutcome.gameFinished);
+            _GameFinished.SetActive(GameOutcome.gameFinished);
+            _GameExited.SetActive(!GameOutcome.gameFinished);
 
-            if (gameOutcome.gameFinished)
+            if (GameOutcome.gameFinished)
             {
-                _WinnerText.text = gameOutcome.winner.name + " won the game!";
+                _WinnerText.text = GameOutcome.winner.name + " won the game!";
                 StartCoroutine("GoBackToMenu", 10);
             }
             else

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using audience.game;
 using audience.messages;
@@ -15,6 +16,11 @@ namespace audience
 
         [SerializeField] private GameManager _GameManager;
 
+        public Action<PollChoices> OnReceivedPollResults;
+        public Action<PollChoices> OnReceivedPollList;
+        public Action OnReceivedSpellRequest;
+        public Action<GameOutcome> OnReceivedGameOutcome;
+
         #region Unity API
 
         private void GameStart()
@@ -22,6 +28,7 @@ namespace audience
             _Socket.On(Command.EVENT_LIST, OnEventList);
             _Socket.On(Command.CAST_SPELL, OnCastSpellRequest);
             _Socket.On(Command.GAME_QUIT, OnPlayerQuitGame);
+            _Socket.On(Command.POLL_RESULTS, OnPollResults);
         }
 
         #endregion
@@ -47,38 +54,28 @@ namespace audience
         private void OnEventList(SocketIOEvent e)
         {
             Debug.Log("OnEventList");
-            RetrieveGameManager();
-
             var pollChoices = JsonConvert.DeserializeObject<PollChoices>(e.data.ToString());
-            _GameManager?.StartPoll(pollChoices);
+            OnReceivedPollList?.Invoke(pollChoices);
         }
 
         private void OnCastSpellRequest(SocketIOEvent e)
         {
             Debug.Log("OnCastSpellRequest");
-            RetrieveGameManager();
-            _GameManager?.StartSpellSelection();
+            OnReceivedSpellRequest?.Invoke();
+        }
+
+        private void OnPollResults(SocketIOEvent e)
+        {
+            Debug.Log("OnPollResults");
+            var pollChoices = JsonConvert.DeserializeObject<PollChoices>(e.data.ToString());
+            OnReceivedPollResults?.Invoke(pollChoices);
         }
 
         private void OnPlayerQuitGame(SocketIOEvent e)
         {
             Debug.Log("OnPlayerQuitGame");
             var gameOutcome = JsonConvert.DeserializeObject<GameOutcome>(e.data.ToString());
-            if (_GameManager == null)
-            {
-                _GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-            }
-
-            _GameManager.SetGameOutcome(gameOutcome);
-            Destroy(gameObject);
-        }
-
-        private void RetrieveGameManager()
-        {
-            if (_GameManager == null)
-            {
-                _GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-            }
+            OnReceivedGameOutcome?.Invoke(gameOutcome);
         }
 
         #endregion

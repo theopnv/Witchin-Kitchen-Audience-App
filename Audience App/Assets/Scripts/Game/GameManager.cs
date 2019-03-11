@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using audience;
-using audience.messages;
+﻿using audience.messages;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,21 +8,15 @@ namespace audience.game
     public class GameManager : MonoBehaviour
     {
         private NetworkManager _NetworkManager;
-        private bool IsOnPrimaryPanel;
 
         [SerializeField] private GameObject _OneChoiceOverlayPrefab;
         [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
         [SerializeField] private Canvas _Canvas;
 
         [SerializeField] private GameObject _PrimaryPanelPrefab;
-
         [SerializeField] private GameObject _PollPanelPrefab;
-        [HideInInspector] public PollPanelManager PollPanelManager;
-
         [SerializeField] private GameObject _ExitRoomPanelPrefab;
-
         [SerializeField] private GameObject _SpellsPanelPrefab;
-        [HideInInspector] public SpellsPanelManager SpellsPanelManager;
 
         #region Unity API
 
@@ -33,57 +24,33 @@ namespace audience.game
         void Start()
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
-            _NetworkManager.OnDisconnected += OnDisconnectedFromServer;
-            _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
-
-            var instance = Instantiate(_PrimaryPanelPrefab, _Canvas.transform);
-            instance.GetComponent<PrimaryPanelManager>().GameManager = this;
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (_NetworkManager)
             {
-                if (IsOnPrimaryPanel)
-                {
-                    var instance = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform);
-                    var manager = instance.GetComponent<Overlay>();
-                    manager.Primary += ExitRoom;
-                    manager.Secondary += () => { Destroy(manager.gameObject); };
-                    manager.Description = StringLitterals.RETURN_TO_TITLE_SCREEN_CONFIRMATION;
-                }
-                else
-                {
-                    DestroyLastPanel();
-                }
+                _NetworkManager.OnDisconnected += OnDisconnectedFromServer;
+                _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
+
+                _NetworkManager.OnReceivedPollList += OnReceivedPollList;
+                _NetworkManager.OnReceivedGameOutcome += OnReceivedGameOutcome;
+                _NetworkManager.OnReceivedSpellRequest += OnReceivedSpellRequest;
             }
+
+            var primaryPanel = Instantiate(_PrimaryPanelPrefab, _Canvas.transform).GetComponent<PrimaryPanelManager>();
+            primaryPanel.GameManager = this;
         }
 
         void OnDisable()
         {
             _NetworkManager.OnDisconnected -= OnDisconnectedFromServer;
             _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
+
+            _NetworkManager.OnReceivedPollList -= OnReceivedPollList;
+            _NetworkManager.OnReceivedGameOutcome -= OnReceivedGameOutcome;
+            _NetworkManager.OnReceivedSpellRequest -= OnReceivedSpellRequest;
         }
 
         #endregion
 
         #region Custom Methods
-
-        public void DestroyLastPanel()
-        {
-            IsOnPrimaryPanel = false;
-
-            if (SpellsPanelManager != null && PollPanelManager == null)
-            {
-                Destroy(SpellsPanelManager.gameObject);
-                SpellsPanelManager = null;
-            }
-            if (PollPanelManager != null)
-            {
-                Destroy(PollPanelManager.gameObject);
-                PollPanelManager = null;
-            }
-        }
 
         void OnDisconnectedFromServer()
         {
@@ -104,12 +71,6 @@ namespace audience.game
                 Debug.Log(content.code + ": " + content.content);
                 switch (content.code)
                 {
-                    case Code.success_vote_accepted:
-                        DestroyLastPanel();
-                        break;
-                    case Code.spell_casted_success:
-                        DestroyLastPanel();
-                        break;
                 }
             }
             else
@@ -124,34 +85,22 @@ namespace audience.game
             }
         }
 
-        public void ExitRoom()
+        void OnReceivedPollList(PollChoices pollChoices)
         {
-            _NetworkManager?.ExitRoom();
-            Destroy(_NetworkManager?.gameObject);
-            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+            var pollManager = Instantiate(_PollPanelPrefab, _Canvas.transform).GetComponent<PollPanelManager>();
+            pollManager.PollChoices = pollChoices;
         }
 
-        public void StartPoll(PollChoices pollChoices)
+        void OnReceivedGameOutcome(GameOutcome gameOutcome)
         {
-            Handheld.Vibrate();
-            var pollPanel = Instantiate(_PollPanelPrefab, _Canvas.transform);
-            PollPanelManager = pollPanel.GetComponent<PollPanelManager>();
-            PollPanelManager.StartPoll(pollChoices, _NetworkManager);
+            var exitManager = Instantiate(_ExitRoomPanelPrefab, _Canvas.transform).GetComponent<ExitRoomPanelManager>();
+            exitManager.GameOutcome = gameOutcome;
         }
 
-        public void SetGameOutcome(GameOutcome gameOutcome)
+        void OnReceivedSpellRequest()
         {
-            var exitRoomPanel = Instantiate(_ExitRoomPanelPrefab, _Canvas.transform);
-            var exitRoomPanelManager = exitRoomPanel.GetComponent<ExitRoomPanelManager>();
-            exitRoomPanelManager.SetOutcome(gameOutcome);
-        }
-
-        public void StartSpellSelection(bool authorizeCasting = true)
-        {
-            var spellPanel = Instantiate(_SpellsPanelPrefab, _Canvas.transform);
-            SpellsPanelManager = spellPanel.GetComponent<SpellsPanelManager>();
-            SpellsPanelManager.AuthorizeCasting = authorizeCasting;
-            SpellsPanelManager.GenerateSpellCards(_NetworkManager);
+            var spellManager = Instantiate(_SpellsPanelPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
+            spellManager.AuthorizeCasting = true;
         }
 
         #endregion

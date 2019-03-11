@@ -220,6 +220,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
+  _TwoChoicesOverlayPrefab: {fileID: 5696771864021238238, guid: f16d7b84e9b7fe44ea7cd9cfbf7024f5,
+    type: 3}
+  _SpellsManagerPrefab: {fileID: 7481860395654961468, guid: 8b20f4df279f4454d9a829b44c87193c,
+    type: 3}
+  _Canvas: {fileID: 0}
 --- !u!1 &960940941215452668
 GameObject:
   m_ObjectHideFlags: 0

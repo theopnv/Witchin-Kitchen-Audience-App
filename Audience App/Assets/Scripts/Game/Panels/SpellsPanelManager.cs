@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using audience;
 using audience.game;
+using audience.messages;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,9 +21,14 @@ public class SpellsPanelManager : APanelManager
     private NetworkManager _NetworkManager;
     public bool AuthorizeCasting;
 
-    // Start is called before the first frame update
     void Start()
     {
+        _NetworkManager = FindObjectOfType<NetworkManager>();
+        _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
+        foreach (var spell in Spells.EventList)
+        {
+            GenerateCard(spell.Value);
+        }
         StartCoroutine("Timer");
     }
 
@@ -32,15 +38,6 @@ public class SpellsPanelManager : APanelManager
     {
         yield return new WaitForSeconds(20);
         ExitScreen();
-    }
-
-    public void GenerateSpellCards(NetworkManager networkManager)
-    {
-        _NetworkManager = networkManager;
-        foreach (var spell in Spells.EventList)
-        {
-            GenerateCard(spell.Value);
-        }
     }
 
     void GenerateCard(Type spellType)
@@ -57,6 +54,30 @@ public class SpellsPanelManager : APanelManager
         spellCardManager.RectoTitle.text = spellManager.GetTitle();
         spellCardManager.RectoDescription.text = spellManager.GetDescription();
         spellCardManager.CastSpellAction += spellManager.OnCastButtonClick;
+    }
+
+    public void OnBackButtonClick()
+    {
+        ExitScreen();
+    }
+
+    void OnDisable()
+    {
+        _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
+    }
+
+    private void OnMessageReceivedFromServer(Base content)
+    {
+        if ((int)content.code % 10 == 0) // Success codes always have their unit number equal to 0 (cf. protocol)
+        {
+            Debug.Log(content.code + ": " + content.content);
+            switch (content.code)
+            {
+                case Code.spell_casted_success:
+                    ExitScreen();
+                    break;
+            }
+        }
     }
 
     #endregion
