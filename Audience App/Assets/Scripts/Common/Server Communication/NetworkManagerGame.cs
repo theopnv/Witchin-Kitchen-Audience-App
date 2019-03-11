@@ -20,6 +20,7 @@ namespace audience
         public Action<PollChoices> OnReceivedPollList;
         public Action OnReceivedSpellRequest;
         public Action<GameOutcome> OnReceivedGameOutcome;
+        public Action<Game> OnReceivedGameStateUpdate;
 
         #region Unity API
 

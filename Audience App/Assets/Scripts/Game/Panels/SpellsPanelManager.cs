@@ -24,7 +24,11 @@ public class SpellsPanelManager : APanelManager
     void Start()
     {
         _NetworkManager = FindObjectOfType<NetworkManager>();
-        _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
+        if (_NetworkManager)
+        {
+            _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
+        }
+
         foreach (var spell in Spells.EventList)
         {
             GenerateCard(spell.Value);

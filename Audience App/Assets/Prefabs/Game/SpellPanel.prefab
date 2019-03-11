@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 7481860395227862347}
   - component: {fileID: 7481860395227862346}
   - component: {fileID: 7481860395227862345}
-  - component: {fileID: 7481860395227862340}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -188,21 +187,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &7481860395227862340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7481860395227862351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf06b52d1d6e0544ebbf45aca29122ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ScrollView: {fileID: 0}
-  _ScrollContent: {fileID: 0}
-  _CardPrefab: {fileID: 0}
 --- !u!1 &7481860395654961468
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +281,7 @@ MonoBehaviour:
   _ScrollContent: {fileID: 7481860396111820952}
   _CardPrefab: {fileID: 8507887356459410382, guid: 539005f101893de4388de0b32ec0296a,
     type: 3}
+  AuthorizeCasting: 0
 --- !u!1 &7481860396111820952
 GameObject:
   m_ObjectHideFlags: 0

@@ -60,10 +60,13 @@ namespace audience
             GameInfo.PlayerNumber = game.players.Count;
             for (var i = 0; i < game.players.Count; i++)
             {
+                GameInfo.PlayerIDs[i] = i;
                 GameInfo.PlayerNames[i] = game.players[i].name;
                 ColorUtility.TryParseHtmlString(game.players[i].color, out GameInfo.PlayerColors[i]);
-                GameInfo.PlayerIDs[i] = i;
+                GameInfo.PlayerScores[i] = game.players[i].score;
             }
+
+            OnReceivedGameStateUpdate?.Invoke(game);
         }
 
         #endregion
