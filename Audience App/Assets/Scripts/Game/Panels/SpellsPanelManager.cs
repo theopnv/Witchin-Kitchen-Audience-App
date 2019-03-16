@@ -36,6 +36,7 @@ public class SpellsPanelManager : APanelManager
 
         if (AuthorizeCasting)
         {
+            Handheld.Vibrate();
             StartCoroutine("Timer");
         }
     }

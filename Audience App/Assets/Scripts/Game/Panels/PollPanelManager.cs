@@ -34,6 +34,7 @@ namespace audience.game
             SetButton(_ButtonA, PollChoices.events[0]);
             SetButton(_ButtonB, PollChoices.events[1]);
             _RemainingTimeText = _RemainingTimeTextVote;
+            Handheld.Vibrate();
 
             InvokeRepeating("UpdateTime", 0, 1);
         }
