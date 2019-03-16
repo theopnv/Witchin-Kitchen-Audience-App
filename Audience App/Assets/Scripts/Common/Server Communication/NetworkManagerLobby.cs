@@ -62,7 +62,9 @@ namespace audience
             {
                 GameInfo.PlayerIDs[i] = i;
                 GameInfo.PlayerNames[i] = game.players[i].name;
-                ColorUtility.TryParseHtmlString(game.players[i].color, out GameInfo.PlayerColors[i]);
+                Debug.Log("Raw = " + game.players[i].color);
+                ColorUtility.TryParseHtmlString(game.players[i].color, out var color);
+                GameInfo.PlayerColors[i] = color;
                 GameInfo.PlayerScores[i] = game.players[i].score;
             }
 

@@ -33,7 +33,11 @@ public class SpellsPanelManager : APanelManager
         {
             GenerateCard(spell.Value);
         }
-        StartCoroutine("Timer");
+
+        if (AuthorizeCasting)
+        {
+            StartCoroutine("Timer");
+        }
     }
 
     #region Custom Methods

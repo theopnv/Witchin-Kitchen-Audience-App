@@ -18,7 +18,6 @@ namespace audience.game
             }
         }
 
-
         [SerializeField] private Text _ScoreText;
         private int _Score;
 

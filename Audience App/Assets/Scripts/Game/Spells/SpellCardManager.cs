@@ -44,33 +44,35 @@ namespace audience.game
             var i = 0;
             if (GameInfo.PlayerNumber > i)
             {
-                InstantiateButton(i);
+                InstantiateButton(i, GameInfo.PlayerColors[i]);
             }
 
             ++i;
             if (GameInfo.PlayerNumber > i)
             {
-                InstantiateButton(i);
+                InstantiateButton(i, GameInfo.PlayerColors[i]);
             }
 
             ++i;
             if (GameInfo.PlayerNumber > i)
             {
-                InstantiateButton(i);
+                InstantiateButton(i, GameInfo.PlayerColors[i]);
             }
 
             ++i;
             if (GameInfo.PlayerNumber > i)
             {
-                InstantiateButton(i);
+                InstantiateButton(i, GameInfo.PlayerColors[i]);
             }
 
         }
 
-        void InstantiateButton(int i)
+        void InstantiateButton(int i, Color color)
         {
             var instance = Instantiate(_TargetPlayerButton, _ButtonsPlaceholder.transform);
             var button = instance.GetComponent<Button>();
+            button.GetComponent<Image>().material.color = color;
+            button.GetComponent<Image>().color = color;
             button.onClick.AddListener(delegate { OnTargetButtonClick(i); });
             var text = instance.GetComponentInChildren<Text>();
             text.text = GameInfo.PlayerNames[i];
