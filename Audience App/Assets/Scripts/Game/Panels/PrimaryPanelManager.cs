@@ -22,6 +22,7 @@ namespace audience.game
 
         void Start()
         {
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
             _Canvas = FindObjectOfType<Canvas>();
             _NetworkManager = FindObjectOfType<NetworkManager>();
             if (_NetworkManager)
@@ -63,6 +64,7 @@ namespace audience.game
 
         public void ExitRoom()
         {
+            Screen.sleepTimeout = SleepTimeout.SystemSetting;
             _NetworkManager?.ExitRoom();
             Destroy(_NetworkManager?.gameObject);
             SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
