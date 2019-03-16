@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 3183082475475780926}
   - component: {fileID: 3183082475475780897}
   m_Layer: 5
-  m_Name: Remaining Time
+  m_Name: Remaining Time Vote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Remaining time to vote: 30 secs'
+  m_Text: 'Remaining time to vote: 20 secs'
 --- !u!1 &3183082475754419070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,7 +1114,7 @@ GameObject:
   - component: {fileID: 6800673914695431447}
   - component: {fileID: 532176830126231550}
   m_Layer: 5
-  m_Name: Remaining Time
+  m_Name: Remaining Time Results
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 123f92fe6c4aaae4590863fd936ba51b, type: 3}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -1180,7 +1180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Remaining time to vote: 30 secs'
+  m_Text: 'Remaining time to vote: 20 secs'
 --- !u!1 &5311149058481284843
 GameObject:
   m_ObjectHideFlags: 0

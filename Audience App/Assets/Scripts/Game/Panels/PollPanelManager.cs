@@ -82,7 +82,6 @@ namespace audience.game
 
             IsVoting = true;
             StartPoll();
-            _RemainingTimeText = _RemainingTimeTextResults;
         }
 
         void OnDisable()
@@ -95,6 +94,7 @@ namespace audience.game
             _VoteSide.SetActive(false);
             _ResultsSide.SetActive(true);
             IsVoting = false;
+            _RemainingTimeText = _RemainingTimeTextResults;
         }
 
         public override void ExitScreen()

@@ -71,7 +71,6 @@ namespace audience.game
         {
             var instance = Instantiate(_TargetPlayerButton, _ButtonsPlaceholder.transform);
             var button = instance.GetComponent<Button>();
-            button.GetComponent<Image>().material.color = color;
             button.GetComponent<Image>().color = color;
             button.onClick.AddListener(delegate { OnTargetButtonClick(i); });
             var text = instance.GetComponentInChildren<Text>();
