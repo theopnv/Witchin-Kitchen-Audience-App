@@ -52,7 +52,7 @@ namespace audience.game
             {
                 ExitScreen();
             }
-            _RemainingTimeText.text = "Remaining time to vote: " + _RemainingTime + " secs";
+            _RemainingTimeText.text = "Remaining time to vote: " + _RemainingTime + " seconds";
             --_RemainingTime;
         }
 

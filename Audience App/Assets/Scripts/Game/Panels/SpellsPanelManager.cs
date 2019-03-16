@@ -21,6 +21,9 @@ public class SpellsPanelManager : APanelManager
     private NetworkManager _NetworkManager;
     public bool AuthorizeCasting;
 
+    [SerializeField] private Text _RemainingTimeText;
+    private int _RemainingTime = 20;
+
     void Start()
     {
         _NetworkManager = FindObjectOfType<NetworkManager>();
@@ -37,16 +40,21 @@ public class SpellsPanelManager : APanelManager
         if (AuthorizeCasting)
         {
             Handheld.Vibrate();
-            StartCoroutine("Timer");
+            _RemainingTimeText.gameObject.SetActive(true);
+            InvokeRepeating("Timer", 0, 1);
         }
     }
 
     #region Custom Methods
 
-    private IEnumerator Timer()
+    private void Timer()
     {
-        yield return new WaitForSeconds(20);
-        ExitScreen();
+        if (_RemainingTime < 0)
+        {
+            ExitScreen();
+        }
+        _RemainingTimeText.text = "Remaining time to choose a spell: " + _RemainingTime + " seconds";
+        --_RemainingTime;
     }
 
     void GenerateCard(Type spellType)
