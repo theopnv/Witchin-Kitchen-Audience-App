@@ -19,6 +19,8 @@ namespace audience.game
         [SerializeField] private GameObject _GameOutcomePanelPrefab;
         [SerializeField] private GameObject _SpellsPanelPrefab;
 
+        private bool _GameIsAboutToEnd = false;
+
         #region Unity API
 
         // Start is called before the first frame update
@@ -91,8 +93,11 @@ namespace audience.game
 
         void OnReceivedPollList(PollChoices pollChoices)
         {
-            var pollManager = Instantiate(_PollPanelPrefab, _Canvas.transform).GetComponent<PollPanelManager>();
-            pollManager.PollChoices = pollChoices;
+            if (!_GameIsAboutToEnd)
+            {
+                var pollManager = Instantiate(_PollPanelPrefab, _Canvas.transform).GetComponent<PollPanelManager>();
+                pollManager.PollChoices = pollChoices;
+            }
         }
 
         void OnReceivedGameOutcome(GameOutcome gameOutcome)
@@ -101,12 +106,16 @@ namespace audience.game
                 Instantiate(_GameOutcomePanelPrefab, _Canvas.transform)
                     .GetComponent<GameOutcomePanelManager>();
             gameOutcomeManager.GameOutcome = gameOutcome;
+            _GameIsAboutToEnd = true;
         }
 
         void OnReceivedSpellRequest()
         {
-            var spellManager = Instantiate(_SpellsPanelPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
-            spellManager.AuthorizeCasting = true;
+            if (!_GameIsAboutToEnd)
+            {
+                var spellManager = Instantiate(_SpellsPanelPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
+                spellManager.AuthorizeCasting = true;
+            }
         }
 
         void OnReceiveEndGame(EndGame endGame)
