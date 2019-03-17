@@ -19,7 +19,7 @@ public class SpellsPanelManager : APanelManager
     [SerializeField] private Text _SelectionTitle;
 
     // Mini Game
-    [Header("Mini Game")]
+    [Header("Mini Game")] public string Title;
     [SerializeField] private GameObject _MiniGamePanel;
     [SerializeField] private Text _MiniGameTitle;
     [SerializeField] private Image _PotionImage;
@@ -49,6 +49,7 @@ public class SpellsPanelManager : APanelManager
         {
             Handheld.Vibrate();
             _RemainingText = _RemainingTextMiniGame;
+            _MiniGameTitle.text = Title;
             InvokeRepeating("Timer", 0, 1);
         }
         else

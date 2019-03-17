@@ -109,11 +109,15 @@ namespace audience.game
             _GameIsAboutToEnd = true;
         }
 
-        void OnReceivedSpellRequest()
+        void OnReceivedSpellRequest(SpellRequest spellRequest)
         {
             if (!_GameIsAboutToEnd)
             {
                 var spellManager = Instantiate(_SpellsPanelPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
+                var title = spellRequest.fromPlayer.id == -1
+                    ? "A free potion has been offered to you!"
+                    : spellRequest.fromPlayer.name + " made a potion for you!";
+                spellManager.Title = title;
                 spellManager.AuthorizeCasting = true;
             }
         }

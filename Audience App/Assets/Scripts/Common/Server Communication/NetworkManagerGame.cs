@@ -18,7 +18,7 @@ namespace audience
 
         public Action<PollChoices> OnReceivedPollResults;
         public Action<PollChoices> OnReceivedPollList;
-        public Action OnReceivedSpellRequest;
+        public Action<SpellRequest> OnReceivedSpellRequest;
         public Action<GameOutcome> OnReceivedGameOutcome;
         public Action<Game> OnReceivedGameStateUpdate;
         public Action<EndGame> OnReceivedEndGame;
@@ -28,7 +28,7 @@ namespace audience
         private void GameStart()
         {
             _Socket.On(Command.EVENT_LIST, OnEventList);
-            _Socket.On(Command.CAST_SPELL, OnCastSpellRequest);
+            _Socket.On(Command.CAST_SPELL_REQUEST, OnCastSpellRequest);
             _Socket.On(Command.GAME_OUTCOME, OnGameOutcome);
             _Socket.On(Command.POLL_RESULTS, OnPollResults);
             _Socket.On(Command.END_GAME, OnEndGame);
@@ -47,7 +47,7 @@ namespace audience
         public void EmitSpellCast(Spell spell)
         {
             var serialized = JsonConvert.SerializeObject(spell);
-            _Socket.Emit(Command.CAST_SPELL, new JSONObject(serialized));
+            _Socket.Emit(Command.CAST_SPELL_RESPONSE, new JSONObject(serialized));
         }
 
         #endregion
@@ -64,7 +64,8 @@ namespace audience
         private void OnCastSpellRequest(SocketIOEvent e)
         {
             Debug.Log("OnCastSpellRequest");
-            OnReceivedSpellRequest?.Invoke();
+            var spellRequest = JsonConvert.DeserializeObject<SpellRequest>(e.data.ToString());
+            OnReceivedSpellRequest?.Invoke(spellRequest);
         }
 
         private void OnPollResults(SocketIOEvent e)

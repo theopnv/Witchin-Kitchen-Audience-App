@@ -13,7 +13,7 @@ namespace audience.messages
         public const string JOIN_GAME = "joinGame";
         public const string SEND_VOTE = "vote";
         public const string REGISTER_VIEWER = "registerViewer";
-        public const string CAST_SPELL = "castSpell";
+        public const string CAST_SPELL_RESPONSE = "castSpell";
 
         // Received
         public const string MESSAGE = "message";
@@ -23,6 +23,7 @@ namespace audience.messages
         public const string UPDATED_GAME_STATE = "updateGameState";
         public const string POLL_RESULTS = "pollResults";
         public const string END_GAME = "endGame";
+        public const string CAST_SPELL_REQUEST = "castSpellRequest";
     }
 
     public enum Code
@@ -91,6 +92,12 @@ namespace audience.messages
     public class GameOutcome
     {
         public Player[] leaderboards;
+    }
+
+    public class SpellRequest
+    {
+        public Viewer targetedViewer;
+        public Player fromPlayer;
     }
 
     public class Spell
