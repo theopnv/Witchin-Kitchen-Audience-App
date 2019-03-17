@@ -21,6 +21,7 @@ namespace audience
         public Action OnReceivedSpellRequest;
         public Action<GameOutcome> OnReceivedGameOutcome;
         public Action<Game> OnReceivedGameStateUpdate;
+        public Action<EndGame> OnReceivedEndGame;
 
         #region Unity API
 
@@ -28,8 +29,9 @@ namespace audience
         {
             _Socket.On(Command.EVENT_LIST, OnEventList);
             _Socket.On(Command.CAST_SPELL, OnCastSpellRequest);
-            _Socket.On(Command.GAME_QUIT, OnPlayerQuitGame);
+            _Socket.On(Command.GAME_OUTCOME, OnGameOutcome);
             _Socket.On(Command.POLL_RESULTS, OnPollResults);
+            _Socket.On(Command.END_GAME, OnEndGame);
         }
 
         #endregion
@@ -72,11 +74,18 @@ namespace audience
             OnReceivedPollResults?.Invoke(pollChoices);
         }
 
-        private void OnPlayerQuitGame(SocketIOEvent e)
+        private void OnGameOutcome(SocketIOEvent e)
         {
-            Debug.Log("OnPlayerQuitGame");
+            Debug.Log("OnPlayerQOnGameOutcomeuitGame");
             var gameOutcome = JsonConvert.DeserializeObject<GameOutcome>(e.data.ToString());
             OnReceivedGameOutcome?.Invoke(gameOutcome);
+        }
+
+        private void OnEndGame(SocketIOEvent e)
+        {
+            Debug.Log("OnEndGame");
+            var rematch = JsonConvert.DeserializeObject<EndGame>(e.data.ToString());
+            OnReceivedEndGame?.Invoke(rematch);
         }
 
         #endregion

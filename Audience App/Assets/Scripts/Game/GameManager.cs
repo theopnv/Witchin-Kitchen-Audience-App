@@ -1,4 +1,5 @@
-﻿using audience.messages;
+﻿using System.Collections;
+using audience.messages;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,6 +33,7 @@ namespace audience.game
                 _NetworkManager.OnReceivedPollList += OnReceivedPollList;
                 _NetworkManager.OnReceivedGameOutcome += OnReceivedGameOutcome;
                 _NetworkManager.OnReceivedSpellRequest += OnReceivedSpellRequest;
+                _NetworkManager.OnReceivedEndGame += OnReceiveEndGame;
             }
 
             var primaryPanel = Instantiate(_PrimaryPanelPrefab, _Canvas.transform).GetComponent<PrimaryPanelManager>();
@@ -46,6 +48,8 @@ namespace audience.game
             _NetworkManager.OnReceivedPollList -= OnReceivedPollList;
             _NetworkManager.OnReceivedGameOutcome -= OnReceivedGameOutcome;
             _NetworkManager.OnReceivedSpellRequest -= OnReceivedSpellRequest;
+            _NetworkManager.OnReceivedEndGame -= OnReceiveEndGame;
+
         }
 
         #endregion
@@ -93,8 +97,10 @@ namespace audience.game
 
         void OnReceivedGameOutcome(GameOutcome gameOutcome)
         {
-            var exitManager = Instantiate(_ExitRoomPanelPrefab, _Canvas.transform).GetComponent<ExitRoomPanelManager>();
-            exitManager.GameOutcome = gameOutcome;
+            var gameOutcomeManager = 
+                Instantiate(_ExitRoomPanelPrefab, _Canvas.transform)
+                    .GetComponent<GameOutcomePanelManager>();
+            gameOutcomeManager.GameOutcome = gameOutcome;
         }
 
         void OnReceivedSpellRequest()
@@ -103,6 +109,30 @@ namespace audience.game
             spellManager.AuthorizeCasting = true;
         }
 
+        void OnReceiveEndGame(EndGame endGame)
+        {
+            if (endGame.doRematch)
+            {
+                for (var i = 0; i < GameInfo.PlayerNumber; i++)
+                {
+                    GameInfo.PlayerScores[i] = 0;
+                }
+
+                SceneManager.LoadSceneAsync(SceneNames.Game);
+            }
+            else
+            {
+                var instance = Instantiate(_OneChoiceOverlayPrefab, _Canvas.transform);
+                var errorOverlay = instance.GetComponent<Overlay>();
+                errorOverlay.Description = "The cooking show is over. Witchin' Kitchen returns live each time new candidates are ready to risk their lives!";
+                errorOverlay.Primary += () =>
+                {
+                    _NetworkManager?.ExitRoom();
+                    SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+                };
+            }
+        }
+        
         #endregion
 
     }

@@ -17,11 +17,12 @@ namespace audience.messages
 
         // Received
         public const string MESSAGE = "message";
-        public const string GAME_QUIT = "gameQuit";
+        public const string GAME_OUTCOME = "gameOutcome";
         public const string EVENT_LIST = "eventList";
         public const string JOINED_GAME = "joinedGame";
         public const string UPDATED_GAME_STATE = "updateGameState";
         public const string POLL_RESULTS = "pollResults";
+        public const string END_GAME = "endGame";
     }
 
     public enum Code
@@ -88,7 +89,6 @@ namespace audience.messages
 
     public class GameOutcome
     {
-        public bool gameFinished;
         public Player winner;
     }
 
@@ -97,6 +97,11 @@ namespace audience.messages
         public int spellId;
         public Player targetedPlayer;
         public Viewer caster;
+    }
+
+    public class EndGame
+    {
+        public bool doRematch;
     }
 
     public static class SocketInfo

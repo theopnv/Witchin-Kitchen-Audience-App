@@ -41,6 +41,8 @@ namespace audience.lobby
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
+
+            InitGameInfo();
         }
 
         void Update()
@@ -59,6 +61,15 @@ namespace audience.lobby
         #endregion
 
         #region Custom Methods
+
+        private void InitGameInfo()
+        {
+            GameInfo.PlayerNumber = 4;
+            GameInfo.PlayerIDs = new int[GameInfo.PlayerNumber];
+            GameInfo.PlayerColors = new Color[GameInfo.PlayerNumber];
+            GameInfo.PlayerNames = new string[GameInfo.PlayerNumber];
+            GameInfo.PlayerScores = new int[GameInfo.PlayerNumber];
+        }
 
         private void InstantiateErrorOverlay(string error)
         {
