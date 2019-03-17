@@ -230,7 +230,7 @@ MonoBehaviour:
     type: 3}
   _PollPanelPrefab: {fileID: 3183082475218297909, guid: ee27833366c57ff4c9b5cac904d530da,
     type: 3}
-  _ExitRoomPanelPrefab: {fileID: 7568787130222568797, guid: 4bb09f4ac27e4f342987226f2ec48d36,
+  _GameOutcomePanelPrefab: {fileID: 7568787130222568797, guid: 4bb09f4ac27e4f342987226f2ec48d36,
     type: 3}
   _SpellsPanelPrefab: {fileID: 7481860395654961468, guid: 8b20f4df279f4454d9a829b44c87193c,
     type: 3}

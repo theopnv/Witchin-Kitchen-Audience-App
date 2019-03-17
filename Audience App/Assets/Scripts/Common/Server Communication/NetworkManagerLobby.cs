@@ -65,7 +65,7 @@ namespace audience
                 Debug.Log("Raw = " + game.players[i].color);
                 ColorUtility.TryParseHtmlString(game.players[i].color, out var color);
                 GameInfo.PlayerColors[i] = color;
-                GameInfo.PlayerScores[i] = game.players[i].score;
+                GameInfo.PlayerPotions[i] = game.players[i].potions;
             }
 
             OnReceivedGameStateUpdate?.Invoke(game);

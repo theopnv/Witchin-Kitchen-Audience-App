@@ -35,7 +35,7 @@ namespace audience.game
             {
                 var instance = Instantiate(_PlayerStatePrefab, _PlayersStatePlaceholder.transform);
                 var manager = instance.GetComponent<PlayerStateManager>();
-                manager.Score = GameInfo.PlayerScores[i];
+                manager.Score = GameInfo.PlayerPotions[i];
                 manager.Name = GameInfo.PlayerNames[i];
 
                 _PlayerStateManagers.Add(i, manager);
@@ -74,7 +74,7 @@ namespace audience.game
         {
             for (var i = 0; i < GameInfo.PlayerNumber; i++)
             {
-                _PlayerStateManagers[i].Score = GameInfo.PlayerScores[i];
+                _PlayerStateManagers[i].Score = GameInfo.PlayerPotions[i];
                 _PlayerStateManagers[i].Name = GameInfo.PlayerNames[i];
             }
         }

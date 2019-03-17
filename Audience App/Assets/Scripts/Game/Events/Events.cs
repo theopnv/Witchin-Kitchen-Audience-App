@@ -22,7 +22,7 @@ namespace audience.game
 
         public static Dictionary<EventID, string> EventList = new Dictionary<EventID, string>
         {
-            { EventID.freezing_rain, "Freezing Rain"},
+            { EventID.freezing_rain, "Skating Rink"},
             { EventID.network_ads, "Network Ads"},
             { EventID.meteorites, "Meteorites"},
             { EventID.ingredient_morph, "Ingredient Morph"},

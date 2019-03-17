@@ -68,7 +68,8 @@ namespace audience.lobby
             GameInfo.PlayerIDs = new int[GameInfo.PlayerNumber];
             GameInfo.PlayerColors = new Color[GameInfo.PlayerNumber];
             GameInfo.PlayerNames = new string[GameInfo.PlayerNumber];
-            GameInfo.PlayerScores = new int[GameInfo.PlayerNumber];
+            GameInfo.PlayerPotions = new int[GameInfo.PlayerNumber];
+            GameInfo.PlayerIngredients = new int[GameInfo.PlayerNumber];
         }
 
         private void InstantiateErrorOverlay(string error)

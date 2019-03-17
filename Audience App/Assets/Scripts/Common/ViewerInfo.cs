@@ -10,7 +10,8 @@ namespace audience
         public static int[] PlayerIDs = new int[PlayerNumber];
         public static Color[] PlayerColors = new Color[PlayerNumber];
         public static string[] PlayerNames = new string[PlayerNumber];
-        public static int[] PlayerScores = new int[PlayerNumber];
+        public static int[] PlayerPotions = new int[PlayerNumber];
+        public static int[] PlayerIngredients = new int[PlayerNumber];
     }
 
     /// <summary>

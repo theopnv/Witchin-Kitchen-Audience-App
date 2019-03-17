@@ -66,7 +66,8 @@ namespace audience.messages
         public int id;
         public string color;
         public string name;
-        public int score;
+        public int potions;
+        public int ingredients;
     }
 
     public class Players
@@ -89,7 +90,7 @@ namespace audience.messages
 
     public class GameOutcome
     {
-        public Player winner;
+        public Player[] leaderboards;
     }
 
     public class Spell

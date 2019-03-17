@@ -16,7 +16,7 @@ namespace audience.game
 
         [SerializeField] private GameObject _PrimaryPanelPrefab;
         [SerializeField] private GameObject _PollPanelPrefab;
-        [SerializeField] private GameObject _ExitRoomPanelPrefab;
+        [SerializeField] private GameObject _GameOutcomePanelPrefab;
         [SerializeField] private GameObject _SpellsPanelPrefab;
 
         #region Unity API
@@ -98,7 +98,7 @@ namespace audience.game
         void OnReceivedGameOutcome(GameOutcome gameOutcome)
         {
             var gameOutcomeManager = 
-                Instantiate(_ExitRoomPanelPrefab, _Canvas.transform)
+                Instantiate(_GameOutcomePanelPrefab, _Canvas.transform)
                     .GetComponent<GameOutcomePanelManager>();
             gameOutcomeManager.GameOutcome = gameOutcome;
         }
@@ -115,7 +115,7 @@ namespace audience.game
             {
                 for (var i = 0; i < GameInfo.PlayerNumber; i++)
                 {
-                    GameInfo.PlayerScores[i] = 0;
+                    GameInfo.PlayerPotions[i] = 0;
                 }
 
                 SceneManager.LoadSceneAsync(SceneNames.Game);
