@@ -9,20 +9,28 @@ using UnityEngine.UI;
 
 public class SpellsPanelManager : APanelManager
 {
-    [SerializeField]
-    private ScrollRect _ScrollView;
+    // Selection
+    [Header("Selection")]
+    [SerializeField] private GameObject _SelectionPanel;
+    [SerializeField] private ScrollRect _ScrollView;
+    [SerializeField] private GameObject _ScrollContent;
+    [SerializeField] private GameObject _CardPrefab;
+    [SerializeField] private Text _RemainingTimeTextSelection;
+    [SerializeField] private Text _SelectionTitle;
 
-    [SerializeField]
-    private GameObject _ScrollContent;
+    // Mini Game
+    [Header("Mini Game")]
+    [SerializeField] private GameObject _MiniGamePanel;
+    [SerializeField] private Text _MiniGameTitle;
+    [SerializeField] private Image _PotionImage;
+    [SerializeField] private Text _RemainingTextMiniGame;
+    private int _NbTouches = 0;
 
-    [SerializeField]
-    private GameObject _CardPrefab;
-
+    // Common
+    private Text _RemainingText;
+    private int _RemainingTime = 20;
     private NetworkManager _NetworkManager;
     public bool AuthorizeCasting;
-
-    [SerializeField] private Text _RemainingTimeText;
-    private int _RemainingTime = 20;
 
     void Start()
     {
@@ -40,8 +48,26 @@ public class SpellsPanelManager : APanelManager
         if (AuthorizeCasting)
         {
             Handheld.Vibrate();
-            _RemainingTimeText.gameObject.SetActive(true);
+            _RemainingText = _RemainingTextMiniGame;
             InvokeRepeating("Timer", 0, 1);
+        }
+        else
+        {
+            _MiniGamePanel.SetActive(false);
+            _SelectionPanel.SetActive(true);
+        }
+    }
+
+    void OnDisable()
+    {
+        _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
+    }
+
+    void Update()
+    {
+        if (_MiniGamePanel.activeInHierarchy)
+        {
+            MiniGame();
         }
     }
 
@@ -53,7 +79,7 @@ public class SpellsPanelManager : APanelManager
         {
             ExitScreen();
         }
-        _RemainingTimeText.text = "Remaining time to choose a spell: " + _RemainingTime + " seconds";
+        _RemainingText.text = "Remaining time to choose a spell: " + _RemainingTime + " seconds";
         --_RemainingTime;
     }
 
@@ -78,11 +104,6 @@ public class SpellsPanelManager : APanelManager
         ExitScreen();
     }
 
-    void OnDisable()
-    {
-        _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
-    }
-
     private void OnMessageReceivedFromServer(Base content)
     {
         if ((int)content.code % 10 == 0) // Success codes always have their unit number equal to 0 (cf. protocol)
@@ -95,6 +116,41 @@ public class SpellsPanelManager : APanelManager
                     break;
             }
         }
+    }
+
+    private void MiniGame()
+    {
+        if (Input.touchCount > 0)
+        {
+            var touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Ended)
+            {
+                ++_NbTouches;
+            }
+        }
+
+        // Simulates touch in the editor
+        if (Input.GetMouseButtonDown(0))
+        {
+            ++_NbTouches;
+        }
+
+        if (_NbTouches >= 3)
+        {
+            EndMinigame();
+            _NbTouches = 0;
+        }
+
+    }
+
+    private void EndMinigame()
+    {
+        _RemainingTimeTextSelection.gameObject.SetActive(true);
+        _RemainingText = _RemainingTimeTextSelection;
+        _MiniGamePanel.SetActive(false);
+        _SelectionPanel.SetActive(true);
+        _SelectionTitle.text = "The potion gave you the ability to cast a spell!";
     }
 
     #endregion
