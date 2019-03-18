@@ -15,6 +15,8 @@ namespace audience.game
         public Text RectoTitle;
         public Text RectoDescription;
         public Button RectoCastSpellButton;
+        public Image RectoSprite;
+        public Image VersoSprite;
 
         public GameObject Verso;
 

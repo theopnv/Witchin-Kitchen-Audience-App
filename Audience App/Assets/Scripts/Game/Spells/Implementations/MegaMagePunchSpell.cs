@@ -9,6 +9,11 @@ namespace audience.game
 
     public class MegaMageSpell : ASpell
     {
+        public override string GetSpritePath()
+        {
+            return "Megapunch";
+        }
+
         public override Spells.SpellID GetSpellID()
         {
             return Spells.SpellID.mega_mage_punch;

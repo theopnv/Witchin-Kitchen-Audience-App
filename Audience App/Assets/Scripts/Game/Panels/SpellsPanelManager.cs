@@ -98,6 +98,12 @@ public class SpellsPanelManager : APanelManager
         spellCardManager.RectoTitle.text = spellManager.GetTitle();
         spellCardManager.RectoDescription.text = spellManager.GetDescription();
         spellCardManager.CastSpellAction += spellManager.OnCastButtonClick;
+        var sprite = Resources.Load<Sprite>(spellManager.GetSpritePath());
+        if (sprite)
+        {
+            spellCardManager.RectoSprite.sprite = sprite;
+            spellCardManager.VersoSprite.sprite = sprite;
+        }
     }
 
     public void OnBackButtonClick()

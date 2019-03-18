@@ -19,6 +19,7 @@ namespace audience.game
 
         public abstract string GetTitle();
         public abstract string GetDescription();
+        public abstract string GetSpritePath();
         public abstract Spells.SpellID GetSpellID();
 
         public void OnCastButtonClick(int targetId)

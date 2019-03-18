@@ -9,6 +9,11 @@ namespace audience.game
 
     public class DiscoManiaSpell : ASpell
     {
+        public override string GetSpritePath()
+        {
+            return "Discomania";
+        }
+
         public override Spells.SpellID GetSpellID()
         {
             return Spells.SpellID.disco_mania;
