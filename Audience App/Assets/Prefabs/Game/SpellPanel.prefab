@@ -303,8 +303,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 059a4353ad6337846901ef058e64d0f6, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: bb9ba0fda5f2c3d458f60daa0444f916, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -538,7 +538,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8016a287e3d959848a41d79596c4eea8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 94bfd0e56ec72d54fb57ba33adcac1a7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -643,6 +643,7 @@ MonoBehaviour:
     type: 3}
   _RemainingTimeTextSelection: {fileID: 3781374268847798912}
   _SelectionTitle: {fileID: 7481860396855846179}
+  Title: 
   _MiniGamePanel: {fileID: 5087584596263607826}
   _MiniGameTitle: {fileID: 7922309262380055620}
   _PotionImage: {fileID: 6763027804156241720}
@@ -1035,8 +1036,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 059a4353ad6337846901ef058e64d0f6, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: bb9ba0fda5f2c3d458f60daa0444f916, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
