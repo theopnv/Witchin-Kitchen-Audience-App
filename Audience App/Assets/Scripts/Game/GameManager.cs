@@ -8,6 +8,8 @@ namespace audience.game
 
     public class GameManager : MonoBehaviour
     {
+        [HideInInspector]
+        public bool IsChoosingASpell = false;
         private NetworkManager _NetworkManager;
 
         [SerializeField] private GameObject _OneChoiceOverlayPrefab;
@@ -97,6 +99,7 @@ namespace audience.game
             {
                 var pollManager = Instantiate(_PollPanelPrefab, _Canvas.transform).GetComponent<PollPanelManager>();
                 pollManager.PollChoices = pollChoices;
+                pollManager.WasChoosingASpell = IsChoosingASpell;
             }
         }
 
@@ -119,6 +122,7 @@ namespace audience.game
                     : spellRequest.fromPlayer.name + " made a potion for you!";
                 spellManager.Title = title;
                 spellManager.AuthorizeCasting = true;
+                IsChoosingASpell = true;
             }
         }
 

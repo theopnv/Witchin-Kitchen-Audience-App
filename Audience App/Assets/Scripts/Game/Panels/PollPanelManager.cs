@@ -73,6 +73,10 @@ namespace audience.game
         #region Common
 
         public PollChoices PollChoices;
+
+        [HideInInspector]
+        public bool WasChoosingASpell;
+
         private bool IsVoting;
         private Text _RemainingTimeText;
 
@@ -92,6 +96,10 @@ namespace audience.game
 
         public void SwitchSides()
         {
+            if (WasChoosingASpell)
+            {
+                ExitScreen();
+            }
             _VoteSide.SetActive(false);
             _ResultsSide.SetActive(true);
             IsVoting = false;

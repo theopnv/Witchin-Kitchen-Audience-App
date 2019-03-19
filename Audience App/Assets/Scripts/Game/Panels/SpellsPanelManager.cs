@@ -74,6 +74,12 @@ public class SpellsPanelManager : APanelManager
 
     #region Custom Methods
 
+    public override void ExitScreen()
+    {
+        FindObjectOfType<GameManager>().IsChoosingASpell = false;
+        base.ExitScreen();
+    }
+
     private void Timer()
     {
         if (_RemainingTime < 0)
