@@ -98,6 +98,7 @@ namespace audience.game
         {
             if (WasChoosingASpell)
             {
+                IsVoting = false;
                 ExitScreen();
             }
             else

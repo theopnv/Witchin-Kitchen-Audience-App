@@ -44,7 +44,10 @@ namespace audience.game
 
         void OnDisable()
         {
-            _NetworkManager.OnReceivedGameStateUpdate -= OnGameStateUpdate;
+            if (_NetworkManager)
+            {
+                _NetworkManager.OnReceivedGameStateUpdate -= OnGameStateUpdate;
+            }
         }
 
         public override void ExitScreen()

@@ -163,7 +163,9 @@ public class SpellsPanelManager : APanelManager
         _RemainingText = _RemainingTimeTextSelection;
         _MiniGamePanel.SetActive(false);
         _SelectionPanel.SetActive(true);
-        _SelectionTitle.text = "The potion gave you the ability to cast a spell!";
+        _SelectionTitle.text = AuthorizeCasting 
+            ? "You can now choose a spell!"
+            : "Browse spells";
     }
 
     #endregion
