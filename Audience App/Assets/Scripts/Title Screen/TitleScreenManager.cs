@@ -51,6 +51,11 @@ namespace audience.title_screen
         {
             SceneManager.LoadSceneAsync(SceneNames.Settings);
         }
+
+        public void OnTutorialButtonClick()
+        {
+            SceneManager.LoadSceneAsync(SceneNames.Tutorial);
+        }
     }
 
 }
