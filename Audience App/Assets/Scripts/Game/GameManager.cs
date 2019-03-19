@@ -46,14 +46,16 @@ namespace audience.game
 
         void OnDisable()
         {
-            _NetworkManager.OnDisconnected -= OnDisconnectedFromServer;
-            _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
+            if (_NetworkManager)
+            {
+                _NetworkManager.OnDisconnected -= OnDisconnectedFromServer;
+                _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
 
-            _NetworkManager.OnReceivedPollList -= OnReceivedPollList;
-            _NetworkManager.OnReceivedGameOutcome -= OnReceivedGameOutcome;
-            _NetworkManager.OnReceivedSpellRequest -= OnReceivedSpellRequest;
-            _NetworkManager.OnReceivedEndGame -= OnReceiveEndGame;
-
+                _NetworkManager.OnReceivedPollList -= OnReceivedPollList;
+                _NetworkManager.OnReceivedGameOutcome -= OnReceivedGameOutcome;
+                _NetworkManager.OnReceivedSpellRequest -= OnReceivedSpellRequest;
+                _NetworkManager.OnReceivedEndGame -= OnReceiveEndGame;
+            }
         }
 
         #endregion

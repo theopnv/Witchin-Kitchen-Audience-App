@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000048637, y: 96.900024}
-  m_SizeDelta: {x: 982.4, y: 193.8}
+  m_AnchoredPosition: {x: -0.000048637, y: 99.9}
+  m_SizeDelta: {x: 982.4, y: 295.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3605968657530721981
 CanvasRenderer:
@@ -157,7 +157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Close
+  m_Text: No
 --- !u!1 &5696771864021238238
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -322.20007, y: -132}
+  m_AnchoredPosition: {x: -322.20007, y: -165}
   m_SizeDelta: {x: 338, y: 108.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &148542581352560259
@@ -315,7 +315,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8016a287e3d959848a41d79596c4eea8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 94bfd0e56ec72d54fb57ba33adcac1a7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -490,7 +490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 322.2, y: -132}
+  m_AnchoredPosition: {x: 322.2, y: -165}
   m_SizeDelta: {x: 338, y: 108.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8808885474705995952
@@ -521,7 +521,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8016a287e3d959848a41d79596c4eea8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 94bfd0e56ec72d54fb57ba33adcac1a7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -661,4 +661,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit
+  m_Text: Yes

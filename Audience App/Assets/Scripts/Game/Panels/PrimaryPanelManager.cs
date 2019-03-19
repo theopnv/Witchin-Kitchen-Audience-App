@@ -62,6 +62,14 @@ namespace audience.game
             spellManager.AuthorizeCasting = false;
         }
 
+        public void OnExitButtonClick()
+        {
+            var overlay = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform).GetComponent<Overlay>();
+            overlay.Primary = () => ExitRoom();
+            overlay.Secondary = () => Destroy(overlay.gameObject);
+            overlay.Description = "Do you really want to stop watching Witchin Kitchen ?";
+        }
+
         public void ExitRoom()
         {
             Screen.sleepTimeout = SleepTimeout.SystemSetting;

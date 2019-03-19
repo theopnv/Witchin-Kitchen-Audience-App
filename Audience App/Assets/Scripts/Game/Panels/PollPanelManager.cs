@@ -100,10 +100,13 @@ namespace audience.game
             {
                 ExitScreen();
             }
-            _VoteSide.SetActive(false);
-            _ResultsSide.SetActive(true);
-            IsVoting = false;
-            _RemainingTimeText = _RemainingTimeTextResults;
+            else
+            {
+                _VoteSide.SetActive(false);
+                _ResultsSide.SetActive(true);
+                IsVoting = false;
+                _RemainingTimeText = _RemainingTimeTextResults;
+            }
         }
 
         public override void ExitScreen()
