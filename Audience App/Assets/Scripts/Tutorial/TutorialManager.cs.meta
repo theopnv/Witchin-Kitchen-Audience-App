@@ -3,7 +3,15 @@ guid: 1b47b318610a74a65b38d5e3d956f041
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _Canvas: {instanceID: 0}
+  - _PrimaryPanelPrefab: {fileID: 960940941099796081, guid: 91b37211ed8764950a281b6008cdda1b,
+      type: 3}
+  - _PollPanelPrefab: {instanceID: 0}
+  - _SpellsPanelPrefab: {fileID: 7481860395654961468, guid: 7b4964922abb74a179d7779811b72b4f,
+      type: 3}
+  - _TwoChoicesOverlayPrefab: {fileID: 5696771864021238238, guid: f16d7b84e9b7fe44ea7cd9cfbf7024f5,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

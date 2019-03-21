@@ -5,9 +5,9 @@ using audience.messages;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace audience.game
+namespace audience.tutorial
 {
-    public class TutorialPrimaryPanelManager : ATutorialPanelManager
+    public class PrimaryPanelManager : APanelManager
     {
         private Canvas _Canvas;
         [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
@@ -34,14 +34,12 @@ namespace audience.game
 
         public void BrowseSpells()
         {
-            var spellManager = Instantiate(_SpellsManagerPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
-            spellManager.AuthorizeCasting = false;
+            Instantiate(_SpellsManagerPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
         }
 
         public void NextPage()
         {
-            var spellManager = Instantiate(_SpellsManagerPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
-            spellManager.AuthorizeCasting = false;
+            Instantiate(_SpellsManagerPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
         }
 
         public void OnExitButtonClick()

@@ -3,7 +3,7 @@ using audience.messages;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace audience.game
+namespace audience.tutorial
 {
 
     public class TutorialManager : MonoBehaviour
@@ -12,8 +12,9 @@ namespace audience.game
 
         [SerializeField] private GameObject _PrimaryPanelPrefab;
         [SerializeField] private GameObject _PollPanelPrefab;
-        [SerializeField] private GameObject _GameOutcomePanelPrefab;
         [SerializeField] private GameObject _SpellsPanelPrefab;
+
+        [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
 
         #region Unity API
 
