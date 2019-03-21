@@ -11,7 +11,7 @@ namespace audience.game
     {
         public override string GetSpritePath()
         {
-            return "Megapunch";
+            return "RocketSpeed";
         }
 
         public override Spells.SpellID GetSpellID()
@@ -21,12 +21,12 @@ namespace audience.game
 
         public override string GetTitle()
         {
-            return "Rocket Speed";
+            return "Rainbow Speed";
         }
 
         public override string GetDescription()
         {
-            return "Turn the player into a jetpack with this crazy spell";
+            return "Make the player move faster with this crazy spell!";
         }
 
     }

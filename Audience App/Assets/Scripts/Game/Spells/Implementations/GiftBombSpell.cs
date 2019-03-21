@@ -11,7 +11,7 @@ namespace audience.game
     {
         public override string GetSpritePath()
         {
-            return "Megapunch";
+            return "GiftBomb";
         }
 
         public override Spells.SpellID GetSpellID()
@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "Gift bomb desc.";
+            return "The player may think it's a gift, but...";
         }
 
     }

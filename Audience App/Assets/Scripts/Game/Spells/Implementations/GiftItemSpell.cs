@@ -11,7 +11,7 @@ namespace audience.game
     {
         public override string GetSpritePath()
         {
-            return "Megapunch";
+            return "GiftIngredient";
         }
 
         public override Spells.SpellID GetSpellID()
@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "Gift item desc.";
+            return "Gift the player an ingredient required to complete a potion.";
         }
 
     }
