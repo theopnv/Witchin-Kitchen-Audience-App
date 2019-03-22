@@ -1,59 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using audience;
-using audience.messages;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace audience.tutorial
 {
-    public class PrimaryPanelManager : APanelManager
+    public class PrimaryPanelManager : ATutorialPanelManager
     {
-        private Canvas _Canvas;
-        [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
         [SerializeField] private GameObject _SpellsManagerPrefab;
 
-        void Start()
+        protected override void Start()
         {
+            base.Start();
+
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
-            _Canvas = FindObjectOfType<Canvas>();
         }
 
         void OnDisable()
         {
         }
 
-        public override void ExitScreen()
-        {
-            var instance = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform);
-            var manager = instance.GetComponent<Overlay>();
-            manager.Primary += ExitRoom;
-            manager.Secondary += () => { Destroy(manager.gameObject); };
-            manager.Description = StringLitterals.RETURN_TO_TITLE_SCREEN_CONFIRMATION;
-        }
-
-        public void BrowseSpells()
-        {
-            Instantiate(_SpellsManagerPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
-        }
-
         public void NextPage()
-        {
+        { 
             Instantiate(_SpellsManagerPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
-        }
-
-        public void OnExitButtonClick()
-        {
-            var overlay = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform).GetComponent<Overlay>();
-            overlay.Primary = () => ExitRoom();
-            overlay.Secondary = () => Destroy(overlay.gameObject);
-            overlay.Description = "Do you really want to stop watching Witchin Kitchen ?";
-        }
-
-        public void ExitRoom()
-        {
-            Screen.sleepTimeout = SleepTimeout.SystemSetting;
-            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
         }
     }
 
