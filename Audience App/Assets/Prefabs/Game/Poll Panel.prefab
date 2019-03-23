@@ -106,8 +106,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: bb9ba0fda5f2c3d458f60daa0444f916, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: e3d2fe1ffea69bf48aed94a633cfaec6, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -417,6 +417,7 @@ MonoBehaviour:
   _RemainingTimeTextVote: {fileID: 3183082475475780897}
   _ButtonA: {fileID: 3183082476137116634}
   _ButtonB: {fileID: 3183082475754419069}
+  WasChoosingASpell: 0
   _RemainingTimeTextResults: {fileID: 532176830126231550}
   _ResultsSide: {fileID: 7946577812057545866}
   _EventAResults: {fileID: 1593618897372921230}
@@ -1523,8 +1524,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: bb9ba0fda5f2c3d458f60daa0444f916, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: e3d2fe1ffea69bf48aed94a633cfaec6, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
