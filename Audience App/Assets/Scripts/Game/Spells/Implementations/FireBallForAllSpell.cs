@@ -21,7 +21,7 @@ namespace audience.game
 
         public override string GetTitle()
         {
-            return "Fireballs for all";
+            return "Fireballs Turret";
         }
 
         public override string GetDescription()

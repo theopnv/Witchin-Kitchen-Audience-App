@@ -21,12 +21,12 @@ namespace audience.game
 
         public override string GetTitle()
         {
-            return "Mega Mage Punch";
+            return "Giant";
         }
 
         public override string GetDescription()
         {
-            return "Punch is temporarily twice as strong and player grows in size.";
+            return "Transform the player into a giant.";
         }
 
     }

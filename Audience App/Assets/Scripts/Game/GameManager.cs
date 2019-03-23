@@ -116,7 +116,7 @@ namespace audience.game
 
         void OnReceivedSpellRequest(SpellRequest spellRequest)
         {
-            if (!_GameIsAboutToEnd)
+            if (!_GameIsAboutToEnd && !IsChoosingASpell)
             {
                 var spellManager = Instantiate(_SpellsPanelPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
                 var title = spellRequest.fromPlayer.id == -1

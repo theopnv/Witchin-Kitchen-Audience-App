@@ -149,7 +149,7 @@ public class SpellsPanelManager : APanelManager
             ++_NbTouches;
         }
 
-        if (_NbTouches >= 3)
+        if (_NbTouches > 3)
         {
             EndMinigame();
             _NbTouches = 0;

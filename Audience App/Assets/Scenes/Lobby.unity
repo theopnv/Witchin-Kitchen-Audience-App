@@ -532,7 +532,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Frequency is in the upper left corner of your streaming screen
+  m_Text: Frequency is in the upper left corner of the players' screen
 --- !u!222 &470302635
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1163,7 +1163,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: STREAM
+  m_Text: PLAY
 --- !u!222 &1498895582
 CanvasRenderer:
   m_ObjectHideFlags: 0

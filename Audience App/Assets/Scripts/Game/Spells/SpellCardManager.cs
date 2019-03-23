@@ -75,8 +75,9 @@ namespace audience.game
             var button = instance.GetComponent<Button>();
             button.GetComponent<Image>().color = color;
             button.onClick.AddListener(delegate { OnTargetButtonClick(i); });
-            var text = instance.GetComponentInChildren<Text>();
-            text.text = GameInfo.PlayerNames[i];
+            var manager = button.GetComponent<TargetPlayerButtonManager>();
+            manager.Player.text = GameInfo.PlayerNames[i];
+            manager.Score.text = GameInfo.PlayerPotions[i].ToString();
         }
 
         void Update()
