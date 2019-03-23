@@ -7,13 +7,13 @@ namespace audience.tutorial
     public class EventPanelManager : ATutorialPanelManager
     {
         [SerializeField] private GameObject _SpellsPanel;
-        [SerializeField] private GameObject _ThemeIngredientPanel;
+        [SerializeField] private GameObject _EndPanel;
 
         #region Custom Methods
 
         public void NextPage()
         {
-            Instantiate(_ThemeIngredientPanel, _Canvas.transform).GetComponent<ThemeIngredientPanelManager>();
+            Instantiate(_EndPanel, _Canvas.transform).GetComponent<EndPanelManager>();
         }
 
         public void PreviousPage()

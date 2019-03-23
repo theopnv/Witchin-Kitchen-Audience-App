@@ -588,7 +588,7 @@ MonoBehaviour:
     type: 3}
   _SpellsPanel: {fileID: 7481860395654961468, guid: 7b4964922abb74a179d7779811b72b4f,
     type: 3}
-  _ThemeIngredientPanel: {fileID: 7481860395654961468, guid: dd3b82becc7284555b48a405294331f7,
+  _EndPanel: {fileID: 7481860395654961468, guid: 2c93d075d8f7741eeb511f691f2b4d05,
     type: 3}
 --- !u!1 &8155934649384133783
 GameObject:
