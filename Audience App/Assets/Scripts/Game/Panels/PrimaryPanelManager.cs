@@ -100,6 +100,7 @@ namespace audience.game
         {
             yield return new WaitForSeconds(2);
             p.PlusOneImage.CrossFadeAlpha(0, 2, false);
+            yield return new WaitForSeconds(2);
             p.PlusOneImage.gameObject.SetActive(false);
             p.PlusOneImage.color = new Color(p.PlusOneImage.color.r, p.PlusOneImage.color.g, p.PlusOneImage.color.b, 255);
         }
