@@ -22,7 +22,7 @@ namespace audience.game
             {
                 var playerScore = Instantiate(_PlayerScorePrefab, _Leaderboards.transform);
                 var manager = playerScore.GetComponent<PlayerScore>();
-                manager.GetComponent<Image>().color = GameInfo.PlayerColors[i];
+                manager.GetComponent<Image>().color = GameInfo.PlayerColors[GameOutcome.leaderboards[i].id];
 
                 manager.Name = GameOutcome.leaderboards[i].name;
                 manager.Potions = GameOutcome.leaderboards[i].potions;

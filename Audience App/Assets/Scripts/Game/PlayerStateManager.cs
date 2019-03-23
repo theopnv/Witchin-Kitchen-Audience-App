@@ -30,5 +30,7 @@ namespace audience.game
                 _ScoreText.text = "Score: " + Score;
             }
         }
+
+        public Image PlusOneImage;
     }
 }

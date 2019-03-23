@@ -85,9 +85,23 @@ namespace audience.game
         {
             for (var i = 0; i < GameInfo.PlayerNumber; i++)
             {
+                var oldScore = _PlayerStateManagers[i].Score;
+                if (oldScore != GameInfo.PlayerPotions[i])
+                {
+                    _PlayerStateManagers[i].PlusOneImage.gameObject.SetActive(true);
+                    StartCoroutine(SetPlusOneActiveFalse(_PlayerStateManagers[i]));
+                }
                 _PlayerStateManagers[i].Score = GameInfo.PlayerPotions[i];
                 _PlayerStateManagers[i].Name = GameInfo.PlayerNames[i];
             }
+        }
+
+        private IEnumerator SetPlusOneActiveFalse(PlayerStateManager p)
+        {
+            yield return new WaitForSeconds(2);
+            p.PlusOneImage.CrossFadeAlpha(0, 2, false);
+            p.PlusOneImage.gameObject.SetActive(false);
+            p.PlusOneImage.color = new Color(p.PlusOneImage.color.r, p.PlusOneImage.color.g, p.PlusOneImage.color.b, 255);
         }
     }
 
