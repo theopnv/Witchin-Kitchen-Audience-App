@@ -14,6 +14,8 @@ namespace audience
 
         public const string EXIT_APP_CONFIRMATION = "Do you want to exit the application ?";
         public const string RETURN_TO_TITLE_SCREEN_CONFIRMATION = "Do you want to stop watching go back to the title screen ?";
+
+        public const string EXIT_TUTORIAL_CONFIRMATION = "Do you want to exit the tutorial and go back to the title screen ?";
     }
 
 }
