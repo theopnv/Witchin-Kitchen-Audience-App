@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "Make the player invisible!";
+            return "John Cena's specialty. Cast an invisibility spell!";
         }
 
     }

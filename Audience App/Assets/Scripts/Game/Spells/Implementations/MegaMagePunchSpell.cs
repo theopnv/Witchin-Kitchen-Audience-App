@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "Transform the player into a giant.";
+            return "Become giant! Punch harder!";
         }
 
     }

@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "Make the player move faster with this crazy spell!";
+            return "Give a player a significant speed boost!";
         }
 
     }

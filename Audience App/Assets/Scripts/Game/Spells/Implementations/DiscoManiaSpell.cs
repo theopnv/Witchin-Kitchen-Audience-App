@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "Turn the arena into a giant dancefloor!";
+            return "Reverse a player's controls and make them dance!";
         }
 
     }

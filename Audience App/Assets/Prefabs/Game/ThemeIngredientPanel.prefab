@@ -464,8 +464,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: -160, y: 281}
+  m_AnchoredPosition: {x: 0, y: 153}
+  m_SizeDelta: {x: -160, y: 208}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8762154052493700096
 CanvasRenderer:
@@ -508,8 +508,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Time to vote for the first time!\r\nVote for the theme ingredient that
-    will be featured in each candidate's potion recipe for the whole game."
+  m_Text: 'Spectators: choose your favorite theme ingredient! This will be the special
+    ingredient for which players will have to add to their potions to win!'
 --- !u!1 &2440212170826704111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,4 +2206,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Vote taken into account.
+  m_Text: Voted! Waiting for witches and wizards.

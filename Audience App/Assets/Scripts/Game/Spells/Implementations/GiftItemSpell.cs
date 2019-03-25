@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "Gift the player an ingredient required to complete a potion.";
+            return "Give a player a gift they're sure to love!";
         }
 
     }

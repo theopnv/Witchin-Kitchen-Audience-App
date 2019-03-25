@@ -108,8 +108,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1750, y: 900}
+  m_AnchoredPosition: {x: 0, y: -0.000022888}
+  m_SizeDelta: {x: 1750, y: 765.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2901934611467821119
 CanvasRenderer:
@@ -152,10 +152,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Welcome on Witchcraft TV !\n\nToday's program is Witchin' Kitchen,\na fast
-    paced cooking show where \nthe best witches and wizards compete \nto be the next
-    potion master !\n\nYou join the show as an audience member.\nIt's up to you to
-    help your candidate.. or just make a mess !"
+  m_Text: "Magic streaming on Witch Network TV!\r\n\r\nToday you lucky audience members
+    are watching the first episode of WITCHIN' KITCHEN, a fast-paced cooking show
+    where only the most efficient wizard will win!\r\n\r\nYOU are in charge of helping
+    the candidates or hexing them, with spells and events!\r\n\r\n"
 --- !u!1 &960940941099796081
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "Turn the player into a deadly fireballs turret!";
+            return "More fireballs!!";
         }
 
     }

@@ -231,8 +231,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Whenever a candidate completes a potion,  the ability to cast a spell is
-    unlocked ! An audience member can then choose who gets hit by the spell... swishh '
+  m_Text: A spell will be granted to an audience member when a player completes a
+    potion! Choose a spell from your arsenal and target a player in the arena!
 --- !u!1 &2852039776747197928
 GameObject:
   m_ObjectHideFlags: 0

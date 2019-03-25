@@ -135,7 +135,7 @@ namespace audience.game
             {
                 var spellManager = Instantiate(_SpellsPanelPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
                 var title = spellRequest.fromPlayer.id == -1
-                    ? "A free potion has been offered to you!"
+                    ? "You've been blessed with a potion!"
                     : spellRequest.fromPlayer.name + " made a potion for you!";
                 spellManager.Title = title;
                 spellManager.AuthorizeCasting = true;
@@ -158,7 +158,7 @@ namespace audience.game
             {
                 var instance = Instantiate(_OneChoiceOverlayPrefab, _Canvas.transform);
                 var errorOverlay = instance.GetComponent<Overlay>();
-                errorOverlay.Description = "The cooking show is over. Witchin' Kitchen returns live each time new candidates are ready to risk their lives!";
+                errorOverlay.Description = "Roll credits! Witchin' Kitchen will be back after these messages!";
                 errorOverlay.Primary += ExitGame;
             }
         }

@@ -26,7 +26,7 @@ namespace audience.game
 
         public override string GetDescription()
         {
-            return "The player may think it's a gift, but...";
+            return "Give a player a gift they're sure to hate!";
         }
 
     }
