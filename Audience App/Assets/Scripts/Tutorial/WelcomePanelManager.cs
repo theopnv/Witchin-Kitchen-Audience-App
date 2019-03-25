@@ -19,8 +19,8 @@ namespace audience.tutorial
         }
 
         public void NextPage()
-        { 
-            Instantiate(_SpellsManagerPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
+        {
+            Instantiate(_SpellsManagerPrefab, _Canvas.transform);
         }
 
     }

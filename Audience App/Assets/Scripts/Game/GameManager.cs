@@ -95,11 +95,7 @@ namespace audience.game
             var instance = Instantiate(_OneChoiceOverlayPrefab, _Canvas.transform);
             var errorOverlay = instance.GetComponent<Overlay>();
             errorOverlay.Description = "Disconnected from server. Please try joining the room again.";
-            errorOverlay.Primary += () =>
-            {
-                _NetworkManager?.ExitRoom();
-                SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
-            };
+            errorOverlay.Primary += ExitGame;
         }
 
         private void OnMessageReceivedFromServer(Base content)
@@ -163,12 +159,15 @@ namespace audience.game
                 var instance = Instantiate(_OneChoiceOverlayPrefab, _Canvas.transform);
                 var errorOverlay = instance.GetComponent<Overlay>();
                 errorOverlay.Description = "The cooking show is over. Witchin' Kitchen returns live each time new candidates are ready to risk their lives!";
-                errorOverlay.Primary += () =>
-                {
-                    _NetworkManager?.ExitRoom();
-                    SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
-                };
+                errorOverlay.Primary += ExitGame;
             }
+        }
+
+        void ExitGame()
+        {
+            GameInfo.InGame = false;
+            _NetworkManager?.ExitRoom();
+            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
         }
 
         void OnReceivedVoteForIngredient(IngredientPoll ingredientPoll)

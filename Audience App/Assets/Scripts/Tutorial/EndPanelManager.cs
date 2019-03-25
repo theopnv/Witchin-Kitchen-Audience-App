@@ -5,7 +5,7 @@ namespace audience.tutorial
 {
     public class EndPanelManager : ATutorialPanelManager
     {
-        [SerializeField] private GameObject _ThemeIngredientPanel;
+        [SerializeField] private GameObject _EventsPanel;
 
         #region Custom Methods
 
@@ -13,12 +13,19 @@ namespace audience.tutorial
         public void NextPage()
         {
             Screen.sleepTimeout = SleepTimeout.SystemSetting;
-            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+            if (GameInfo.InGame)
+            {
+                SceneManager.LoadSceneAsync(SceneNames.Game);
+            }
+            else
+            {
+                SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+            }
         }
 
         public void PreviousPage()
         {
-            Instantiate(_ThemeIngredientPanel, _Canvas.transform).GetComponent<ThemeIngredientPanelManager>();
+            Instantiate(_EventsPanel, _Canvas.transform);
             Destroy(gameObject);
         }
 

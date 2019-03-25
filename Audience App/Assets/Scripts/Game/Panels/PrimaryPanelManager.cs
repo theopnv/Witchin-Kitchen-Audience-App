@@ -40,6 +40,8 @@ namespace audience.game
 
                 _PlayerStateManagers.Add(i, manager);
             }
+
+            GameInfo.InGame = true;
         }
 
         void OnDisable()
@@ -75,7 +77,7 @@ namespace audience.game
 
         public void OnHelpButtonClick()
         {
-
+            SceneManager.LoadSceneAsync(SceneNames.Tutorial);
         }
 
         public void ExitRoom()

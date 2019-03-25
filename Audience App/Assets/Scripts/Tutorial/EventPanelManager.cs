@@ -13,12 +13,12 @@ namespace audience.tutorial
 
         public void NextPage()
         {
-            Instantiate(_EndPanel, _Canvas.transform).GetComponent<EndPanelManager>();
+            Instantiate(_EndPanel, _Canvas.transform);
         }
 
         public void PreviousPage()
         {
-            Instantiate(_SpellsPanel, _Canvas.transform).GetComponent<SpellsPanelManager>();
+            Instantiate(_SpellsPanel, _Canvas.transform);
             Destroy(gameObject);
         }
         #endregion

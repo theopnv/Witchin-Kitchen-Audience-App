@@ -12,6 +12,7 @@ namespace audience
         public static string[] PlayerNames = new string[PlayerNumber];
         public static int[] PlayerPotions = new int[PlayerNumber];
         public static int[] PlayerIngredients = new int[PlayerNumber];
+        public static bool InGame = false;
     }
 
     /// <summary>
