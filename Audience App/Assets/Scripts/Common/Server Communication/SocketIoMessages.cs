@@ -14,7 +14,7 @@ namespace audience.messages
         public const string SEND_VOTE = "vote";
         public const string REGISTER_VIEWER = "registerViewer";
         public const string CAST_SPELL_RESPONSE = "castSpell";
-        public const string VOTE_FOR_EVENT = "voteForIngredient";
+        public const string VOTE_FOR_INGREDIENT = "voteForIngredient";
 
         // Received
         public const string MESSAGE = "message";

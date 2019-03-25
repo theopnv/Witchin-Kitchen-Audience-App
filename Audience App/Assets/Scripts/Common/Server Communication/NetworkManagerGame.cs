@@ -22,7 +22,7 @@ namespace audience
         public Action<GameOutcome> OnReceivedGameOutcome;
         public Action<Game> OnReceivedGameStateUpdate;
         public Action<EndGame> OnReceivedEndGame;
-        public Action<IngredientPoll> OnReceivedIngredientPoll;
+        public Action<IngredientPoll> OnReceivedVoteForIngredient;
         public Action<IngredientPoll> OnReceivedIngredientPollResults;
         public Action OnReceivedStopIngredientPoll;
 
@@ -35,7 +35,7 @@ namespace audience
             _Socket.On(Command.GAME_OUTCOME, OnGameOutcome);
             _Socket.On(Command.POLL_RESULTS, OnPollResults);
             _Socket.On(Command.END_GAME, OnEndGame);
-            _Socket.On(Command.VOTE_FOR_EVENT, OnVoteForEvent);
+            _Socket.On(Command.VOTE_FOR_INGREDIENT, OnVoteForIngredient);
             _Socket.On(Command.INGREDIENT_RESULTS, OnIngredientResults);
             _Socket.On(Command.STOP_INGREDIENT_POLL, OnStopIngredientPoll);
         }
@@ -59,7 +59,7 @@ namespace audience
         public void SendIngredientVote(int ingredientId)
         {
             var serialized = JsonConvert.SerializeObject(ingredientId);
-            _Socket.Emit(Command.VOTE_FOR_EVENT, new JSONObject(serialized));
+            _Socket.Emit(Command.VOTE_FOR_INGREDIENT, new JSONObject(serialized));
         }
 
         #endregion
@@ -101,11 +101,11 @@ namespace audience
             OnReceivedEndGame?.Invoke(rematch);
         }
 
-        private void OnVoteForEvent(SocketIOEvent e)
+        private void OnVoteForIngredient(SocketIOEvent e)
         {
             Debug.Log("OnVoteForEvent");
             var poll = JsonConvert.DeserializeObject<IngredientPoll>(e.data.ToString());
-            OnReceivedIngredientPoll?.Invoke(poll);
+            OnReceivedVoteForIngredient?.Invoke(poll);
         }
 
         private void OnIngredientResults(SocketIOEvent e)

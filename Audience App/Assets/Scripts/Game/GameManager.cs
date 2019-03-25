@@ -41,16 +41,17 @@ namespace audience.game
                 _NetworkManager.OnReceivedSpellRequest += OnReceivedSpellRequest;
                 _NetworkManager.OnReceivedEndGame += OnReceiveEndGame;
 
-                _NetworkManager.OnReceivedIngredientPoll += OnReceivedIngredientPoll;
+                _NetworkManager.OnReceivedVoteForIngredient += OnReceivedVoteForIngredient;
+                _NetworkManager.OnReceivedIngredientPollResults += OnReceivedIngredientPoll;
             }
 
-            if (TransmitIngredientPoll.Instance == null)
+            if (TransmitIngredientPoll.WasAskedToVote)
             {
-                InstantiatePrimaryPanel();
+                InstantiateIngredientPollPanel();
             }
             else
             {
-                InstantiateIngredientPollPanel();
+                InstantiatePrimaryPanel();
             }
         }
 
@@ -66,7 +67,8 @@ namespace audience.game
                 _NetworkManager.OnReceivedSpellRequest -= OnReceivedSpellRequest;
                 _NetworkManager.OnReceivedEndGame -= OnReceiveEndGame;
 
-                _NetworkManager.OnReceivedIngredientPoll -= OnReceivedIngredientPoll;
+                _NetworkManager.OnReceivedVoteForIngredient -= OnReceivedVoteForIngredient;
+                _NetworkManager.OnReceivedIngredientPollResults -= OnReceivedIngredientPoll;
             }
         }
 
@@ -176,10 +178,14 @@ namespace audience.game
             }
         }
 
+        void OnReceivedVoteForIngredient(IngredientPoll ingredientPoll)
+        {
+            TransmitIngredientPoll.Instance = ingredientPoll;
+        }
+
         void OnReceivedIngredientPoll(IngredientPoll ingredientPoll)
         {
             TransmitIngredientPoll.Instance = ingredientPoll;
-            InstantiateIngredientPollPanel();
         }
 
         #endregion

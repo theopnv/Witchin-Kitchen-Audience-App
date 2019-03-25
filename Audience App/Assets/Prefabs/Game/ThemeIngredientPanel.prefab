@@ -1479,6 +1479,8 @@ MonoBehaviour:
   _VoteIngredientAImage: {fileID: 5560865323633406203}
   _VoteIngredientBButton: {fileID: 5233949711421044251}
   _VoteIngredientBImage: {fileID: 8568840906468906795}
+  _PrimaryPanel: {fileID: 960940941099796081, guid: 4b34947949ccc4f44a31e7c5b7456ca7,
+    type: 3}
   _ResultIngredientAImage: {fileID: 6451891305253274210}
   _ResultsIngredientAText: {fileID: 9190502792659525961}
   _ResultIngredientBImage: {fileID: 2217627529323451463}

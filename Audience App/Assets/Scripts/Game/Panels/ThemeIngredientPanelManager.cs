@@ -2,6 +2,7 @@
 using audience.game;
 using audience.messages;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace audience.tutorial
@@ -51,6 +52,7 @@ namespace audience.tutorial
         #endregion
 
         public IngredientPoll IngredientPoll;
+        [SerializeField] private GameObject _PrimaryPanel;
 
         void Start()
         {
@@ -114,6 +116,10 @@ namespace audience.tutorial
         private void OnReceivedStopIngredientPoll()
         {
             Destroy(gameObject);
+            if (SceneManager.GetActiveScene().name == SceneNames.Game)
+            {
+                Instantiate(_PrimaryPanel, _Canvas.transform);
+            }
         }
 
         #endregion

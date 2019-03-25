@@ -34,7 +34,7 @@ namespace audience.lobby
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
-            _NetworkManager.OnReceivedIngredientPoll += OnReceivedIngredientPoll;
+            _NetworkManager.OnReceivedVoteForIngredient += OnReceivedVoteForIngredient;
 
             InitGameInfo();
         }
@@ -50,7 +50,7 @@ namespace audience.lobby
         void OnDisable()
         {
             _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
-            _NetworkManager.OnReceivedIngredientPoll -= OnReceivedIngredientPoll;
+            _NetworkManager.OnReceivedVoteForIngredient -= OnReceivedVoteForIngredient;
         }
 
         #endregion
@@ -111,9 +111,10 @@ namespace audience.lobby
             SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
         }
 
-        void OnReceivedIngredientPoll(IngredientPoll ingredientPoll)
+        void OnReceivedVoteForIngredient(IngredientPoll ingredientPoll)
         {
             TransmitIngredientPoll.Instance = ingredientPoll;
+            TransmitIngredientPoll.WasAskedToVote = true;
         }
 
         void OnMessageReceivedFromServer(Base message)
