@@ -89,6 +89,11 @@ namespace audience.tutorial
             }
         }
 
+        public void OnCloseButtonClick()
+        {
+            ExitScreen();
+        }
+
         #region Results Panel
 
         [SerializeField] private Image _ResultIngredientAImage;
