@@ -591,4 +591,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TwoChoicesOverlayPrefab: {fileID: 5696771864021238238, guid: f16d7b84e9b7fe44ea7cd9cfbf7024f5,
     type: 3}
-  _EventsPanel: {fileID: 0}
+  _EventsPanel: {fileID: 7481860395654961468, guid: 1127c9c47a06a49189104bd3da76782c,
+    type: 3}
