@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using audience.messages;
-using SocketIO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Newtonsoft.Json;
 using UnityEngine.UI;
 using WebSocketSharp;
 
@@ -23,9 +19,6 @@ namespace audience.lobby
         private InputField _NameInputField;
 
         [SerializeField]
-        private Button[] _ColorButtons;
-
-        [SerializeField]
         private Canvas _Canvas;
 
         [SerializeField]
@@ -41,6 +34,7 @@ namespace audience.lobby
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
+            _NetworkManager.OnReceivedIngredientPoll += OnReceivedIngredientPoll;
 
             InitGameInfo();
         }
@@ -56,6 +50,7 @@ namespace audience.lobby
         void OnDisable()
         {
             _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
+            _NetworkManager.OnReceivedIngredientPoll -= OnReceivedIngredientPoll;
         }
 
         #endregion
@@ -116,12 +111,10 @@ namespace audience.lobby
             SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
         }
 
-        // TODO: Refactor this (dynamically add buttons and their listeners)
-        // once the UIs are established.
-        public void OnRedClick() { ViewerInfo.Color = Color.red; }
-        public void OnBlueClick() { ViewerInfo.Color = Color.blue; }
-        public void OnGreenClick() { ViewerInfo.Color = Color.green; }
-        public void OnYellowClick() { ViewerInfo.Color = Color.yellow; }
+        void OnReceivedIngredientPoll(IngredientPoll ingredientPoll)
+        {
+            TransmitIngredientPoll.Instance = ingredientPoll;
+        }
 
         void OnMessageReceivedFromServer(Base message)
         {
@@ -133,7 +126,6 @@ namespace audience.lobby
                     case Code.register_viewer_success:
                         SceneManager.LoadSceneAsync(SceneNames.Game);
                         break;
-                    default: break;
                 }
             }
             else

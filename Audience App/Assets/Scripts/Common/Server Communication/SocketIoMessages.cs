@@ -25,6 +25,8 @@ namespace audience.messages
         public const string POLL_RESULTS = "pollResults";
         public const string END_GAME = "endGame";
         public const string CAST_SPELL_REQUEST = "castSpellRequest";
+        public const string INGREDIENT_RESULTS = "ingredientPollResults";
+        public const string STOP_INGREDIENT_POLL = "stopIngredientPoll";
     }
 
     public enum Code

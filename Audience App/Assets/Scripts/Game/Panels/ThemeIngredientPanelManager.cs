@@ -1,4 +1,5 @@
-﻿using audience.game;
+﻿using System.Linq;
+using audience.game;
 using audience.messages;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,12 +17,14 @@ namespace audience.tutorial
         #region Vote panel
 
         [SerializeField] private Button _VoteIngredientAButton;
+        [SerializeField] private Image _VoteIngredientAImage;
         [SerializeField] private Button _VoteIngredientBButton;
+        [SerializeField] private Image _VoteIngredientBImage;
 
         public void StartPoll()
         {
-            SetButton(_VoteIngredientAButton, _IngredientPoll.ingredients[0]);
-            SetButton(_VoteIngredientBButton, _IngredientPoll.ingredients[1]);
+            SetButton(_VoteIngredientAButton, _VoteIngredientAImage, IngredientPoll.ingredients[0]);
+            SetButton(_VoteIngredientBButton, _VoteIngredientBImage, IngredientPoll.ingredients[1]);
         }
 
         public void OnIngredientAClick()
@@ -34,26 +37,28 @@ namespace audience.tutorial
             _NetworkManager.SendIngredientVote(_VoteIngredientBButton.GetComponent<PollButton>().ID);
         }
 
-        private void SetButton(Button button, Ingredient ig)
+        private void SetButton(Button button, Image img, Ingredient ig)
         {
             var eventButton = button.GetComponent<PollButton>();
             eventButton.ID = ig.id;
             button.GetComponentInChildren<Text>().text =
                 Ingredients.IngredientNames[(Ingredients.IngredientID)ig.id];
-            var sprite = Resources.Load<Sprite>("Spell/" +
+            var sprite = Resources.Load<Sprite>("Ingredients/" +
                Ingredients.IngredientNames[(Ingredients.IngredientID)ig.id]);
-            button.GetComponentInChildren<Image>().sprite = sprite;
+            img.sprite = sprite;
         }
 
         #endregion
 
-        private IngredientPoll _IngredientPoll;
+        public IngredientPoll IngredientPoll;
 
         void Start()
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
-            
+            _NetworkManager.OnReceivedIngredientPollResults += OnReceivedIngredientPollResults;
+            _NetworkManager.OnReceivedStopIngredientPoll += OnReceivedStopIngredientPoll;
+            StartPoll();
         }
 
         void OnDisable()
@@ -74,8 +79,7 @@ namespace audience.tutorial
                 switch (content.code)
                 {
                     case Code.ingredient_vote_accepted:
-                        //SwitchSides();
-
+                        SwitchSides();
                         break;
                 }
             }
@@ -89,7 +93,28 @@ namespace audience.tutorial
         [SerializeField] private Text _ResultsIngredientBText;
         [SerializeField] private Text _ResultsText;
 
-        // TODO: Live results for ingredient vote
+        private void OnReceivedIngredientPollResults(IngredientPoll poll)
+        {
+            DisplayResults(poll.ingredients[0], _ResultIngredientAImage, _ResultsIngredientAText);
+            DisplayResults(poll.ingredients[1], _ResultIngredientBImage, _ResultsIngredientBText);
+
+            var mostVoted = poll.ingredients.OrderByDescending(i => i.votes).First();
+            var name = Ingredients.IngredientNames[(Ingredients.IngredientID)mostVoted.id];
+            _ResultsText.text = name + " is likely to be chosen as the theme ingredient!";
+        }
+
+        private void DisplayResults(Ingredient ig, Image img, Text text)
+        {
+            var sprite = Resources.Load<Sprite>("Ingredients/" +
+                Ingredients.IngredientNames[(Ingredients.IngredientID)ig.id]);
+            img.sprite = sprite;
+            text.text = ig.votes + " votes";
+        }
+
+        private void OnReceivedStopIngredientPoll()
+        {
+            Destroy(gameObject);
+        }
 
         #endregion
 

@@ -23,6 +23,8 @@ namespace audience
         public Action<Game> OnReceivedGameStateUpdate;
         public Action<EndGame> OnReceivedEndGame;
         public Action<IngredientPoll> OnReceivedIngredientPoll;
+        public Action<IngredientPoll> OnReceivedIngredientPollResults;
+        public Action OnReceivedStopIngredientPoll;
 
         #region Unity API
 
@@ -34,6 +36,8 @@ namespace audience
             _Socket.On(Command.POLL_RESULTS, OnPollResults);
             _Socket.On(Command.END_GAME, OnEndGame);
             _Socket.On(Command.VOTE_FOR_EVENT, OnVoteForEvent);
+            _Socket.On(Command.INGREDIENT_RESULTS, OnIngredientResults);
+            _Socket.On(Command.STOP_INGREDIENT_POLL, OnStopIngredientPoll);
         }
 
         #endregion
@@ -102,7 +106,20 @@ namespace audience
             Debug.Log("OnVoteForEvent");
             var poll = JsonConvert.DeserializeObject<IngredientPoll>(e.data.ToString());
             OnReceivedIngredientPoll?.Invoke(poll);
-        } 
+        }
+
+        private void OnIngredientResults(SocketIOEvent e)
+        {
+            Debug.Log("OnIngredientResults");
+            var ingredientResults = JsonConvert.DeserializeObject<IngredientPoll>(e.data.ToString());
+            OnReceivedIngredientPollResults?.Invoke(ingredientResults);
+        }
+
+        private void OnStopIngredientPoll(SocketIOEvent e)
+        {
+            Debug.Log("OnStopIngredientPoll");
+            OnReceivedStopIngredientPoll?.Invoke();
+        }
 
         #endregion
     }

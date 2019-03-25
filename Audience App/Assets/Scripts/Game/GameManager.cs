@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using audience.messages;
+using audience.tutorial;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,7 @@ namespace audience.game
         [SerializeField] private GameObject _PollPanelPrefab;
         [SerializeField] private GameObject _GameOutcomePanelPrefab;
         [SerializeField] private GameObject _SpellsPanelPrefab;
+        [SerializeField] private GameObject _IngredientPollPrefab;
 
         private bool _GameIsAboutToEnd = false;
 
@@ -38,10 +40,18 @@ namespace audience.game
                 _NetworkManager.OnReceivedGameOutcome += OnReceivedGameOutcome;
                 _NetworkManager.OnReceivedSpellRequest += OnReceivedSpellRequest;
                 _NetworkManager.OnReceivedEndGame += OnReceiveEndGame;
+
+                _NetworkManager.OnReceivedIngredientPoll += OnReceivedIngredientPoll;
             }
 
-            var primaryPanel = Instantiate(_PrimaryPanelPrefab, _Canvas.transform).GetComponent<PrimaryPanelManager>();
-            primaryPanel.GameManager = this;
+            if (TransmitIngredientPoll.Instance == null)
+            {
+                InstantiatePrimaryPanel();
+            }
+            else
+            {
+                InstantiateIngredientPollPanel();
+            }
         }
 
         void OnDisable()
@@ -55,12 +65,26 @@ namespace audience.game
                 _NetworkManager.OnReceivedGameOutcome -= OnReceivedGameOutcome;
                 _NetworkManager.OnReceivedSpellRequest -= OnReceivedSpellRequest;
                 _NetworkManager.OnReceivedEndGame -= OnReceiveEndGame;
+
+                _NetworkManager.OnReceivedIngredientPoll -= OnReceivedIngredientPoll;
             }
         }
 
         #endregion
 
         #region Custom Methods
+
+        void InstantiatePrimaryPanel()
+        {
+            var primaryPanel = Instantiate(_PrimaryPanelPrefab, _Canvas.transform).GetComponent<PrimaryPanelManager>();
+            primaryPanel.GameManager = this;
+        }
+
+        void InstantiateIngredientPollPanel()
+        {
+            var pollPanel = Instantiate(_IngredientPollPrefab, _Canvas.transform).GetComponent<ThemeIngredientPanelManager>();
+            pollPanel.IngredientPoll = TransmitIngredientPoll.Instance;
+        }
 
         void OnDisconnectedFromServer()
         {
@@ -151,7 +175,13 @@ namespace audience.game
                 };
             }
         }
-        
+
+        void OnReceivedIngredientPoll(IngredientPoll ingredientPoll)
+        {
+            TransmitIngredientPoll.Instance = ingredientPoll;
+            InstantiateIngredientPollPanel();
+        }
+
         #endregion
 
     }
