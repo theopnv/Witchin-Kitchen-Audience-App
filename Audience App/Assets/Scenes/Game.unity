@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd4c68262381d3468ba5b23b0af9a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsChoosingASpell: 0
   _OneChoiceOverlayPrefab: {fileID: 561792306183662364, guid: 8ef876d26bb46d34a9695f436094b198,
     type: 3}
   _TwoChoicesOverlayPrefab: {fileID: 5696771864021238238, guid: f16d7b84e9b7fe44ea7cd9cfbf7024f5,

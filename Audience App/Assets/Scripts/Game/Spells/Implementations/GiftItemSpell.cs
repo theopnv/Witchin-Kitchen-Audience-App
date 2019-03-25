@@ -11,7 +11,7 @@ namespace audience.game
     {
         public override string GetSpritePath()
         {
-            return "GiftIngredient";
+            return "Spells/GiftIngredient";
         }
 
         public override Spells.SpellID GetSpellID()

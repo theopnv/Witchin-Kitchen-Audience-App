@@ -14,6 +14,7 @@ namespace audience.messages
         public const string SEND_VOTE = "vote";
         public const string REGISTER_VIEWER = "registerViewer";
         public const string CAST_SPELL_RESPONSE = "castSpell";
+        public const string VOTE_FOR_EVENT = "voteForIngredient";
 
         // Received
         public const string MESSAGE = "message";
@@ -38,6 +39,9 @@ namespace audience.messages
 
         spell_casted_success = 290,
         spell_casted_error = 291,
+
+        ingredient_vote_accepted = 350,
+        ingredient_vote_error = 351,
     }
 
     public class Base
@@ -110,6 +114,17 @@ namespace audience.messages
     public class EndGame
     {
         public bool doRematch;
+    }
+
+    public class IngredientPoll
+    {
+        public List<Ingredient> ingredients;
+    }
+
+    public class Ingredient
+    {
+        public int id;
+        public int votes;
     }
 
     public static class SocketInfo

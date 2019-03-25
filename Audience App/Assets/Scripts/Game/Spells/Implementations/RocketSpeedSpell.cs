@@ -11,7 +11,7 @@ namespace audience.game
     {
         public override string GetSpritePath()
         {
-            return "RocketSpeed";
+            return "Spells/RocketSpeed";
         }
 
         public override Spells.SpellID GetSpellID()

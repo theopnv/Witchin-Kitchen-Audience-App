@@ -22,6 +22,7 @@ namespace audience
         public Action<GameOutcome> OnReceivedGameOutcome;
         public Action<Game> OnReceivedGameStateUpdate;
         public Action<EndGame> OnReceivedEndGame;
+        public Action<IngredientPoll> OnReceivedIngredientPoll;
 
         #region Unity API
 
@@ -32,6 +33,7 @@ namespace audience
             _Socket.On(Command.GAME_OUTCOME, OnGameOutcome);
             _Socket.On(Command.POLL_RESULTS, OnPollResults);
             _Socket.On(Command.END_GAME, OnEndGame);
+            _Socket.On(Command.VOTE_FOR_EVENT, OnVoteForEvent);
         }
 
         #endregion
@@ -48,6 +50,12 @@ namespace audience
         {
             var serialized = JsonConvert.SerializeObject(spell);
             _Socket.Emit(Command.CAST_SPELL_RESPONSE, new JSONObject(serialized));
+        }
+
+        public void SendIngredientVote(int ingredientId)
+        {
+            var serialized = JsonConvert.SerializeObject(ingredientId);
+            _Socket.Emit(Command.VOTE_FOR_EVENT, new JSONObject(serialized));
         }
 
         #endregion
@@ -89,8 +97,14 @@ namespace audience
             OnReceivedEndGame?.Invoke(rematch);
         }
 
-        #endregion
+        private void OnVoteForEvent(SocketIOEvent e)
+        {
+            Debug.Log("OnVoteForEvent");
+            var poll = JsonConvert.DeserializeObject<IngredientPoll>(e.data.ToString());
+            OnReceivedIngredientPoll?.Invoke(poll);
+        } 
 
+        #endregion
     }
 }
 

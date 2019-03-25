@@ -11,7 +11,7 @@ namespace audience.game
     {
         public override string GetSpritePath()
         {
-            return "Discomania";
+            return "Spells/Discomania";
         }
 
         public override Spells.SpellID GetSpellID()

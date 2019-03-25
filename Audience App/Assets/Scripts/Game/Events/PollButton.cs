@@ -6,10 +6,10 @@ using UnityEngine;
 namespace audience.game
 {
 
-    public class EventButton : MonoBehaviour
+    public class PollButton : MonoBehaviour
     {
         [HideInInspector]
-        public int EventID;
+        public int ID;
     }
 
 }

@@ -41,8 +41,8 @@ namespace audience.game
 
         private void SetButton(Button button, Event ev)
         {
-            var eventButton = button.GetComponent<EventButton>();
-            eventButton.EventID = ev.id;
+            var eventButton = button.GetComponent<PollButton>();
+            eventButton.ID = ev.id;
             button.GetComponentInChildren<Text>().text = Events.EventList[(Events.EventID)ev.id];
         }
 
@@ -58,13 +58,13 @@ namespace audience.game
 
         public void OnEventAClick()
         {
-            _NetworkManager.SendVote(_ButtonA.GetComponent<EventButton>().EventID);
+            _NetworkManager.SendVote(_ButtonA.GetComponent<PollButton>().ID);
             SwitchSides();
         }
 
         public void OnEventBClick()
         {
-            _NetworkManager.SendVote(_ButtonB.GetComponent<EventButton>().EventID);
+            _NetworkManager.SendVote(_ButtonB.GetComponent<PollButton>().ID);
             SwitchSides();
         }
 

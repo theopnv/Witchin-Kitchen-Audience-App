@@ -22,6 +22,7 @@ namespace audience.tutorial
         { 
             Instantiate(_SpellsManagerPrefab, _Canvas.transform).GetComponent<SpellsPanelManager>();
         }
+
     }
 
 }

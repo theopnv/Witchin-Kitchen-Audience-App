@@ -73,6 +73,11 @@ namespace audience.game
             overlay.Description = "Do you really want to stop watching Witchin Kitchen ?";
         }
 
+        public void OnHelpButtonClick()
+        {
+
+        }
+
         public void ExitRoom()
         {
             Screen.sleepTimeout = SleepTimeout.SystemSetting;
