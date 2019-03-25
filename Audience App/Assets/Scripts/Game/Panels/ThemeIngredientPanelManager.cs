@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace audience.tutorial
 {
-    public class ThemeIngredientPanelManager : ATutorialPanelManager
+    public class ThemeIngredientPanelManager : APanelManager
     {
 
         [SerializeField] private GameObject _VotePanel;
@@ -52,7 +52,7 @@ namespace audience.tutorial
         #endregion
 
         public IngredientPoll IngredientPoll;
-        [SerializeField] private GameObject _PrimaryPanel;
+        [SerializeField] private GameObject _PrimaryPanelPrefab;
 
         void Start()
         {
@@ -66,6 +66,8 @@ namespace audience.tutorial
         void OnDisable()
         {
             _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
+            _NetworkManager.OnReceivedIngredientPollResults -= OnReceivedIngredientPollResults;
+            _NetworkManager.OnReceivedStopIngredientPoll -= OnReceivedStopIngredientPoll;
         }
 
         public void SwitchSides()
@@ -116,10 +118,6 @@ namespace audience.tutorial
         private void OnReceivedStopIngredientPoll()
         {
             Destroy(gameObject);
-            if (SceneManager.GetActiveScene().name == SceneNames.Game)
-            {
-                Instantiate(_PrimaryPanel, _Canvas.transform);
-            }
         }
 
         #endregion

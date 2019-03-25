@@ -68,6 +68,7 @@ namespace audience
                 GameInfo.PlayerPotions[i] = game.players[i].potions;
             }
 
+            var number = GameInfo.PlayerNumber;
             OnReceivedGameStateUpdate?.Invoke(game);
         }
 

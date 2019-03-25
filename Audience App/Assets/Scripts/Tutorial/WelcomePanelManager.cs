@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace audience.tutorial
 {
-    public class PrimaryPanelManager : ATutorialPanelManager
+    public class WelcomePanelManager : ATutorialPanelManager
     {
         [SerializeField] private GameObject _SpellsManagerPrefab;
 

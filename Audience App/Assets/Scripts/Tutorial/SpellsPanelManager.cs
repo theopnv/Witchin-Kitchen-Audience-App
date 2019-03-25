@@ -18,7 +18,7 @@ namespace audience.tutorial
 
         public void PreviousPage()
         {
-            Instantiate(_PrimaryPanel, _Canvas.transform).GetComponent<PrimaryPanelManager>();
+            Instantiate(_PrimaryPanel, _Canvas.transform).GetComponent<WelcomePanelManager>();
             Destroy(gameObject);
         }
 

@@ -43,6 +43,7 @@ namespace audience.game
 
                 _NetworkManager.OnReceivedVoteForIngredient += OnReceivedVoteForIngredient;
                 _NetworkManager.OnReceivedIngredientPollResults += OnReceivedIngredientPoll;
+                _NetworkManager.OnReceivedStopIngredientPoll += InstantiatePrimaryPanel;
             }
 
             if (TransmitIngredientPoll.WasAskedToVote)
@@ -69,6 +70,7 @@ namespace audience.game
 
                 _NetworkManager.OnReceivedVoteForIngredient -= OnReceivedVoteForIngredient;
                 _NetworkManager.OnReceivedIngredientPollResults -= OnReceivedIngredientPoll;
+                _NetworkManager.OnReceivedStopIngredientPoll -= InstantiatePrimaryPanel;
             }
         }
 
@@ -105,19 +107,10 @@ namespace audience.game
             if ((int)content.code % 10 == 0) // Success codes always have their unit number equal to 0 (cf. protocol)
             {
                 Debug.Log(content.code + ": " + content.content);
-                switch (content.code)
-                {
-                }
             }
             else
             {
                 Debug.LogError(content.content);
-                switch (content.code)
-                {
-                    case Code.error_vote_didnt_pass:
-                        break;
-                    default: break;
-                }
             }
         }
 
@@ -181,6 +174,7 @@ namespace audience.game
         void OnReceivedVoteForIngredient(IngredientPoll ingredientPoll)
         {
             TransmitIngredientPoll.Instance = ingredientPoll;
+            InstantiateIngredientPollPanel();
         }
 
         void OnReceivedIngredientPoll(IngredientPoll ingredientPoll)

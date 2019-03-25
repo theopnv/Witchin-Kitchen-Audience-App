@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 473366872210444190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.5604796, y: 5.5604796, z: 5.5604796}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 960940941099796080}
   m_RootOrder: 0
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 960940941099796080}
   - component: {fileID: 960940941099796086}
   - component: {fileID: 960940941099796087}
-  - component: {fileID: 466128515708962181}
+  - component: {fileID: 8650852567224886246}
   m_Layer: 5
   m_Name: Primary Panel
   m_TagString: Untagged
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &466128515708962181
+--- !u!114 &8650852567224886246
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f87add34743c41e892b5cc22e0c6dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TwoChoicesOverlayPrefab: {fileID: 5696771864021238238, guid: f16d7b84e9b7fe44ea7cd9cfbf7024f5,
+  _TwoChoicesOverlayPrefab: {fileID: 561792306183662364, guid: 8ef876d26bb46d34a9695f436094b198,
     type: 3}
   _SpellsManagerPrefab: {fileID: 7481860395654961468, guid: 7b4964922abb74a179d7779811b72b4f,
     type: 3}
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 466128515708962181}
+      - m_Target: {fileID: 8650852567224886246}
         m_MethodName: NextPage
         m_Mode: 1
         m_Arguments:
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 466128515708962181}
+      - m_Target: {fileID: 8650852567224886246}
         m_MethodName: OnExitButtonClick
         m_Mode: 1
         m_Arguments:
