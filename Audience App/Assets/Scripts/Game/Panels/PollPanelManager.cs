@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using audience;
-using audience.game;
-using audience.messages;
+﻿using audience.messages;
 using UnityEngine;
 using UnityEngine.UI;
 using Event = audience.messages.Event;
@@ -59,13 +54,11 @@ namespace audience.game
         public void OnEventAClick()
         {
             _NetworkManager.SendVote(_ButtonA.GetComponent<PollButton>().ID);
-            SwitchSides();
         }
 
         public void OnEventBClick()
         {
             _NetworkManager.SendVote(_ButtonB.GetComponent<PollButton>().ID);
-            SwitchSides();
         }
 
         #endregion
@@ -84,6 +77,7 @@ namespace audience.game
         {
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnReceivedPollResults += OnReceivePollResults;
+            _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
 
             IsVoting = true;
             StartPoll();
@@ -92,6 +86,7 @@ namespace audience.game
         void OnDisable()
         {
             _NetworkManager.OnReceivedPollResults -= OnReceivePollResults;
+            _NetworkManager.OnMessageReceived -= OnMessageReceivedFromServer;
         }
 
         public void SwitchSides()

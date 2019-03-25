@@ -13,14 +13,7 @@ namespace audience.tutorial
         public void NextPage()
         {
             Screen.sleepTimeout = SleepTimeout.SystemSetting;
-            if (GameInfo.InGame)
-            {
-                SceneManager.LoadSceneAsync(SceneNames.Game);
-            }
-            else
-            {
-                SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
-            }
+            SceneManager.LoadSceneAsync(GameInfo.InGame ? SceneNames.Game : SceneNames.TitleScreen);
         }
 
         public void PreviousPage()

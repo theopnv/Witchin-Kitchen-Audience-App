@@ -28,7 +28,7 @@ namespace audience.tutorial
         public void ExitRoom()
         {
             Screen.sleepTimeout = SleepTimeout.SystemSetting;
-            SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+            SceneManager.LoadSceneAsync(GameInfo.InGame ? SceneNames.Game : SceneNames.TitleScreen);
         }
     }
 
