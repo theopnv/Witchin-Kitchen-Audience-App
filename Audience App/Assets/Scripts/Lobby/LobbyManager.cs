@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using WebSocketSharp;
+using Key = audience.PlayerPrefsKeys;
 
 namespace audience.lobby
 {
@@ -35,6 +36,10 @@ namespace audience.lobby
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
             _NetworkManager.OnReceivedVoteForIngredient += OnReceivedVoteForIngredient;
+            if (PlayerPrefs.HasKey(Key.USER_NICKNAME))
+            {
+                _NameInputField.text = PlayerPrefs.GetString(Key.USER_NICKNAME);
+            }
         }
 
         void Update()
@@ -69,6 +74,10 @@ namespace audience.lobby
             {
                 InstantiateErrorOverlay(StringLitterals.ERROR_NO_NAME);
                 return;
+            }
+            else
+            {
+                PlayerPrefs.SetString(Key.USER_NICKNAME, _NameInputField.text);
             }
             ViewerInfo.Name = _NameInputField.text;
 
