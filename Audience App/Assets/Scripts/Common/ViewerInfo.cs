@@ -6,12 +6,12 @@ namespace audience
 
     public static class GameInfo
     {
-        public static int PlayerNumber = 4;
-        public static int[] PlayerIDs = new int[PlayerNumber];
-        public static Color[] PlayerColors = new Color[PlayerNumber];
-        public static string[] PlayerNames = new string[PlayerNumber];
-        public static int[] PlayerPotions = new int[PlayerNumber];
-        public static int[] PlayerIngredients = new int[PlayerNumber];
+        public static int PlayerNumber = 0;
+        public static int[] PlayerIDs = new int[4];
+        public static Color[] PlayerColors = new Color[4];
+        public static string[] PlayerNames = new string[4];
+        public static int[] PlayerPotions = new int[4];
+        public static int[] PlayerIngredients = new int[4];
         public static bool InGame = false;
     }
 

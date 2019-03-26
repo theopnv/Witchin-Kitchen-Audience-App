@@ -91,7 +91,7 @@ namespace audience.tutorial
 
         public void OnCloseButtonClick()
         {
-            ExitScreen();
+            SceneManager.LoadSceneAsync(SceneNames.Tutorial);
         }
 
         #region Results Panel

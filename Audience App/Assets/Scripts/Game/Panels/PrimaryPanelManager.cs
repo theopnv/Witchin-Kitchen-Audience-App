@@ -33,15 +33,20 @@ namespace audience.game
             _PlayerStateManagers = new Dictionary<int, PlayerStateManager>();
             for (var i = 0; i < GameInfo.PlayerNumber; i++)
             {
-                var instance = Instantiate(_PlayerStatePrefab, _PlayersStatePlaceholder.transform);
-                var manager = instance.GetComponent<PlayerStateManager>();
-                manager.Score = GameInfo.PlayerPotions[i];
-                manager.Name = GameInfo.PlayerNames[i];
-
-                _PlayerStateManagers.Add(i, manager);
+                AddPlayerStateUI(i);
             }
 
             GameInfo.InGame = true;
+        }
+
+        private void AddPlayerStateUI(int i)
+        {
+            var instance = Instantiate(_PlayerStatePrefab, _PlayersStatePlaceholder.transform);
+            var manager = instance.GetComponent<PlayerStateManager>();
+            manager.Score = GameInfo.PlayerPotions[i];
+            manager.Name = GameInfo.PlayerNames[i];
+
+            _PlayerStateManagers.Add(i, manager);
         }
 
         void OnDisable()
@@ -92,14 +97,21 @@ namespace audience.game
         {
             for (var i = 0; i < GameInfo.PlayerNumber; i++)
             {
-                var oldScore = _PlayerStateManagers[i].Score;
-                if (oldScore != GameInfo.PlayerPotions[i])
+                if (_PlayerStateManagers.Count <= i)
                 {
-                    _PlayerStateManagers[i].PlusOneImage.gameObject.SetActive(true);
-                    StartCoroutine(SetPlusOneActiveFalse(_PlayerStateManagers[i]));
+                    AddPlayerStateUI(i);
                 }
-                _PlayerStateManagers[i].Score = GameInfo.PlayerPotions[i];
-                _PlayerStateManagers[i].Name = GameInfo.PlayerNames[i];
+                else
+                {
+                    var oldScore = _PlayerStateManagers[i].Score;
+                    if (oldScore != GameInfo.PlayerPotions[i])
+                    {
+                        _PlayerStateManagers[i].PlusOneImage.gameObject.SetActive(true);
+                        StartCoroutine(SetPlusOneActiveFalse(_PlayerStateManagers[i]));
+                    }
+                    _PlayerStateManagers[i].Score = GameInfo.PlayerPotions[i];
+                    _PlayerStateManagers[i].Name = GameInfo.PlayerNames[i];
+                }
             }
         }
 

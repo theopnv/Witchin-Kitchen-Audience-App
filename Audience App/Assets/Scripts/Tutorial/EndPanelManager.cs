@@ -9,7 +9,6 @@ namespace audience.tutorial
 
         #region Custom Methods
 
-
         public void NextPage()
         {
             Screen.sleepTimeout = SleepTimeout.SystemSetting;

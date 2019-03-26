@@ -16,17 +16,26 @@ namespace audience.tutorial
 
         [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
 
+        private NetworkManager _NetworkManager;
+
         #region Unity API
 
         // Start is called before the first frame update
         void Start()
         {
             Instantiate(_PrimaryPanelPrefab, _Canvas.transform);
+            _NetworkManager = FindObjectOfType<NetworkManager>();
+            _NetworkManager.OnReceivedStopIngredientPoll += OnReceivedStopIngredientPoll;
         }
 
         void OnDisable()
         {
+            _NetworkManager.OnReceivedStopIngredientPoll -= OnReceivedStopIngredientPoll;
+        }
 
+        void OnReceivedStopIngredientPoll()
+        {
+            TransmitIngredientPoll.WasAskedToVote = false;
         }
 
         #endregion

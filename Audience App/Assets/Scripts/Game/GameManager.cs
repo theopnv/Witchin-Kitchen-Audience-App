@@ -43,16 +43,12 @@ namespace audience.game
 
                 _NetworkManager.OnReceivedVoteForIngredient += OnReceivedVoteForIngredient;
                 _NetworkManager.OnReceivedIngredientPollResults += OnReceivedIngredientPoll;
-                _NetworkManager.OnReceivedStopIngredientPoll += InstantiatePrimaryPanel;
             }
 
+            InstantiatePrimaryPanel();
             if (TransmitIngredientPoll.WasAskedToVote)
             {
                 InstantiateIngredientPollPanel();
-            }
-            else
-            {
-                InstantiatePrimaryPanel();
             }
         }
 
@@ -70,7 +66,6 @@ namespace audience.game
 
                 _NetworkManager.OnReceivedVoteForIngredient -= OnReceivedVoteForIngredient;
                 _NetworkManager.OnReceivedIngredientPollResults -= OnReceivedIngredientPoll;
-                _NetworkManager.OnReceivedStopIngredientPoll -= InstantiatePrimaryPanel;
             }
         }
 

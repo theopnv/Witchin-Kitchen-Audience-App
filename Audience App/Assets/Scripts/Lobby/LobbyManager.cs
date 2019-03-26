@@ -35,8 +35,6 @@ namespace audience.lobby
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
             _NetworkManager.OnReceivedVoteForIngredient += OnReceivedVoteForIngredient;
-
-            InitGameInfo();
         }
 
         void Update()
@@ -56,17 +54,7 @@ namespace audience.lobby
         #endregion
 
         #region Custom Methods
-
-        private void InitGameInfo()
-        {
-            GameInfo.PlayerNumber = 4;
-            GameInfo.PlayerIDs = new int[GameInfo.PlayerNumber];
-            GameInfo.PlayerColors = new Color[GameInfo.PlayerNumber];
-            GameInfo.PlayerNames = new string[GameInfo.PlayerNumber];
-            GameInfo.PlayerPotions = new int[GameInfo.PlayerNumber];
-            GameInfo.PlayerIngredients = new int[GameInfo.PlayerNumber];
-        }
-
+        
         private void InstantiateErrorOverlay(string error)
         {
             var instance = Instantiate(_ErrorOverlayPrefab, _Canvas.transform);
