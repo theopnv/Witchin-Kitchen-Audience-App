@@ -12,10 +12,15 @@ namespace audience.title_screen
     public class TitleScreenManager : MonoBehaviour
     {
         [SerializeField] private GameObject _TwoChoicesOverlayPrefab;
+        [SerializeField] private GameObject _JoinButton;
         [SerializeField] private Canvas _Canvas;
+
+        //Effects
+        private Effects effects;
 
         void Start()
         {
+            effects = new Effects(2, 0.9f, 0.9f);
             QualitySettings.vSyncCount = 1;
 
             ResetStaticVars();
@@ -53,6 +58,7 @@ namespace audience.title_screen
 
         void Update()
         {
+            effects.GrowShrink(_JoinButton.transform);
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 var instance = Instantiate(_TwoChoicesOverlayPrefab, _Canvas.transform);

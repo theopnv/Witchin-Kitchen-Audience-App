@@ -1025,6 +1025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TwoChoicesOverlayPrefab: {fileID: 5696771864021238238, guid: f16d7b84e9b7fe44ea7cd9cfbf7024f5,
     type: 3}
+  _JoinButton: {fileID: 147793657}
   _Canvas: {fileID: 2076808551}
 --- !u!1 &1941531399
 GameObject:
