@@ -9,18 +9,16 @@ namespace audience.game
 
         public enum IngredientID
         {
-            pepper = 0,
-            newt_eye = 1,
-            mushroom = 2,
-            fish = 3,
-            pumpkin = 4,
+            newt_eye = 0,
+            mushroom = 1,
+            fish = 2,
+            pumpkin = 3,
 
             max_id,
         }
 
         public static Dictionary<IngredientID, string> IngredientNames = new Dictionary<IngredientID, string>
         {
-            { IngredientID.pepper, "Pepper"},
             { IngredientID.newt_eye, "Newt Eye"},
             { IngredientID.mushroom, "Mushroom"},
             { IngredientID.fish, "Fish"},
