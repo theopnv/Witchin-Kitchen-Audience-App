@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using audience;
@@ -133,8 +133,20 @@ namespace audience.game
             }
         }
 
+        float rate = 2f;
+        float midScale = 0.8f;
+        float ratio = 0.8f;
+        private Vector3 scale;
         private void MiniGame()
         {
+            var factor = _NbTouches * 0.3f;
+            float scaleComponent = midScale * Mathf.Pow(ratio, Mathf.Sin(Time.time * rate)) + factor;
+            Debug.Log(scaleComponent);
+            for (int i = 0; i < 3; i++)
+            {
+                scale = scaleComponent * Vector3.one;
+                _PotionImage.transform.localScale = scale;
+            }
             if (Input.touchCount > 0)
             {
                 var touch = Input.GetTouch(0);
@@ -151,7 +163,7 @@ namespace audience.game
                 ++_NbTouches;
             }
 
-            if (_NbTouches > 3)
+            if (_NbTouches >= 3)
             {
                 EndMinigame();
                 _NbTouches = 0;
