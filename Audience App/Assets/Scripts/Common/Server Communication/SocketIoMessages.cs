@@ -64,7 +64,6 @@ namespace audience.messages
     public class Viewer
     {
         public string socketId;
-        public string color;
         public string name;
     }
 

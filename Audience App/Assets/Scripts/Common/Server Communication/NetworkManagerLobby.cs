@@ -35,7 +35,6 @@ namespace audience
             var viewer = new Viewer
             {
                 name = ViewerInfo.Name,
-                color = ColorUtility.ToHtmlStringRGBA(ViewerInfo.Color),
                 socketId = ViewerInfo.SocketId,
             };
             var serialized = JsonConvert.SerializeObject(viewer);

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using audience.messages;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using SocketIO;
@@ -17,6 +18,8 @@ namespace audience.title_screen
         {
             QualitySettings.vSyncCount = 1;
 
+            ResetStaticVars();
+
             // Setting default values in case this is the first time the app is started
             if (!PlayerPrefs.HasKey(Key.HOST_ADDRESS))
             {
@@ -28,6 +31,24 @@ namespace audience.title_screen
             {
                 Destroy(networkManager.gameObject);
             }
+        }
+
+        private void ResetStaticVars()
+        {
+            GameInfo.PlayerNumber = 0;
+            GameInfo.PlayerIDs = new int[4];
+            GameInfo.PlayerColors = new Color[4];
+            GameInfo.PlayerNames = new string[4];
+            GameInfo.PlayerPotions = new int[4];
+            GameInfo.PlayerIngredients = new int[4];
+            GameInfo.InGame = false;
+
+            ViewerInfo.SocketId = "";
+            ViewerInfo.Name = "";
+
+            TransmitIngredientPoll.Instance = null;
+            TransmitIngredientPoll.Voted = false;
+            TransmitIngredientPoll.WasAskedToVote = false;
         }
 
         void Update()

@@ -33,7 +33,6 @@ namespace audience.game
                 },
                 caster = new Viewer
                 {
-                    color = ColorUtility.ToHtmlStringRGBA(ViewerInfo.Color),
                     name = ViewerInfo.Name,
                     socketId = ViewerInfo.SocketId
                 }

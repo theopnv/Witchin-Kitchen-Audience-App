@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using audience.messages;
 using UnityEngine;
 
 namespace audience
@@ -6,13 +7,13 @@ namespace audience
 
     public static class GameInfo
     {
-        public static int PlayerNumber = 0;
-        public static int[] PlayerIDs = new int[4];
-        public static Color[] PlayerColors = new Color[4];
-        public static string[] PlayerNames = new string[4];
-        public static int[] PlayerPotions = new int[4];
-        public static int[] PlayerIngredients = new int[4];
-        public static bool InGame = false;
+        public static int PlayerNumber;
+        public static int[] PlayerIDs;
+        public static Color[] PlayerColors;
+        public static string[] PlayerNames;
+        public static int[] PlayerPotions;
+        public static int[] PlayerIngredients;
+        public static bool InGame;
     }
 
     /// <summary>
@@ -22,8 +23,14 @@ namespace audience
     /// </summary>
     public static class ViewerInfo
     {
-        public static string SocketId = "";
-        public static Color Color = Color.blue;
-        public static string Name = "";
+        public static string SocketId;
+        public static string Name;
+    }
+
+    public static class TransmitIngredientPoll
+    {
+        public static IngredientPoll Instance = null;
+        public static bool WasAskedToVote = false;
+        public static bool Voted = false;
     }
 }
