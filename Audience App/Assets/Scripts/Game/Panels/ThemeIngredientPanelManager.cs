@@ -60,7 +60,17 @@ namespace audience.tutorial
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
             _NetworkManager.OnReceivedIngredientPollResults += OnReceivedIngredientPollResults;
             _NetworkManager.OnReceivedStopIngredientPoll += OnReceivedStopIngredientPoll;
-            StartPoll();
+
+            if (!TransmitIngredientPoll.Voted)
+            {
+                StartPoll();
+            }
+            else
+            {
+                IngredientPoll = TransmitIngredientPoll.Instance;
+                OnReceivedIngredientPollResults(IngredientPoll);
+                SwitchSides();
+            }
         }
 
         void OnDisable()
@@ -83,6 +93,7 @@ namespace audience.tutorial
                 switch (content.code)
                 {
                     case Code.ingredient_vote_accepted:
+                        TransmitIngredientPoll.Voted = true;
                         SwitchSides();
                         break;
                 }
@@ -104,6 +115,7 @@ namespace audience.tutorial
 
         private void OnReceivedIngredientPollResults(IngredientPoll poll)
         {
+            TransmitIngredientPoll.Instance = poll;
             DisplayResults(poll.ingredients[0], _ResultIngredientAImage, _ResultsIngredientAText);
             DisplayResults(poll.ingredients[1], _ResultIngredientBImage, _ResultsIngredientBText);
 
@@ -122,6 +134,7 @@ namespace audience.tutorial
 
         private void OnReceivedStopIngredientPoll()
         {
+            TransmitIngredientPoll.WasAskedToVote = false;
             Destroy(gameObject);
         }
 

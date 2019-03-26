@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using audience;
 using audience.messages;
 using UnityEngine;
@@ -45,7 +47,6 @@ namespace audience.game
             var manager = instance.GetComponent<PlayerStateManager>();
             manager.Score = GameInfo.PlayerPotions[i];
             manager.Name = GameInfo.PlayerNames[i];
-
             _PlayerStateManagers.Add(i, manager);
         }
 
@@ -111,8 +112,23 @@ namespace audience.game
                     }
                     _PlayerStateManagers[i].Score = GameInfo.PlayerPotions[i];
                     _PlayerStateManagers[i].Name = GameInfo.PlayerNames[i];
+                    _PlayerStateManagers[i].transform.SetSiblingIndex(GetScoreIndex(i));
                 }
             }
+        }
+
+        private int GetScoreIndex(int playerIndex)
+        {
+            var playersOrderByScore = _PlayerStateManagers.OrderByDescending(p => p.Value.Score).ToList();
+            for (var i = 0; i < playersOrderByScore.Count(); i++)
+            {
+                if (playersOrderByScore[i].Key == playerIndex)
+                {
+                    return i;
+                }
+            }
+
+            return 0;
         }
 
         private IEnumerator SetPlusOneActiveFalse(PlayerStateManager p)

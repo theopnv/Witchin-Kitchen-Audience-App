@@ -89,7 +89,7 @@ namespace audience.game
         {
             var instance = Instantiate(_OneChoiceOverlayPrefab, _Canvas.transform);
             var errorOverlay = instance.GetComponent<Overlay>();
-            errorOverlay.Description = "Disconnected from server. Please try joining the room again.";
+            errorOverlay.Description = "Lost the magic link (Server disconnection). Try to join again.";
             errorOverlay.Primary += ExitGame;
         }
 

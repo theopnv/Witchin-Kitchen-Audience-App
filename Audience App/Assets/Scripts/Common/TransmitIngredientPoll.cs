@@ -6,5 +6,6 @@ namespace audience
     {
         public static IngredientPoll Instance = null;
         public static bool WasAskedToVote = false;
+        public static bool Voted = false;
     }
 }
