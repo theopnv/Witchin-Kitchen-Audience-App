@@ -108,8 +108,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.0035172}
-  m_SizeDelta: {x: 1616.6, y: 467.8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1616.6, y: 333.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8762154052493700096
 CanvasRenderer:
@@ -152,11 +152,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Now look out for your candidate''s channel id#
-
-    and join the arena !
-
-    We can''t wait to see you in game.
+  m_Text: 'Happy streaming on Witch Network Television!
 
 
     Thank you for following this tutorial.
