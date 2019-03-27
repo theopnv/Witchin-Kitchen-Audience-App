@@ -35,11 +35,11 @@ namespace audience.game
         public bool AuthorizeCasting;
 
         //Effect
-        private Effects effects;
+        private Effects _effects;
 
         void Start()
         {
-            effects = new Effects(2, 0.8f, 0.8f);
+            _effects = new Effects(2, 0.8f, 0.8f);
             _NetworkManager = FindObjectOfType<NetworkManager>();
             if (_NetworkManager)
             {
@@ -141,7 +141,7 @@ namespace audience.game
 
         private void MiniGame()
         {
-            effects.GrowShrink(_PotionImage.transform, _NbTouches);
+            _effects.GrowShrink(_PotionImage.transform, _NbTouches);
             if (Input.touchCount > 0)
             {
                 var touch = Input.GetTouch(0);

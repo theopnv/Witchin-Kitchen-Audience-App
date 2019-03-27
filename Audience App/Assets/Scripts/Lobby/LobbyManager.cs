@@ -20,6 +20,9 @@ namespace audience.lobby
         private InputField _NameInputField;
 
         [SerializeField]
+        private GameObject _JoinInputField;
+
+        [SerializeField]
         private Canvas _Canvas;
 
         [SerializeField]
@@ -27,12 +30,15 @@ namespace audience.lobby
 
         private NetworkManager _NetworkManager;
 
+        private Effects _effects;
+
         #endregion
 
         #region Unity API
 
         void Start()
         {
+            _effects = new Effects(2, 0.95f, 0.9f);
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
             _NetworkManager.OnReceivedVoteForIngredient += OnReceivedVoteForIngredient;
@@ -47,6 +53,11 @@ namespace audience.lobby
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 SceneManager.LoadSceneAsync(SceneNames.TitleScreen);
+            }
+
+            if (_NameInputField.text.IsNullOrEmpty() == false && _RoomPinInputField.text.IsNullOrEmpty() == false)
+            {
+                _effects.GrowShrink(_JoinInputField.transform);
             }
         }
 
