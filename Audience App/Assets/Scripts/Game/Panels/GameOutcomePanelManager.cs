@@ -10,7 +10,7 @@ namespace audience.game
         [SerializeField] private GameObject _Leaderboards;
         [SerializeField] private GameObject _PlayerScorePrefab;
         [SerializeField] private Text _RemainingTimeText;
-        private int _RemainingTime = 15;
+        private int _RemainingTime = 20;
 
         public GameOutcome GameOutcome;
 

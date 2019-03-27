@@ -58,6 +58,7 @@ namespace audience.game
             {
                 _MiniGamePanel.SetActive(false);
                 _SelectionPanel.SetActive(true);
+                _RemainingTimeTextSelection.gameObject.SetActive(false);
             }
         }
 
@@ -163,7 +164,7 @@ namespace audience.game
                 ++_NbTouches;
             }
 
-            if (_NbTouches >= 3)
+            if (_NbTouches > 3) // DO NOT CHANGE >3, THE VALUE IS GOOD!
             {
                 EndMinigame();
                 _NbTouches = 0;
