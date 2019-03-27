@@ -34,8 +34,12 @@ namespace audience.game
         private NetworkManager _NetworkManager;
         public bool AuthorizeCasting;
 
+        //Effect
+        private Effects effects;
+
         void Start()
         {
+            effects = new Effects(2, 0.8f, 0.8f);
             _NetworkManager = FindObjectOfType<NetworkManager>();
             if (_NetworkManager)
             {
@@ -134,20 +138,10 @@ namespace audience.game
             }
         }
 
-        float rate = 2f;
-        float midScale = 0.8f;
-        float ratio = 0.8f;
-        private Vector3 scale;
+
         private void MiniGame()
         {
-            var factor = _NbTouches * 0.3f;
-            float scaleComponent = midScale * Mathf.Pow(ratio, Mathf.Sin(Time.time * rate)) + factor;
-            Debug.Log(scaleComponent);
-            for (int i = 0; i < 3; i++)
-            {
-                scale = scaleComponent * Vector3.one;
-                _PotionImage.transform.localScale = scale;
-            }
+            effects.GrowShrink(_PotionImage.transform, _NbTouches);
             if (Input.touchCount > 0)
             {
                 var touch = Input.GetTouch(0);
