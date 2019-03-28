@@ -22,6 +22,10 @@ namespace audience.tutorial
         [SerializeField] private Button _VoteIngredientBButton;
         [SerializeField] private Image _VoteIngredientBImage;
 
+        [SerializeField] private GameObject _TutorialButton;
+
+        private Effects _effects;
+
         public void StartPoll()
         {
             SetButton(_VoteIngredientAButton, _VoteIngredientAImage, IngredientPoll.ingredients[0]);
@@ -56,6 +60,7 @@ namespace audience.tutorial
 
         void Start()
         {
+            _effects = new Effects(2, 0.9f, 0.9f);
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
             _NetworkManager.OnReceivedIngredientPollResults += OnReceivedIngredientPollResults;
@@ -70,6 +75,14 @@ namespace audience.tutorial
                 IngredientPoll = TransmitIngredientPoll.Instance;
                 OnReceivedIngredientPollResults(IngredientPoll);
                 SwitchSides();
+            }
+        }
+
+        void Update()
+        {
+            if (_TutorialButton.gameObject.activeInHierarchy)
+            {
+                _effects.GrowShrink(_TutorialButton.transform);
             }
         }
 
