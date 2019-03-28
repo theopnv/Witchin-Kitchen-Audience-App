@@ -17,7 +17,9 @@ namespace audience.game
         private Text _RemainingTimeTextVote;
 
         [SerializeField] private Button _ButtonA;
+        [SerializeField] private Image _ButtonAImage;
         [SerializeField] private Button _ButtonB;
+        [SerializeField] private Image _ButtonBImage;
 
         private NetworkManager _NetworkManager;
 
@@ -26,16 +28,21 @@ namespace audience.game
         public void StartPoll()
         {
             _RemainingTime = PollChoices.duration;
-            SetButton(_ButtonA, PollChoices.events[0]);
-            SetButton(_ButtonB, PollChoices.events[1]);
+            SetButton(_ButtonA, _ButtonAImage, PollChoices.events[0]);
+            SetButton(_ButtonB, _ButtonBImage, PollChoices.events[1]);
             _RemainingTimeText = _RemainingTimeTextVote;
             Handheld.Vibrate();
 
             InvokeRepeating("UpdateTime", 0, 1);
         }
 
-        private void SetButton(Button button, Event ev)
+        private void SetButton(Button button, Image img, Event ev)
         {
+            var sprite = Resources.Load<Sprite>("Events/" + Events.EventList[(Events.EventID) ev.id]);
+            if (sprite)
+            {
+                img.sprite = sprite;
+            }
             var eventButton = button.GetComponent<PollButton>();
             eventButton.ID = ev.id;
             button.GetComponentInChildren<Text>().text = Events.EventList[(Events.EventID)ev.id];
@@ -144,21 +151,29 @@ namespace audience.game
 
         [SerializeField] private GameObject _ResultsSide;
 
+        [SerializeField] private Image _ImageA;
         [SerializeField] private Text _EventAResults;
+        [SerializeField] private Image _ImageB;
         [SerializeField] private Text _EventBResults;
 
         public void OnReceivePollResults(PollChoices pollChoices)
         {
             PollChoices = pollChoices;
-            DisplayEventResults(pollChoices.events[0], _EventAResults);
-            DisplayEventResults(pollChoices.events[1], _EventBResults);
+            DisplayEventResults(pollChoices.events[0], _ImageA, _EventAResults);
+            DisplayEventResults(pollChoices.events[1], _ImageB, _EventBResults);
         }
 
-        private void DisplayEventResults(Event ev, Text text)
+        private void DisplayEventResults(Event ev, Image img, Text text)
         {
             var name = Events.EventList[(Events.EventID)ev.id];
             var msg = name + "\n" + ev.votes + " votes";
             text.text = msg;
+
+            var sprite = Resources.Load<Sprite>("Events/" + Events.EventList[(Events.EventID)ev.id]);
+            if (sprite)
+            {
+                img.sprite = sprite;
+            }
         }
 
         #endregion
