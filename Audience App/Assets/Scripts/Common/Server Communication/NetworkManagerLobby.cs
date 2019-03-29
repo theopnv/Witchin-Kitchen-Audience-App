@@ -61,7 +61,6 @@ namespace audience
             {
                 GameInfo.PlayerIDs[i] = i;
                 GameInfo.PlayerNames[i] = game.players[i].name;
-                Debug.Log("Raw = " + game.players[i].color);
                 ColorUtility.TryParseHtmlString(game.players[i].color, out var color);
                 GameInfo.PlayerColors[i] = color;
                 GameInfo.PlayerPotions[i] = game.players[i].potions;

@@ -33,4 +33,15 @@ namespace audience
         public static bool WasAskedToVote = false;
         public static bool Voted = false;
     }
+
+    public static class PlayerInfo
+    {
+        public static Dictionary<int, string> Colors = new Dictionary<int, string>
+        {
+            {0, "Orange" },
+            {1, "Blue" },
+            {2, "Yellow" },
+            {3, "Pink" }
+        };
+    }
 }

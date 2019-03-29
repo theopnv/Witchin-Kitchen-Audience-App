@@ -47,6 +47,7 @@ namespace audience.game
             var manager = instance.GetComponent<PlayerStateManager>();
             manager.Score = GameInfo.PlayerPotions[i];
             manager.Name = GameInfo.PlayerNames[i];
+            manager.SetCharacter("Characters/" + PlayerInfo.Colors[i]);
             _PlayerStateManagers.Add(i, manager);
         }
 

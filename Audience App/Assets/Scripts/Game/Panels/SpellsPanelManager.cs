@@ -142,6 +142,26 @@ namespace audience.game
         private void MiniGame()
         {
             _effects.GrowShrink(_PotionImage.transform, _NbTouches);
+
+            // NO MORE TOUCHING THIS @VICTOR, I'M FORCED TO GO BACK INTO THIS PIECE OF CODE EACH TIME YOU CHANGED IT.
+            // THANKS
+            if (Application.isEditor)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _NbTouches++;
+                    if (_NbTouches >= 3)
+                    {
+                        EndMinigame();
+                        _NbTouches = 0;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+
             foreach (Touch touch in Input.touches)
             {
                 if (touch.phase == TouchPhase.Began && touch.phase != TouchPhase.Canceled)

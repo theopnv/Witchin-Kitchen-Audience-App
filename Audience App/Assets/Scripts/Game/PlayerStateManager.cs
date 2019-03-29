@@ -32,5 +32,16 @@ namespace audience.game
         }
 
         public Image PlusOneImage;
+
+        [SerializeField] private Image _Character;
+
+        public void SetCharacter(string pathToSprite)
+        {
+            var sprite = Resources.Load<Sprite>(pathToSprite);
+            if (sprite)
+            {
+                _Character.sprite = sprite;
+            }
+        }
     }
 }
