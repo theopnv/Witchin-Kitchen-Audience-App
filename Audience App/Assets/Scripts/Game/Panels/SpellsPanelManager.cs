@@ -142,28 +142,23 @@ namespace audience.game
         private void MiniGame()
         {
             _effects.GrowShrink(_PotionImage.transform, _NbTouches);
-            if (Input.touchCount > 0)
+            foreach (Touch touch in Input.touches)
             {
-                var touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Ended)
+                if (touch.phase == TouchPhase.Began && touch.phase != TouchPhase.Canceled)
                 {
-                    ++_NbTouches;
+                    _NbTouches++;
+
+                    if (_NbTouches >= 3)
+                    {
+                        EndMinigame();
+                        _NbTouches = 0;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
             }
-
-            // Simulates touch in the editor
-            if (Input.GetMouseButtonDown(0))
-            {
-                ++_NbTouches;
-            }
-
-            if (_NbTouches > 3) // DO NOT CHANGE >3, THE VALUE IS GOOD!
-            {
-                EndMinigame();
-                _NbTouches = 0;
-            }
-
         }
 
         private void EndMinigame()
