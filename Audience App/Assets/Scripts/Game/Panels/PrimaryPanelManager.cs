@@ -38,6 +38,11 @@ namespace audience.game
                 AddPlayerStateUI(i);
             }
 
+            for (var i = 0; i < GameInfo.PlayerNumber; i++)
+            {
+                _PlayerStateManagers[i].transform.SetSiblingIndex(GetScoreIndex(i));
+            }
+
             GameInfo.InGame = true;
         }
 
