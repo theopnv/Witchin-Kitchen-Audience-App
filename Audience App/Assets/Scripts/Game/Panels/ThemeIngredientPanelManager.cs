@@ -60,7 +60,7 @@ namespace audience.tutorial
 
         void Start()
         {
-            _effects = new Effects(2, 0.9f, 0.9f);
+            _effects = new Effects(2, 0.9f, 1.3f);
             _NetworkManager = FindObjectOfType<NetworkManager>();
             _NetworkManager.OnMessageReceived += OnMessageReceivedFromServer;
             _NetworkManager.OnReceivedIngredientPollResults += OnReceivedIngredientPollResults;
