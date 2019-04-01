@@ -28,10 +28,13 @@ namespace audience.game
         private bool _RotateRecto;
         private bool _RotateVerso;
         private float _RotationSpeed = 125f; // Magic number (a cleaner way would be to calculate the speed depending of the rotation duration).
+        private bool _clicked;
+
         #region Unity API
 
         void Start()
         {
+            _clicked = false;
             if (!AuthorizeCasting)
             {
                 RectoCastSpellButton.gameObject.SetActive(false);
@@ -121,8 +124,12 @@ namespace audience.game
 
         public void OnTargetButtonClick(int targetId)
         {
-            Debug.Log("Button number " + targetId);
-            CastSpellAction?.Invoke(targetId);
+            if (!_clicked)
+            {
+                Debug.Log("Button number " + targetId);
+                CastSpellAction?.Invoke(targetId);
+                _clicked = true;
+            }
         }
 
         #endregion
