@@ -57,12 +57,14 @@ namespace audience.game
                 _RemainingText = _RemainingTextMiniGame;
                 _MiniGameTitle.text = Title;
                 InvokeRepeating("Timer", 0, 1);
+                _SelectionTitle.text = "Choose a spell!";
             }
             else
             {
                 _MiniGamePanel.SetActive(false);
                 _SelectionPanel.SetActive(true);
-                _RemainingTimeTextSelection.gameObject.SetActive(false);
+                _RemainingTimeTextSelection.text = "You'll be able to cast a spell when a player completes a potion!";
+                _SelectionTitle.text = "Browse spells";
             }
         }
 
